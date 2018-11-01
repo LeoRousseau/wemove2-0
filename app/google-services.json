@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "135180826695",
+    "firebase_url": "https://wemove-9ef2c.firebaseio.com",
+    "project_id": "wemove-9ef2c",
+    "storage_bucket": "wemove-9ef2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135180826695:android:75fd2b5f897d0133",
+        "android_client_info": {
+          "package_name": "com.example.wemove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135180826695-vsldqp8k1j60f2sqicu3jprp2ocej0bc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wemove",
+            "certificate_hash": "cd0de39330490b2dc34b9f7aa3d2f47aa52cc287"
+          }
+        },
+        {
+          "client_id": "135180826695-oe1oeeile6dprs7il3me5oop8i8sfrng.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAShcgBq9hhA0NnCwhzpbfRCByQMiBAyb4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135180826695-oe1oeeile6dprs7il3me5oop8i8sfrng.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
