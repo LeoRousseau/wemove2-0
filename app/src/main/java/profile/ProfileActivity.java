@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wemove.R;
+import com.example.wemove.Sport;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private List<SportItem> sportItems;
+    private List<Sport> sportItems;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -111,12 +112,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void setSports () {
-        sportItems.add(new SportItem("Football",(float)3.5,"Intermédiaire","Détente"));
-        sportItems.add(new SportItem("Ping Pong",1,"Débutant","Détente"));
-        sportItems.add(new SportItem("Rugby",5,"Confirmé","Tout"));
-        sportItems.add(new SportItem("Natation",4,"Intermédiaire","Sérieux"));
-        sportItems.add(new SportItem("Volleyball",2,"Débutant","Tout"));
-        sportItems.add(new SportItem("Peche",4,"Intermédiaire","Détente"));
+        sportItems.add(new Sport("Football","Intermédiaire","Détente",(float)3.5));
+        sportItems.add(new Sport("Ping Pong","Débutant","Détente",1));
+        sportItems.add(new Sport("Rugby","Confirmé","Tout",5));
+        sportItems.add(new Sport("Natation","Intermédiaire","Sérieux",4));
+        sportItems.add(new Sport("Volleyball","Débutant","Tout",2));
+        sportItems.add(new Sport("Peche","Intermédiaire","Détente",4));
     }
 
 

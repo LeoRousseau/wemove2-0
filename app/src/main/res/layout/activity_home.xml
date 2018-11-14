@@ -27,4 +27,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="383dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="168dp"
+        android:onClick="goToProfile"/>
 </android.support.constraint.ConstraintLayout>

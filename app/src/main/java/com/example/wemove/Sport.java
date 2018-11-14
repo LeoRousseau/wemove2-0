@@ -1,10 +1,10 @@
 package com.example.wemove;
 
 public class Sport {
-    String Name;
-    String Niveau;
-    String Envie;
-    Integer Intérêt;
+    private String Name;
+    private float interest;
+    private String level;
+    private String type;
 
     public String getName() {
         return Name;
@@ -14,9 +14,6 @@ public class Sport {
         Name = name;
     }
 
-    public String getNiveau() {
-        return Niveau;
-    }
 
     public Sport(String name) {
         Name = name;
@@ -26,37 +23,29 @@ public class Sport {
     public String toString() {
         return "Sport{" +
                 "Nom ='" + Name + '\'' +
-                ", Niveau='" + Niveau + '\'' +
-                ", Envie ='" + Envie + '\'' +
-                ", Intérêt =" + Intérêt +
+                ", Niveau='" + level + '\'' +
+                ", Envie ='" + type + '\'' +
+                ", Intérêt =" + interest +
                 '}';
     }
 
-    public void setNiveau(String niveau) {
-        Niveau = niveau;
+    public float getInterest() {
+        return interest;
     }
 
-    public String getEnvie() {
-        return Envie;
+    public String getLevel() {
+        return level;
     }
 
-    public void setEnvie(String envie) {
-        Envie = envie;
+    public String getType() {
+        return type;
     }
 
-    public Integer getIntérêt() {
-        return Intérêt;
-    }
+    public Sport(String name, String level, String type, float interest) {
 
-    public void setIntérêt(Integer intérêt) {
-        Intérêt = intérêt;
-    }
-
-    public Sport(String name, String niveau, String envie, Integer intérêt) {
-
-        Name = name;
-        Niveau = niveau;
-        Envie = envie;
-        Intérêt = intérêt;
+        this.Name = name;
+        this.level = level;
+        this.type = type;
+        this.interest = interest;
     }
 }

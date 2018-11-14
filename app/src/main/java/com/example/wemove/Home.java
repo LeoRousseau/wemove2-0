@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import profile.ProfileActivity;
+
 public class Home extends AppCompatActivity {
 
     private Button mSignOutBtn;
@@ -69,5 +71,10 @@ public class Home extends AppCompatActivity {
         if(mAuthListener != null) {
             FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
         }
+    }
+
+    public void goToProfile (View view) {
+        Intent intent = new Intent(this,ProfileActivity.class);
+        startActivity(intent);
     }
 }

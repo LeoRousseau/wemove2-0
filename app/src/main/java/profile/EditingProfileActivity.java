@@ -23,6 +23,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import com.example.wemove.R;
+import com.example.wemove.Sport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class EditingProfileActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE=2;
 
 
-    private List<SportItem> sportItems;
+    private List<Sport> sportItems;
     private ImageView hideList;
     private ListView listSportView;
     private ListAdapter listAdapter;
@@ -69,12 +70,12 @@ public class EditingProfileActivity extends AppCompatActivity {
     }
 
     public void setSports () {
-        sportItems.add(new SportItem("Football",(float)3.5,"Intermédiaire","Détente"));
-        sportItems.add(new SportItem("Ping Pong",1,"Débutant","Détente"));
-        sportItems.add(new SportItem("Rugby",5,"Confirmé","Tout"));
-        sportItems.add(new SportItem("Natation",4,"Intermédiaire","Sérieux"));
-        sportItems.add(new SportItem("Volleyball",2,"Débutant","Tout"));
-        sportItems.add(new SportItem("Peche",4,"Intermédiaire","Détente"));
+        sportItems.add(new Sport("Football","Intermédiaire","Détente",(float)3.5));
+        sportItems.add(new Sport("Ping Pong","Débutant","Détente",1));
+        sportItems.add(new Sport("Rugby","Confirmé","Tout",5));
+        sportItems.add(new Sport("Natation","Intermédiaire","Sérieux",4));
+        sportItems.add(new Sport("Volleyball","Débutant","Tout",2));
+        sportItems.add(new Sport("Peche","Intermédiaire","Détente",4));
     }
 
     public void initContentVariables () {
@@ -175,7 +176,7 @@ public class EditingProfileActivity extends AppCompatActivity {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    SportItem sportItem = new SportItem(nameSpinner.getSelectedItem().toString(),interestRating.getRating(),levelSpinner.getSelectedItem().toString(),styleSpinner.getSelectedItem().toString());
+                    Sport sportItem = new Sport(nameSpinner.getSelectedItem().toString(),levelSpinner.getSelectedItem().toString(),styleSpinner.getSelectedItem().toString(),interestRating.getRating());
                     sportItems.add(0,sportItem);
                     ((BaseAdapter)listAdapter).notifyDataSetChanged();
                     setListViewSize();
@@ -222,7 +223,7 @@ public class EditingProfileActivity extends AppCompatActivity {
             otherSport.add(key);
         }
         for (int i =0; i<sportItems.size();i++) {
-            otherSport.remove(sportItems.get(i).getSportName());
+            otherSport.remove(sportItems.get(i).getName());
         }
         return otherSport;
     }

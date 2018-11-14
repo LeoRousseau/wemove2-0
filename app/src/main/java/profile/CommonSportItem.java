@@ -1,5 +1,7 @@
 package profile;
 
+import com.example.wemove.Sport;
+
 public class CommonSportItem {
-    public static SportItem currentsportItem = null;
+    public static Sport currentsportItem = null;
 }

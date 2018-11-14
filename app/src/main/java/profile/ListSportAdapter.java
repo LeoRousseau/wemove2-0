@@ -17,21 +17,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wemove.R;
+import com.example.wemove.Sport;
 
 import java.util.List;
 
 import Utils.SportIconsTable;
 
 
-public class ListSportAdapter extends ArrayAdapter<SportItem> {
+public class ListSportAdapter extends ArrayAdapter<Sport> {
 
     private Context context;
-    private List<SportItem> items;
+    private List<Sport> items;
 
 
 
 
-    public ListSportAdapter(@NonNull Context context, List<SportItem> items) {
+    public ListSportAdapter(@NonNull Context context, List<Sport> items) {
         super(context, R.layout.editingprofile_sportrow);
         this.context=context;
         this.items=items;
@@ -43,12 +44,12 @@ public class ListSportAdapter extends ArrayAdapter<SportItem> {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View customView= layoutInflater.inflate(R.layout.editingprofile_sportrow,parent,false);
 
-        SportItem sportItem = getItem(position);
+        Sport sportItem = getItem(position);
 
         ImageView sportIcon = (ImageView)customView.findViewById(R.id.imageSportRow);
         TextView sportName = (TextView)customView.findViewById(R.id.textSportRow);
-        sportName.setText(sportItem.getSportName());
-        sportIcon.setImageResource(SportIconsTable.table.get(sportItem.getSportName()));
+        sportName.setText(sportItem.getName());
+        sportIcon.setImageResource(SportIconsTable.table.get(sportItem.getName()));
         ImageView editSport = (ImageView)customView.findViewById(R.id.editSportIcon);
         ImageView deleteSport = (ImageView)customView.findViewById(R.id.deleteSportIcon);
 
@@ -83,20 +84,20 @@ public class ListSportAdapter extends ArrayAdapter<SportItem> {
 
     }
 
-    public void setItems(List<SportItem> items) {
+    public void setItems(List<Sport> items) {
         this.items = items;
     }
 
     @Override
-    public SportItem getItem(int position) {
+    public Sport getItem(int position) {
         return items.get(position);
     }
 
-    public void openEditDialog(SportItem sportItem) {
+    public void openEditDialog(Sport sportItem) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.edit_sport,null);
-        builder.setTitle(sportItem.getSportName());
+        builder.setTitle(sportItem.getName());
 
         Spinner levelSpinner = (Spinner) view.findViewById(R.id.levelSpinner);
         Spinner styleSpinner = (Spinner) view.findViewById(R.id.styleSpinner);

@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.wemove.R;
+import com.example.wemove.Sport;
 
 import java.util.List;
 
@@ -51,11 +52,11 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
     TextView level;
     RatingBar interest;
     TextView type;
-    List<SportItem> items;
+    List<Sport> items;
     Context context;
     int rowindex =-1; //Default case
 
-    public HorizontalSportAdapter(List<SportItem> items, Context context, LinearLayout linearLayout) {
+    public HorizontalSportAdapter(List<Sport> items, Context context, LinearLayout linearLayout) {
         this.items = items;
         this.context = context;
         this.linearLayout = linearLayout;
@@ -76,8 +77,8 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder customViewHolder, int i) {
-        customViewHolder.sportName.setText(items.get(i).getSportName());
-        customViewHolder.sportImage.setImageResource(SportIconsTable.table.get(items.get(i).getSportName()));
+        customViewHolder.sportName.setText(items.get(i).getName());
+        customViewHolder.sportImage.setImageResource(SportIconsTable.table.get(items.get(i).getName()));
 
         customViewHolder.setItemClickListener(new ItemClickListener() {
             @Override
@@ -118,8 +119,8 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
     }
 
 
-    public void setSelectedInformation (SportItem sportItem) {
-        sportTitle.setText(sportItem.getSportName());
+    public void setSelectedInformation (Sport sportItem) {
+        sportTitle.setText(sportItem.getName());
         interest.setRating(sportItem.getInterest());
         type.setText(sportItem.getType());
         level.setText(sportItem.getLevel());
