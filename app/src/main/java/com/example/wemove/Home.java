@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,23 +24,16 @@ public class Home extends AppCompatActivity {
 
     private Button mSignOutBtn;
     private  FirebaseAuth.AuthStateListener mAuthListener;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        mSignOutBtn = findViewById(R.id.signoutBtn);
-
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         setupFirebaseListener();
 
-        mSignOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("ATTEMPT", "onClick: attempting to sign out the user");
-                FirebaseAuth.getInstance().signOut();
-            }
-        });
     }
 
     private void setupFirebaseListener() {
@@ -77,4 +72,35 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this,ProfileActivity.class);
         startActivity(intent);
     }
+
+    public void signOut (View view) {
+        Log.d("ATTEMPT", "onClick: attempting to sign out the user");
+        FirebaseAuth.getInstance().signOut();
+    }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment fragmentSelected=null;
+                    switch (menuItem.getItemId()) {
+                        case R.id.eventButton :
+                            fragmentSelected = new Home_EventsFragment();
+                            break;
+                        case R.id.groupButton :
+                            fragmentSelected = new Home_GroupsFragment();
+                            break;
+                        case R.id.notificationsButton :
+                            fragmentSelected = new Home_NotificationsFragment();
+                            break;
+                        case R.id.menuButton :
+                            fragmentSelected = new Home_MenuFragment();
+                            break;
+
+
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragmentSelected).commit();
+                    return true;
+                }
+            };
 }

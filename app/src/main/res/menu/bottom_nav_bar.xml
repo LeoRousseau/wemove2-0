@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/eventButton"
+            android:icon="@drawable/ic_event_black_24dp"
+            android:title="Evenements" />
+
+        <item
+            android:id="@+id/groupButton"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="Groupes" />
+
+        <item
+            android:id="@+id/notificationsButton"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            android:title="Notifications" />
+        <item
+            android:id="@+id/menuButton"
+            android:icon="@drawable/ic_menu_black_24dp"
+            android:title="Menu" />
+
+</menu>
