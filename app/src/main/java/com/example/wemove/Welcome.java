@@ -1,5 +1,6 @@
 package com.example.wemove;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import profile.ProfileActivity;
+
+
+
+/*
+Credits :
+
+- Icons Sport :  Icon made by Freepik from www.flaticon.com  https://www.freepik.com/free-icons/sports
+
+
+ */
 
 
 public class Welcome extends AppCompatActivity {
@@ -31,6 +44,13 @@ public class Welcome extends AppCompatActivity {
         mConditionTextView = findViewById(R.id.textViewCondition);
         sunny = findViewById(R.id.buttonSunny);
         foggy = findViewById(R.id.buttonFoggy);
+    }
+
+
+
+    public void goToProfile (View view) {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override

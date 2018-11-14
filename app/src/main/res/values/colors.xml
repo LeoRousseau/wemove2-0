@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#EC9E1D</color>
+    <color name="colorPrimaryDark">#C97D03</color>
     <color name="colorAccent">#FF4081</color>
+
+
+
+    <color name="backgroundGrey">#DEDEDE</color>
+    <color name="foregroundWhiteYellow">#FBEEC4</color>
+    <color name="foregroundWhite">#FDFBF5</color>
+    <color name="sportcardview">#FCECD1</color>
+    <color name="OrangeNormal">#EC9E1D</color>
+    <color name="OrangeDark">#C97D03</color>
+    <color name="OrangeRed">#EC7E1D</color>
+    <color name="OrangeYellow">#ECC01D</color>
 </resources>
