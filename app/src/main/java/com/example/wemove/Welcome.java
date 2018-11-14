@@ -1,88 +1,83 @@
 package com.example.wemove;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import profile.ProfileActivity;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
-
-/*
-Credits :
-
-- Icons Sport :  Icon made by Freepik from www.flaticon.com  https://www.freepik.com/free-icons/sports
-
-
- */
-
-
+// Classe test pour les tests de la bdd
 public class Welcome extends AppCompatActivity {
 
-    TextView mConditionTextView;
-    Button sunny;
-    Button foggy;
-
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef =  mRootRef.child("condition");
+    WeMoveDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        mConditionTextView = findViewById(R.id.textViewCondition);
-        sunny = findViewById(R.id.buttonSunny);
-        foggy = findViewById(R.id.buttonFoggy);
+        ///////////////////////////////////// Pour les tests ///////////////////////////////////////
+
+        db = new WeMoveDB();
+
+        ArrayList<Sport> sports = new ArrayList<>();
+        ArrayList<Sport> sports2 = new ArrayList<>();
+
+        sports.add( new Sport("football","intermédiaire", "détente", 2));
+        sports.add( new Sport("tennis","débutant", "compétition", 5));
+        sports.add( new Sport("rugby","expert", "apprendre", 4));
+
+        sports2.add( new Sport("ski","intermédiaire", "détente", 2));
+        sports2.add( new Sport("tennis","débutant", "compétition", 5));
+        sports2.add( new Sport("rugby","expert", "apprendre", 4));
+
+        User user = new User("OliverNico","Oliver","Nicolas","Joyeux gars",sports);
+        User user2 = new User("RousseauLeo","Rousseau","Leo","Happy guy",sports2);
+        User userEmail = new User("test","nico","test","j@gmail.com","012541");
+
+        /*File img = new File("C:/Users/nicoo/Google Drive/Mobilité sortante/Cours UQAC/Automne/Prog Mobiles/marvel.png");
+        User userPhoto = new User("MartinDupont","Dupont","Martin","Un test",sports);
+        db.addPhoto(userPhoto,img);*/
+
+        //Pour ajouter un evenement
+        Event event = new Event("Badminton Time",new Sport("badminton"),5,false,"Pavillon sportif","Amateur","Cherche 2 personnes pour une doublette");
+
+        // Pour completer un profil (une description et liste de sport)
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("bio","joyeux noel");
+        childUpdates.put("sports",sports);
+
+        //Pour modifier un evenement
+        Map<String, Object> eventUpdates = new HashMap<>();
+        eventUpdates.put("niveau","Pro");
+
+        //Pour modifier un utilisateur
+        Map<String, Object> userUpdates = new HashMap<>();
+        userUpdates.put("bio","Happy Tree Friends");
+
+        //Ajout utilisateur
+        db.addUser(userEmail);
+        db.addUser(user);
+        db.addUser(user2);
+        //Ajout event
+        db.addEvent(event);
+        //Ajout des utilisateurs dans la table sport
+        db.implementSports(user);
+        //complete un profil lors de la premiere utilisation
+        db.completeProfil(userEmail,childUpdates);
+        //modifier un event
+        db.updateEvent(event,eventUpdates);
+        //modifier un user
+        db.updateUser(user2,userUpdates);
+        //Supprimer un event
+        //db.deleteEvent(event);
+
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
     }
-
-
-
-    public void goToProfile (View view) {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mConditionRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
-                mConditionTextView.setText(text);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        sunny.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mConditionRef.setValue("Sunny");
-            }
-        });
-
-        foggy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mConditionRef.setValue("Foggy");
-            }
-        });
-    }
-
 }
