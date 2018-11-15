@@ -16,7 +16,7 @@ import com.example.wemove.Sport;
 
 import java.util.List;
 
-import Utils.SportIconsTable;
+import Utils.AccessData;
 
 class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -78,7 +78,7 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder customViewHolder, int i) {
         customViewHolder.sportName.setText(items.get(i).getName());
-        customViewHolder.sportImage.setImageResource(SportIconsTable.table.get(items.get(i).getName()));
+        customViewHolder.sportImage.setImageResource(AccessData.table.get(items.get(i).getName()));
 
         customViewHolder.setItemClickListener(new ItemClickListener() {
             @Override

@@ -28,7 +28,7 @@ import com.example.wemove.Sport;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.SportIconsTable;
+import Utils.AccessData;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditingProfileActivity extends AppCompatActivity {
@@ -219,7 +219,7 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     public List<String> getOtherSportsName () {
         List<String> otherSport = new ArrayList<String>();
-        for ( String key : SportIconsTable.table.keySet() ) {
+        for ( String key : AccessData.table.keySet() ) {
             otherSport.add(key);
         }
         for (int i =0; i<sportItems.size();i++) {
