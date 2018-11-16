@@ -14,4 +14,5 @@
     <color name="OrangeDark">#C97D03</color>
     <color name="OrangeRed">#EC7E1D</color>
     <color name="OrangeYellow">#ECC01D</color>
+    <color name="CardViewGrey">#524F4C</color>
 </resources>

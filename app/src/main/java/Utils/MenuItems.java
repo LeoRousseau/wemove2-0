@@ -11,6 +11,7 @@ public class MenuItems extends ArrayList<MenuItem> {
         this.add(new MenuItem("Mes évènements", R.drawable.ic_event_black_24dp));
         this.add(new MenuItem("Mes sports",R.drawable.sport));
         this.add(new MenuItem("Mes groupes",R.drawable.ic_group_black_24dp));
+        this.add(new MenuItem("Mes Statistiques",R.drawable.ic_equalizer_black_24dp));
         this.add(new MenuItem("Paramètres",R.drawable.ic_settings_black_24dp));
         this.add(new MenuItem("Crédit",R.drawable.ic_star_border_black_24dp));
         this.add(new MenuItem("Déconnexion",R.drawable.ic_exit_to_app_black_24dp));

@@ -48,15 +48,18 @@ public class Home_MenuFragment extends Fragment {
                     case 1 :
                         break;
                     case 2 :
+                        goToMySports();
                         break;
                     case 3 :
                         break;
                     case 4 :
                         break;
                     case 5 :
-                        goToCredits();
                         break;
                     case 6 :
+                        goToCredits();
+                        break;
+                    case 7 :
                         signOut();
                         break;
                 }
@@ -71,6 +74,11 @@ public class Home_MenuFragment extends Fragment {
 
     public void goToCredits () {
         Intent intent = new Intent(getContext(), CreditActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToMySports() {
+        Intent intent = new Intent(getContext(), MySportsActivity.class);
         startActivity(intent);
     }
 

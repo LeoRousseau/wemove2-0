@@ -33,7 +33,6 @@ public class ProfileActivity extends AppCompatActivity {
     private boolean isOwner;
     private boolean isFirst;
 
-    private LinearLayout infoLL;
     private LinearLayout selecLL;
 
     private CircleImageView image_profile;
@@ -83,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void initContentVariables () {
 
-        infoLL = (LinearLayout) findViewById(R.id.infoLinearLayout);
         selecLL = (LinearLayout) findViewById(R.id.layoutselectedint);
         image_profile = (CircleImageView)findViewById(R.id.profile_image);
         name_text = (TextView) findViewById(R.id.nameText);
@@ -105,7 +103,6 @@ public class ProfileActivity extends AppCompatActivity {
         float dpWidth  = outMetrics.widthPixels / density;
 
         if (dpWidth>500) {
-            infoLL.setOrientation(LinearLayout.HORIZONTAL);
             selecLL.setOrientation(LinearLayout.HORIZONTAL);
         }
 
