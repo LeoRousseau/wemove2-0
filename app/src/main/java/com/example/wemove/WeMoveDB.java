@@ -30,7 +30,8 @@ public class WeMoveDB {
     public void addUserToSport(Sport s, User user) {
         DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
         DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(Float.toString(s.getInterest()).replace('.',':'));
-        //mParamSportsInsideRef.
+        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getTag());
+        mIdUser.setValue(user.getId());
     }
 
     public void implementSports(User user) {

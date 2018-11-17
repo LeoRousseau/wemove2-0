@@ -17,9 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -32,7 +30,6 @@ public class Login extends AppCompatActivity {
     private Button mLoginBtn;
     private Button mNewBtn;
 
-    WeMoveDB db;
 
     ProgressBar progressBar;
 
@@ -70,20 +67,6 @@ public class Login extends AppCompatActivity {
                 newUser();
             }
         });
-
-        /*db = new WeMoveDB();
-        ArrayList<Sport> sports = new ArrayList<>();
-        sports.add( new Sport("football","intermédiaire", "détente", 2));
-        sports.add( new Sport("tennis","débutant", "compétition", 5));
-        sports.add( new Sport("rugby","expert", "apprendre", 4));
-        ArrayList<Sport> sports2 = new ArrayList<>();
-        sports2.add( new Sport("ski","intermédiaire", "détente", 2));
-        sports2.add( new Sport("tennis","débutant", "compétition", 5));
-        sports2.add( new Sport("rugby","expert", "apprendre", 4));
-        User user2 = new User("4567","RousseauLeo","Rousseau","Leo","Happy guy",sports2);
-        User user = new User("1234","OliverNico","Oliver","Nicolas","Joyeux gars",sports);
-        db.implementSports(user);
-        db.implementSports(user2); */
     }
 
     @Override
