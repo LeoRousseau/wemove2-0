@@ -17,6 +17,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 import profile.ProfileActivity;
 
@@ -25,6 +32,11 @@ public class Home extends AppCompatActivity {
     private Button mSignOutBtn;
     private  FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
+    private  FirebaseAuth mAuth;
+    private  String userID;
+    private WeMoveDB db;
+    public static User currentUser;
+    public static Event currentEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +44,53 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
         setupFirebaseListener();
+        db = new WeMoveDB();
+        currentUser = new User();
+        currentEvent = new Event();
 
+        // Test des méthodes (validées)
+        //db.getUser(userID);
+        //db.getEvent("Badminton Time");
+    }
+
+    // Get sur les Users
+    public String getUserName() {
+        return currentUser.getName();
+    }public String getUserFirstName() {
+        return currentUser.getFirstname();
+    }public String getUserTag() {
+        return currentUser.getTag();
+    }public String getUserId() {
+        return currentUser.getId();
+    }public String getUserAge() {
+        return currentUser.getAge();
+    }public String getUserEmail() {
+        return currentUser.getEmail();
+    }public String getUserBio() {
+        return currentUser.getBio();
+    }public ArrayList<Sport> getUserSports() {
+        return currentUser.getSports();
+    }
+
+    // Get sur les Events
+    public String getEventName() {
+        return currentEvent.getName();
+    }public String getEventDescription() {
+        return currentEvent.getDescription();
+    }public String getEventNiveau() {
+        return currentEvent.getNiveau();
+    }public String getEventPlace() {
+        return currentEvent.getPlace();
+    }public int getEventNbPeople() {
+        return currentEvent.getNbPeople();
+    }public Sport getEventSport() {
+        return currentEvent.getSport();
+    }public ArrayList getEventUsers() {
+        return currentEvent.getUsers();
     }
 
     private void setupFirebaseListener() {

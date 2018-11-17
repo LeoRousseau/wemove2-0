@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 public class User {
+    String id;
     String tag;
     String name;
     String firstname;
@@ -82,11 +83,25 @@ public class User {
                 '}';
     }
 
-    public User(String tag, String name, String firstname, String bio, ArrayList<Sport> sports) {
+    public User() {
+    }
 
+    public User(String id, String tag, String name, String firstname, String bio, ArrayList<Sport> sports) {
+        this.id = id;
         this.tag = tag;
         this.name = name;
         this.firstname = firstname;
+        this.bio = bio;
+        this.sports = sports;
+    }
+
+    public User(String id, String tag, String name, String firstname, String email, String age, String bio, ArrayList<Sport> sports) {
+        this.id = id;
+        this.tag = tag;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.age = age;
         this.bio = bio;
         this.sports = sports;
     }
@@ -97,5 +112,30 @@ public class User {
         this.firstname = firstname;
         this.email = email;
         this.age = age;
+    }
+
+    public User(String tag, String name, String firstname, String bio, ArrayList<Sport> sports) {
+        this.tag = tag;
+        this.name = name;
+        this.firstname = firstname;
+        this.bio = bio;
+        this.sports = sports;
+    }
+
+    public User(String id, String tag, String name, String firstname, String email, String age) {
+        this.id = id;
+        this.tag = tag;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
+        this.age = age;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

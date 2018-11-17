@@ -23,6 +23,9 @@ public class Event {
         this.users = users;
     }
 
+    public Event() {
+    }
+
     @Override
     public String toString() {
         return "Event{" +

@@ -34,7 +34,7 @@ public class NewUser extends AppCompatActivity {
     private Button mSignupBtn;
 
     private WeMoveDB db;
-
+    private String userID;
     ProgressBar progressBar;
 
     @Override
@@ -125,7 +125,9 @@ public class NewUser extends AppCompatActivity {
                     if(task.isSuccessful()) {
                         Log.d("SIGNIN", "onComplete: Signed_in success");
                         Toast.makeText(getBaseContext(),"Authentication successful",Toast.LENGTH_LONG).show();
-                        User user = new User(tag,name,prenom,email,date);
+                        FirebaseUser userAuth = mAuth.getCurrentUser();
+                        userID = userAuth.getUid();
+                        User user = new User(userID,tag,name,prenom,email,date);
                         db.addUser(user);
                         startActivity(new Intent(NewUser.this,Home.class));
                     } else {

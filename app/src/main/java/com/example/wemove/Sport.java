@@ -19,6 +19,9 @@ public class Sport {
         Name = name;
     }
 
+    public Sport() {
+    }
+
     @Override
     public String toString() {
         return "Sport{" +

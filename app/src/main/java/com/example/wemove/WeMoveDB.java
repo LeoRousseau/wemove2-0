@@ -1,7 +1,16 @@
 package com.example.wemove;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -14,19 +23,19 @@ public class WeMoveDB {
     private DatabaseReference mEventRef = mRootRef.child("Event");
 
     public void addUser(User user) {
-        DatabaseReference mParamUserRef = mUserRef.child(user.getTag());
+        DatabaseReference mParamUserRef = mUserRef.child(user.getId());
         mParamUserRef.setValue(user);
     }
 
-    public void addSports(String tag, String name, String userTag) {
-        DatabaseReference mParamSportsRef = mSportsRef.child(tag);
-        DatabaseReference mParamSportsInsideRef = mParamSportsRef.child("Users").child(name);
-        mParamSportsInsideRef.setValue(userTag);
+    public void addUserToSport(Sport s, User user) {
+        DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
+        DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(Float.toString(s.getInterest()).replace('.',':'));
+        //mParamSportsInsideRef.
     }
 
     public void implementSports(User user) {
         for(Sport s : user.getSports()) {
-            this.addSports(s.getName(), user.getName(), user.getTag());
+            this.addUserToSport(s, user);
         }
     }
 
@@ -36,7 +45,7 @@ public class WeMoveDB {
     }
 
     public void completeProfil(User user, Map childUpdates) {
-        DatabaseReference mCompleteRef = mUserRef.child(user.getTag());
+        DatabaseReference mCompleteRef = mUserRef.child(user.getId());
         mCompleteRef.updateChildren(childUpdates);
     }
 
@@ -55,6 +64,35 @@ public class WeMoveDB {
         mDeleteEventRef.removeValue();
     }
 
+    public void getEvent(String name) {
+        DatabaseReference mGetEventRef = mEventRef.child(name);
+        mGetEventRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Home.currentEvent = dataSnapshot.getValue(Event.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("Erreur", "Erreur");
+            }
+        });
+    }
+
+    public void getUser(String id) {
+        DatabaseReference mGetUserRef = mUserRef.child(id);
+        mGetUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Home.currentUser = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("Erreur", "Erreur");
+            }
+        });
+    }
     /* public void addPhoto(User user, File path) {
 
         Uri file = Uri.fromFile(path);
