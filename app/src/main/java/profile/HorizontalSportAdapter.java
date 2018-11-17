@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.wemove.R;
@@ -16,12 +17,13 @@ import com.example.wemove.Sport;
 
 import java.util.List;
 
-import Utils.SportIconsTable;
+import Utils.AccessData;
 
 class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public TextView sportName;
     public ImageView sportImage;
+    public RelativeLayout relativeLayout;
 
     ItemClickListener itemClickListener;
 
@@ -31,6 +33,7 @@ class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
 
     public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
+        relativeLayout = (RelativeLayout) itemView.findViewById(R.id.RLtop);
         sportName = (TextView) itemView.findViewById(R.id.textSport);
         sportImage= (ImageView) itemView.findViewById(R.id.imageSport);
         itemView.setOnClickListener(this);
@@ -78,7 +81,7 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder customViewHolder, int i) {
         customViewHolder.sportName.setText(items.get(i).getName());
-        customViewHolder.sportImage.setImageResource(SportIconsTable.table.get(items.get(i).getName()));
+        customViewHolder.sportImage.setImageResource(AccessData.table.get(items.get(i).getName()));
 
         customViewHolder.setItemClickListener(new ItemClickListener() {
             @Override
@@ -99,10 +102,12 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
         });
 
         if (rowindex==i) {
-            customViewHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.OrangeNormal));
+            //customViewHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.OrangeNormal));
+            customViewHolder.relativeLayout.setBackgroundColor(context.getResources().getColor(R.color.OrangeNormal));
         }
         else {
-            customViewHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.sportcardview));
+            //customViewHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.sportcardview));
+            customViewHolder.relativeLayout.setBackgroundColor(context.getResources().getColor(R.color.sportcardview));
         }
 
         if (rowindex==-1) {

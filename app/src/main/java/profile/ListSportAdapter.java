@@ -3,7 +3,6 @@ package profile;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,14 +13,13 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 
 import java.util.List;
 
-import Utils.SportIconsTable;
+import Utils.AccessData;
 
 
 public class ListSportAdapter extends ArrayAdapter<Sport> {
@@ -49,7 +47,7 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
         ImageView sportIcon = (ImageView)customView.findViewById(R.id.imageSportRow);
         TextView sportName = (TextView)customView.findViewById(R.id.textSportRow);
         sportName.setText(sportItem.getName());
-        sportIcon.setImageResource(SportIconsTable.table.get(sportItem.getName()));
+        sportIcon.setImageResource(AccessData.table.get(sportItem.getName()));
         ImageView editSport = (ImageView)customView.findViewById(R.id.editSportIcon);
         ImageView deleteSport = (ImageView)customView.findViewById(R.id.deleteSportIcon);
 

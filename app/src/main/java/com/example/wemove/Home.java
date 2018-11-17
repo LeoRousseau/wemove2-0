@@ -52,6 +52,9 @@ public class Home extends AppCompatActivity {
         currentUser = new User();
         currentEvent = new Event();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_EventsFragment()).commit();
+        
+
         // Test des méthodes (validées)
         //db.getUser(userID);
         //db.getEvent("Badminton Time");
@@ -125,15 +128,7 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    public void goToProfile (View view) {
-        Intent intent = new Intent(this,ProfileActivity.class);
-        startActivity(intent);
-    }
 
-    public void signOut (View view) {
-        Log.d("ATTEMPT", "onClick: attempting to sign out the user");
-        FirebaseAuth.getInstance().signOut();
-    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
