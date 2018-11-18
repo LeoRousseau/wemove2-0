@@ -44,7 +44,7 @@ public class Welcome extends AppCompatActivity {
         db.addPhoto(userPhoto,img);*/
 
         //Pour ajouter un evenement
-        Event event = new Event("Badminton Time",new Sport("badminton"),5,false,"Pavillon sportif","Amateur","Cherche 2 personnes pour une doublette");
+        Event event = new Event("Badminton Second Time",new Sport("badminton"),5,false,"Pavillon sportif","Amateur","Cherche 2 personnes pour une doublette",new ArrayList<User>());
 
         // Pour completer un profil (une description et liste de sport)
         Map<String, Object> childUpdates = new HashMap<>();
@@ -64,13 +64,13 @@ public class Welcome extends AppCompatActivity {
         db.addUser(user);
         db.addUser(user2);
         //Ajout event
-        db.addEvent(event);
+        //db.addEvent(event);
         //Ajout des utilisateurs dans la table sport
         db.implementSports(user);
         //complete un profil lors de la premiere utilisation
         db.completeProfil(userEmail,childUpdates);
         //modifier un event
-        db.updateEvent(event,eventUpdates);
+        //db.updateEvent(event,eventUpdates);
         //modifier un user
         db.updateUser(user2,userUpdates);
         //Supprimer un event

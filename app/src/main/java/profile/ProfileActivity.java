@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wemove.Home;
 import com.example.wemove.R;
@@ -131,6 +132,7 @@ public class ProfileActivity extends AppCompatActivity {
         sportItems = new ArrayList<>(AccessData.currentUser.getSports());
         number_sports.setText(String.valueOf(sportItems.size()));
         bio_content.setText(AccessData.currentUser.getBio());
+        Toast.makeText(this,AccessData.currentUser.getBio(),Toast.LENGTH_SHORT).show();
     }
 
 
