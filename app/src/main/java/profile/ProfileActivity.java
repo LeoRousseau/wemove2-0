@@ -34,6 +34,8 @@ public class ProfileActivity extends AppCompatActivity {
     private boolean isFirst;
 
     private LinearLayout selecLL;
+    private RelativeLayout editinglayout;
+    private RelativeLayout ratingLayout;
 
     private CircleImageView image_profile;
     private TextView name_text;
@@ -77,12 +79,17 @@ public class ProfileActivity extends AppCompatActivity {
         else
             editingLayout.setVisibility(View.GONE);
 
-
+        editingLayout.bringToFront();
+        image_profile.bringToFront();
+        ratingLayout.bringToFront();
+        user_ratingBar.bringToFront();
     }
 
 
     public void initContentVariables () {
 
+        ratingLayout = (RelativeLayout) findViewById(R.id.ratinglayout);
+        editinglayout = (RelativeLayout) findViewById(R.id.editingLayout);
         selecLL = (LinearLayout) findViewById(R.id.layoutselectedint);
         image_profile = (CircleImageView)findViewById(R.id.profile_image);
         name_text = (TextView) findViewById(R.id.nameText);

@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/profile_image"
                 android:layout_below="@+id/profile_image"
+                android:id="@+id/ratinglayout"
                 android:elevation="5dp">
 
                 <RatingBar
