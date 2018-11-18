@@ -53,7 +53,11 @@ public class Home extends AppCompatActivity {
         userID = user.getUid();
         setupFirebaseListener();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_EventsFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_GroupsFragment()).commit();
+        bottomNavigationView.setSelectedItemId(R.id.groupButton);
+
+
+        // Test des méthodes (validées)
 
         AccessData.db.getUser(userID);
         AccessData.db.getEvents();
