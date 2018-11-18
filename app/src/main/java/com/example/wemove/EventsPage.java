@@ -23,13 +23,13 @@ public class EventsPage extends AppCompatActivity {
     private ArrayList<String> eventNiveaux= new ArrayList<String>();
     private ArrayList<String> eventSports= new ArrayList<String>();
     private ArrayList<Integer> eventNbParticipants= new ArrayList<Integer>();
-    private ArrayList<ArrayList<User>> eventUsers= new ArrayList<ArrayList<User>>();
+   // private ArrayList<ArrayList<User>> eventUsers= new ArrayList<ArrayList<User>>();
     private ArrayList<Event> events=new ArrayList<Event>();
-
-    private ArrayList<User> usersFoot= new ArrayList<User>();
+    Home home;
+   // private ArrayList<User> usersFoot= new ArrayList<User>();
     private Sport foot=new Sport("foot");
     private boolean group=false;
-    private User player= new User("daas","saad","ddddd","d.b@gmail.com","03/08/1996");
+   // private User player= new User("daas","saad","ddddd","d.b@gmail.com","03/08/1996");
 
 
 
@@ -44,18 +44,21 @@ public class EventsPage extends AppCompatActivity {
         setContentView(R.layout.activity_events_page);
 
 
-        usersFoot.add(player);
-        eventUsers.add(usersFoot);
-        Event match= new Event("foot",foot, 5,group,"uqac",foot.getLevel(), "un foot pour le fun!",usersFoot);
-        events.add(match);
+
+
+        //usersFoot.add(player);
+       // eventUsers.add(usersFoot);
+       // Event match= new Event("foot",foot, 5,group,"uqac",foot.getLevel(), "un foot pour le fun!");
+         //db.getEvent("Badminton Time");
+        events=Home.events;
 
         for(int i=0; i<events.size();i++){
-            eventNames.add(events.get(i).name);
-            eventDescriptions.add(events.get(i).description);
-            eventNbParticipants.add(events.get(i).nbPeople);
-            eventPlaces.add(events.get(i).place);
-            eventNiveaux.add(events.get(i).niveau);
-            eventSports.add(events.get(i).sport.getName());
+            eventNames.add(events.get(i).getName());
+            eventDescriptions.add(events.get(i).getDescription());
+            eventNbParticipants.add(events.get(i).getNbPeople());
+            eventPlaces.add(events.get(i).getPlace());
+            eventNiveaux.add(events.get(i).getNiveau());
+            eventSports.add(events.get(i).getSport().getName());
         }
 
 
@@ -66,6 +69,7 @@ public class EventsPage extends AppCompatActivity {
 
         EventAdaptater eventAdaptater= new EventAdaptater();
         lv.setAdapter(eventAdaptater);
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -35,6 +35,10 @@ public class Home extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private  FirebaseAuth mAuth;
     private  String userID;
+   // private WeMoveDB db;
+    public static User currentUser;
+    public static Event currentEvent;
+    public static ArrayList<Event> events= new ArrayList<Event>();
 
 
 
@@ -52,8 +56,8 @@ public class Home extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_EventsFragment()).commit();
 
         // Test des méthodes (validées)
-        AccessData.db.getUser(userID);
-        //db.getEvent("Badminton Time");
+        //db.getUser(userID);
+        AccessData.db.getEvents();
     }
 
 

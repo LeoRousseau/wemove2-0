@@ -1,5 +1,6 @@
 package com.example.wemove;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+
+import Utils.AccessData;
 
 public class CreateEvent extends AppCompatActivity {
 
@@ -18,20 +21,51 @@ public class CreateEvent extends AppCompatActivity {
     private EditText nbParticipant;
     private Button save;
     private ArrayList<Sport> sports= new ArrayList<Sport>();
-    private Sport football= new Sport("football");
-    private Sport natation= new Sport("natation");
+    private Sport football= new Sport("Football");
+    private Sport basketball= new Sport("Basketball");
+    private Sport bowling= new Sport("Bowling");
+    private Sport rugby= new Sport("Rugby");
+    private Sport baseball= new Sport("Baseball");
+    private Sport ping= new Sport("Ping Pong");
+    private Sport volleyball= new Sport("Volleyball");
+    private Sport musculation= new Sport("Musculation");
+    private Sport cyclisme= new Sport("Cyclisme");
+    private Sport kayak= new Sport("Kayak");
+    private Sport badminton= new Sport("Badminton");
+    private Sport ski= new Sport("Ski");
+    private Sport equitation= new Sport("Equitation");
+    private Sport peche= new Sport("Peche");
+    private Sport natation= new Sport("Natation");
     private boolean groupe =false;
 
     boolean isFound=false;
 
+    //private WeMoveDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
+
+
         sports.add(football);
         sports.add(natation);
+        sports.add(basketball);
+        sports.add(bowling);
+        sports.add(rugby);
+        sports.add(baseball);
+        sports.add(ping);
+        sports.add(volleyball);
+        sports.add(musculation);
+        sports.add(cyclisme);
+        sports.add(kayak);
+        sports.add(badminton);
+        sports.add(ski);
+        sports.add(equitation);
+        sports.add(peche);
+        sports.add(natation);
+
 
         eventName=findViewById(R.id.NameEvent);
         eventLevel=findViewById(R.id.Niveau);
@@ -87,8 +121,15 @@ public class CreateEvent extends AppCompatActivity {
             return;
         }
 
+
+
         Sport s= new Sport(sportName);
 
-        Event createdEvent = new Event(name,s,nbParticipantAlpha,groupe,place,level);
+        Event createdEvent = new Event(name,s,nbParticipantAlpha,groupe,place,level,description);
+        Home.events.add(createdEvent);
+
+        AccessData.db.addEvent(createdEvent);
+        startActivity(new Intent(CreateEvent.this,Home.class));
+
     }
 }

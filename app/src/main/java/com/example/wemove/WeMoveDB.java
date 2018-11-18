@@ -79,6 +79,23 @@ public class WeMoveDB {
         });
     }
 
+    public void getEvents() {
+        DatabaseReference dbEvents=FirebaseDatabase.getInstance().getReference("Event");
+        dbEvents.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Home.events.add(ds.getValue(Event.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("Erreur", "Erreur");
+            }
+        });
+    }
+
     public void getUser(String id) {
         DatabaseReference mGetUserRef = mUserRef.child(id);
         mGetUserRef.addValueEventListener(new ValueEventListener() {

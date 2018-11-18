@@ -104,7 +104,7 @@ public class Event {
         this.description = description;
     }
 
-    public Event(String name, Sport sport, int nbPeople, boolean groupe, String place, String niveau) {
+    public Event(String name, Sport sport, int nbPeople, boolean groupe, String place, String niveau,String description) {
 
         this.name = name;
         this.sport = sport;
