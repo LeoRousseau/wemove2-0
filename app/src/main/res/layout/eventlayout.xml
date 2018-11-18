@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewnom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="90dp" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Rejoindre"
+        android:layout_alignStart="@+id/textViewnom"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/Rejoindre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textViewnom"
+        android:layout_marginEnd="130dp"
+        android:text="Rejoindre" />
+
+    <TextView
+        android:id="@+id/textViewSport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textViewnom"
+        android:layout_marginTop="83dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textViewPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textViewnom"
+        android:layout_marginTop="111dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textViewNiveau"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textViewnom"
+        android:layout_marginTop="141dp"
+        android:text="TextView" />
+</RelativeLayout>

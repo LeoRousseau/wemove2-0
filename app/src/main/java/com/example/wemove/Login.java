@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
 
     private Button mLoginBtn;
     private Button mNewBtn;
+    private Button guestBtn;
 
 
     ProgressBar progressBar;
@@ -44,6 +45,7 @@ public class Login extends AppCompatActivity {
         mLoginBtn = findViewById(R.id.loginBtn);
         mNewBtn = findViewById(R.id.newBtn);
         progressBar = findViewById(R.id.progressbar);
+        guestBtn=findViewById(R.id.guestBtn);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -65,6 +67,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 newUser();
+            }
+        });
+
+        guestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onGuestClicked();
             }
         });
     }
@@ -118,5 +127,10 @@ public class Login extends AppCompatActivity {
 
     private void newUser() {
         startActivity(new Intent(Login.this,NewUser.class));
+    }
+
+    public void onGuestClicked(){
+        Intent intent=new Intent("android.intent.action.EventsPage");
+        startActivity(intent);
     }
 }
