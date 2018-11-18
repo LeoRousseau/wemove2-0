@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "135180826695-f5ji7ebrl6fjh8r5ebn8a5qss7odpq5d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wemove",
+            "certificate_hash": "dfa0cfa7d68ebbb040edb1352758c325c12d8d39"
+          }
+        },
+        {
           "client_id": "135180826695-oe1oeeile6dprs7il3me5oop8i8sfrng.apps.googleusercontent.com",
           "client_type": 3
         }

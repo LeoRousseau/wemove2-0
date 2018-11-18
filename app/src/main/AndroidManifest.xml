@@ -35,7 +35,24 @@
         <activity android:name=".Home" />
         <activity android:name=".NewUser" />
         <activity android:name=".CreditActivity" />
+<<<<<<< Updated upstream
         <activity android:name=".MySportsActivity"></activity>
+=======
+        <activity android:name=".EventsPage">
+            <intent-filter>
+                <action android:name="android.intent.action.EventsPage" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CreateEvent">
+            <intent-filter>
+                <action android:name="android.intent.action.CreateEvent" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+>>>>>>> Stashed changes
     </application>
 
 </manifest>
