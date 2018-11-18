@@ -22,6 +22,18 @@ public class Sport {
     public Sport() {
     }
 
+    public void setInterest(float interest) {
+        this.interest = interest;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Sport{" +

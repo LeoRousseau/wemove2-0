@@ -91,15 +91,15 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
         return items.get(position);
     }
 
-    public void openEditDialog(Sport sportItem) {
+    public void openEditDialog(final Sport sportItem) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.edit_sport,null);
         builder.setTitle(sportItem.getName());
 
-        Spinner levelSpinner = (Spinner) view.findViewById(R.id.levelSpinner);
-        Spinner styleSpinner = (Spinner) view.findViewById(R.id.styleSpinner);
-        RatingBar interestRating = (RatingBar) view.findViewById(R.id.interestEdit);
+        final Spinner levelSpinner = (Spinner) view.findViewById(R.id.levelSpinner);
+        final Spinner styleSpinner = (Spinner) view.findViewById(R.id.styleSpinner);
+        final RatingBar interestRating = (RatingBar) view.findViewById(R.id.interestEdit);
         String[] levels = {"Débutant","Intermédiaire","Confirmé"};
         String[] styles = {"Détente","Sérieux","Compétition","Tout"};
         ArrayAdapter<String> adapterLevel = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,levels);
@@ -114,10 +114,13 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                sportItem.setInterest(interestRating.getRating());
+                sportItem.setLevel(levelSpinner.getSelectedItem().toString());
+                sportItem.setType(styleSpinner.getSelectedItem().toString());
             }
         });
 
-        builder.setNegativeButton("Anuler", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

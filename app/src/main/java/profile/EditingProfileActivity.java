@@ -21,11 +21,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.wemove.Home;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import Utils.AccessData;
@@ -61,7 +65,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         //Get Data from DataBase
         getData();
 
-        setSports();
+        //setSports();
 
         listSportView = (ListView) findViewById(R.id.listSportView);
         listAdapter = new ListSportAdapter(this,sportItems);
@@ -198,12 +202,22 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     //Get Data from DataBase
     public void getData() {
-
+        name_text.setText(AccessData.currentUser.getName());
+        fname_text.setText(AccessData.currentUser.getFirstname());
+        bd_text.setText(AccessData.currentUser.getAge());
+        bio_content.setText(AccessData.currentUser.getBio());
+        sportItems = new ArrayList<Sport>(AccessData.currentUser.getSports());
     }
 
     //Save Data to DataBase
     public void saveData() {
-
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("bio",bio_content.getText().toString());
+        map.put("age",bd_text.getText().toString());
+        map.put("firstname",fname_text.getText().toString());
+        map.put("name", name_text.getText().toString());
+        map.put("sports",sportItems);
+        AccessData.db.updateUser(AccessData.currentUser,map);
     }
 
     public void onConfirm (View view) {

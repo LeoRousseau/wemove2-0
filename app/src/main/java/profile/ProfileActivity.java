@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,14 +13,14 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.wemove.Home;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 
+import Utils.AccessData;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -63,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
         setLayout();
 
         // Sport
-        setSports();
+        //setSports();
         LinearLayout ll = (LinearLayout) findViewById(R.id.layoutselected);
         recyclerView = (RecyclerView) findViewById(R.id.sportRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -76,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
             editingLayout.setVisibility(View.VISIBLE);
         else
             editingLayout.setVisibility(View.GONE);
+
 
     }
 
@@ -125,6 +125,12 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void getData() {
 
+        String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
+        name_text.setText(name);
+        age_text.setText(AccessData.currentUser.getAge());
+        sportItems = new ArrayList<>(AccessData.currentUser.getSports());
+        number_sports.setText(String.valueOf(sportItems.size()));
+        bio_content.setText(AccessData.currentUser.getBio());
     }
 
 

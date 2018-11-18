@@ -48,6 +48,9 @@ public class User {
     }
 
     public ArrayList<Sport> getSports() {
+        if (sports==null) {
+            return new ArrayList<Sport>();
+        }
         return sports;
     }
 

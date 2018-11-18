@@ -2,7 +2,6 @@ package com.example.wemove;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,9 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.Map;
 
+import Utils.AccessData;
 
 
 public class WeMoveDB {
@@ -51,7 +50,7 @@ public class WeMoveDB {
     }
 
     public void updateUser(User user, Map userUpdates) {
-        DatabaseReference mUpdateUserRef = mUserRef.child(user.getTag());
+        DatabaseReference mUpdateUserRef = mUserRef.child(user.getId());
         mUpdateUserRef.updateChildren(userUpdates);
     }
 
@@ -70,7 +69,7 @@ public class WeMoveDB {
         mGetEventRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Home.currentEvent = dataSnapshot.getValue(Event.class);
+                AccessData.currentEvent = dataSnapshot.getValue(Event.class);
             }
 
             @Override
@@ -85,7 +84,7 @@ public class WeMoveDB {
         mGetUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Home.currentUser = dataSnapshot.getValue(User.class);
+                AccessData.currentUser = dataSnapshot.getValue(User.class);
             }
 
             @Override
