@@ -53,9 +53,6 @@ public class Home extends AppCompatActivity {
 
         // Test des méthodes (validées)
 
-        AccessData.db.getUser(userID);
-        AccessData.db.getEvents();
-
         if (savedInstanceState!=null) {
         }
         else {
