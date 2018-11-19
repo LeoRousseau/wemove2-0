@@ -39,7 +39,6 @@ public class ListMenuAdapter extends ArrayAdapter<MenuItem> {
         textView = (TextView)customView.findViewById(R.id.textMenuItem);
         textView.setText(menuItem.getText());
         imageView.setImageResource(menuItem.getIcon());
-
         return customView;
     }
 

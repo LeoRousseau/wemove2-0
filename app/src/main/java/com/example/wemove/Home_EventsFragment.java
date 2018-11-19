@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +22,12 @@ import java.util.ArrayList;
 import Utils.AccessData;
 
 public class Home_EventsFragment extends Fragment {
+
     private ListView lv;
-    private Button create;
+    private FloatingActionButton create;
     private Button join;
-    private Sport foot=new Sport("foot");
-    private boolean group=false;
+    private ListAdapter eventAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,16 +37,20 @@ public class Home_EventsFragment extends Fragment {
 
 
         lv = (ListView) view.findViewById(R.id.listEventsView);
-        create = (Button) view.findViewById(R.id.Create);
-        join = (Button) view.findViewById(R.id.Rejoindre);
+        create = (FloatingActionButton) view.findViewById(R.id.Create);
+        //join = (Button) view.findViewById(R.id.Rejoindre);
+        eventAdapter = new EventAdapter(getActivity());
+        lv.setAdapter(eventAdapter);
 
-        EventAdapter eventAdaptater = new EventAdapter(getActivity(), AccessData.events);
-        lv.setAdapter(eventAdaptater);
+        Log.d("TEST",String.valueOf(AccessData.events.size()));
+
+
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCreateClicked();
+                Intent intent=new Intent("android.intent.action.CreateEvent");
+                startActivity(intent);
             }
         });
 
@@ -51,12 +58,9 @@ public class Home_EventsFragment extends Fragment {
     }
 
         public void onCreateClicked(){
-            Intent intent=new Intent("android.intent.action.CreateEvent");
-            startActivity(intent);
+            //Intent intent=new Intent("android.intent.action.CreateEvent");
+            //startActivity(intent);
+            Log.d("TEST",String.valueOf(AccessData.events.size()));
         }
-
-
-
-
 
 }

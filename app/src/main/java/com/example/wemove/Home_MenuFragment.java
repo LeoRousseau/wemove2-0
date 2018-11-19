@@ -25,7 +25,6 @@ import profile.ProfileActivity;
 public class Home_MenuFragment extends Fragment {
 
     ListView listView;
-    private List<Sport> sportItems;
     private ListAdapter listAdapter;
 
     @Nullable

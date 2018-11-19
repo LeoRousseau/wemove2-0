@@ -51,6 +51,11 @@ public class Home extends AppCompatActivity {
         userID = user.getUid();
         setupFirebaseListener();
 
+        // Test des méthodes (validées)
+
+        AccessData.db.getUser(userID);
+        AccessData.db.getEvents();
+
         if (savedInstanceState!=null) {
         }
         else {
@@ -59,11 +64,6 @@ public class Home extends AppCompatActivity {
         }
 
 
-        
-        // Test des méthodes (validées)
-
-        AccessData.db.getUser(userID);
-        AccessData.db.getEvents();
     }
 
 
@@ -90,6 +90,7 @@ public class Home extends AppCompatActivity {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
     }
+
 
     @Override
     protected void onStop() {

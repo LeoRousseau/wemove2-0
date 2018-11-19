@@ -6,93 +6,139 @@
     android:layout_height="match_parent"
     tools:context=".CreateEvent">
 
-    <EditText
-        android:id="@+id/NameEvent"
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Event's name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="55dp"
+        android:background="@color/OrangeNormal"
+        android:id="@+id/createEventToolbar"
+        android:elevation="4dp">
 
-    <EditText
-        android:id="@+id/NbPersonne"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/returned"
+                android:onClick="onDismissEvent"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/checked"
+                android:onClick="onConfirmEvent"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/NameEvent"
-        android:ems="10"
-        android:hint="Nombre de participant"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameEvent" />
-
-    <EditText
-        android:id="@+id/NameSport"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/NbPersonne"
-        android:ems="10"
-        android:hint="Nom du Sport"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NbPersonne" />
-
-    <EditText
-        android:id="@+id/Place"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/NameSport"
-        android:ems="10"
-        android:hint="Endroit de la pratique"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameSport" />
-
-    <EditText
-        android:id="@+id/Niveau"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Place"
-        android:ems="10"
-        android:hint="Quel est le niveau attendu pour les participants"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Place" />
-
-    <EditText
-        android:id="@+id/Description"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/Niveau"
-        android:ems="10"
-        android:hint="Ajouter une description"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Niveau" />
-
-    <Button
-        android:id="@+id/sauvegarder"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Description" />
+        android:layout_below="@id/createEventToolbar"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <EditText
+            android:id="@+id/NameEvent"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="Nom de l'évènement"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/NbPersonne"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:ems="10"
+            android:hint="Nombre de participants"
+            android:inputType="number" />
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:padding="2dp">
 
+            <TextView
+                android:id="@+id/txvsp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:ems="10"
+                android:text="Sport : "
+                android:textSize="18sp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/NameSport"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/txvsp">
+
+            </Spinner>
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/Place"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Endroit de la pratique"
+            android:layout_marginTop="10dp"
+            android:inputType="text" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/txniv"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:ems="10"
+                android:text="Niveau requis : "
+                android:textSize="18sp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:id="@+id/Niveau"
+                android:layout_toRightOf="@id/txniv">
+
+            </Spinner>
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/Description"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Ajouter une description"
+            android:inputType="text"
+            android:layout_marginTop="10dp"/>
+
+
+    </LinearLayout>
 </RelativeLayout>

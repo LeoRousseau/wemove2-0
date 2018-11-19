@@ -3,65 +3,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
-    <TextView
-        android:id="@+id/textViewnom"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="90dp" />
+        android:padding="2dp"
+        android:id="@+id/rl1">
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewnom"
-        android:layout_alignTop="@+id/Rejoindre"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/textViewnom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="TextView"
+            android:textColor="@color/CardViewGrey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/Rejoindre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="52dp"
-        android:background="@android:color/transparent"
-        android:text="REJOINDRE"
-        android:textColor="@android:color/holo_orange_dark" />
+        <Button
+            android:id="@+id/Rejoindre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/OrangeNormal"
+            android:background="@android:color/transparent"
+            android:text="REJOINDRE" />
 
-    <TextView
-        android:id="@+id/textViewSport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewnom"
-        android:layout_marginTop="83dp"
-        android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textViewPlace"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewnom"
-        android:layout_marginTop="111dp"
-        android:text="TextView" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textViewNiveau"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewnom"
-        android:layout_marginTop="141dp"
-        android:text="TextView" />
+        android:layout_below="@id/rl1">
+        <TextView
+            android:id="@+id/textViewSport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/textViewSport"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewNiveau"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/textViewPlace"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewSport"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:text="TextView" />
+
+    </RelativeLayout>
 </RelativeLayout>

@@ -15,13 +15,14 @@
         android:layout_alignParentTop="true"
         />
 
-    <Button
-        android:id="@+id/Create"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/Create"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Creer un evenement"
-        app:layout_constraintTop_toBottomOf="@+id/listEventsView"/>
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/OrangeNormal"
+        android:src="@drawable/ic_add_black_24dp"/>
 
 </RelativeLayout>
