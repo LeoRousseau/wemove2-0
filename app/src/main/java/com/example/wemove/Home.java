@@ -36,7 +36,7 @@ public class Home extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private  FirebaseAuth mAuth;
     private  String userID;
-
+    private boolean first = true;
 
 
 
@@ -63,6 +63,11 @@ public class Home extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.groupButton);
         }
 
+        AccessData.db.getUser(userID);
+        if(first) {
+            AccessData.db.getEvents();
+            first = !first;
+        }
 
     }
 
