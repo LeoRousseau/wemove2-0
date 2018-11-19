@@ -139,7 +139,6 @@ public class ProfileActivity extends AppCompatActivity {
         sportItems = new ArrayList<>(AccessData.currentUser.getSports());
         number_sports.setText(String.valueOf(sportItems.size()));
         bio_content.setText(AccessData.currentUser.getBio());
-        Toast.makeText(this,AccessData.currentUser.getBio(),Toast.LENGTH_SHORT).show();
     }
 
 

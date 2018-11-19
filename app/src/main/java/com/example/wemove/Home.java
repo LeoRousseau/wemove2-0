@@ -55,8 +55,7 @@ public class Home extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_EventsFragment()).commit();
 
-        // Test des méthodes (validées)
-        //db.getUser(userID);
+        AccessData.db.getUser(userID);
         AccessData.db.getEvents();
     }
 
