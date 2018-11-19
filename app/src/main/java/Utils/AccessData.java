@@ -5,6 +5,7 @@ import com.example.wemove.R;
 import com.example.wemove.User;
 import com.example.wemove.WeMoveDB;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AccessData {
@@ -13,6 +14,7 @@ public class AccessData {
     public static User currentUser = new User();
     public static Event currentEvent = new Event();
     public static WeMoveDB db = new WeMoveDB();
+    public static ArrayList<Event> events= new ArrayList<Event>();
     public static AgeCalculator ageCalculator = new AgeCalculator();
 }
 

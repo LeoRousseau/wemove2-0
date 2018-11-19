@@ -126,7 +126,7 @@ public class CreateEvent extends AppCompatActivity {
         Sport s= new Sport(sportName);
 
         Event createdEvent = new Event(name,s,nbParticipantAlpha,groupe,place,level,description);
-        Home.events.add(createdEvent);
+        AccessData.events.add(createdEvent);
 
         AccessData.db.addEvent(createdEvent);
         startActivity(new Intent(CreateEvent.this,Home.class));

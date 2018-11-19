@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Utils.AccessData;
+
 public class EventsPage extends AppCompatActivity {
 
     private ListView lv;
@@ -50,7 +52,7 @@ public class EventsPage extends AppCompatActivity {
        // eventUsers.add(usersFoot);
        // Event match= new Event("foot",foot, 5,group,"uqac",foot.getLevel(), "un foot pour le fun!");
          //db.getEvent("Badminton Time");
-        events=Home.events;
+        events= AccessData.events;
 
         for(int i=0; i<events.size();i++){
             eventNames.add(events.get(i).getName());

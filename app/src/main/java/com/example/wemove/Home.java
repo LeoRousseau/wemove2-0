@@ -3,6 +3,7 @@ package com.example.wemove;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -35,10 +36,7 @@ public class Home extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private  FirebaseAuth mAuth;
     private  String userID;
-   // private WeMoveDB db;
-    public static User currentUser;
-    public static Event currentEvent;
-    public static ArrayList<Event> events= new ArrayList<Event>();
+
 
 
 
@@ -53,10 +51,15 @@ public class Home extends AppCompatActivity {
         userID = user.getUid();
         setupFirebaseListener();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_GroupsFragment()).commit();
-        bottomNavigationView.setSelectedItemId(R.id.groupButton);
+        if (savedInstanceState!=null) {
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Home_GroupsFragment()).commit();
+            bottomNavigationView.setSelectedItemId(R.id.groupButton);
+        }
 
 
+        
         // Test des méthodes (validées)
 
         AccessData.db.getUser(userID);
@@ -96,7 +99,11 @@ public class Home extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
+        saveInstanceState.putInt("frag",0);
+    }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import Utils.AccessData;
@@ -81,11 +82,12 @@ public class WeMoveDB {
 
     public void getEvents() {
         DatabaseReference dbEvents=FirebaseDatabase.getInstance().getReference("Event");
+        AccessData.events = new ArrayList<Event>();
         dbEvents.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Home.events.add(ds.getValue(Event.class));
+                    AccessData.events.add(ds.getValue(Event.class));
                 }
             }
 
