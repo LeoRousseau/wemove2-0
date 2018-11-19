@@ -20,21 +20,23 @@ import profile.EditingProfileActivity;
 public class EventAdapter extends ArrayAdapter<Event> {
 
     private Context context;
+    private List<Event> items;
 
-    public EventAdapter(@NonNull Context context) {
+    public EventAdapter(@NonNull Context context, List<Event> items) {
         super(context, R.layout.eventlayout);
         this.context=context;
+        this.items=items;
     }
 
     @Override
     public Event getItem(int position) {
-        return AccessData.events.get(position);
+        return items.get(position);
     }
 
 
     @Override
     public int getCount() {
-        return AccessData.events.size();
+        return items.size();
 
     }
     @NonNull

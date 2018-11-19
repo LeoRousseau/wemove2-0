@@ -38,7 +38,7 @@ public class Home_EventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment_events, container, false);
 
         lv = (ListView) view.findViewById(R.id.listEventsView);
-        create = (Button) view.findViewById(R.id.Create);
+        create = (FloatingActionButton) view.findViewById(R.id.Create);
         join = (Button) view.findViewById(R.id.Rejoindre);
         if(eventAdapter == null) {
             eventAdapter = new EventAdapter(getActivity(), events);
