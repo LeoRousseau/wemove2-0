@@ -21,8 +21,8 @@
         android:id="@+id/textViewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Rejoindre"
         android:layout_alignStart="@+id/textViewnom"
+        android:layout_alignTop="@+id/Rejoindre"
         android:text="TextView" />
 
     <Button
@@ -30,9 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textViewnom"
-        android:layout_marginEnd="130dp"
-        android:text="Rejoindre" />
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="52dp"
+        android:background="@android:color/transparent"
+        android:text="REJOINDRE"
+        android:textColor="@android:color/holo_orange_dark" />
 
     <TextView
         android:id="@+id/textViewSport"
