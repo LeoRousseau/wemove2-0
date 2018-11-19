@@ -1,6 +1,7 @@
 package com.example.wemove;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,20 +26,22 @@ public class Home_EventsFragment extends Fragment {
     private Button join;
     private Sport foot=new Sport("foot");
     private boolean group=false;
+    private EventAdapter eventAdapter;
+    private ArrayList<Event> events= AccessData.events;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment_events, container, false);
 
-
-
-
         lv = (ListView) view.findViewById(R.id.listEventsView);
         create = (Button) view.findViewById(R.id.Create);
         join = (Button) view.findViewById(R.id.Rejoindre);
-
-        EventAdapter eventAdaptater = new EventAdapter(getActivity(), AccessData.events);
-        lv.setAdapter(eventAdaptater);
+        if(eventAdapter == null) {
+            eventAdapter = new EventAdapter(getActivity(), events);
+            lv.setAdapter(eventAdapter);
+            eventAdapter.notifyDataSetChanged();
+        }
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +49,6 @@ public class Home_EventsFragment extends Fragment {
                 onCreateClicked();
             }
         });
-
         return view;
     }
 
@@ -55,8 +57,8 @@ public class Home_EventsFragment extends Fragment {
             startActivity(intent);
         }
 
-
-
-
-
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
 }
