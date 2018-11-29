@@ -47,7 +47,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:backgroundTint="@color/OrangeNormal"
-        android:onClick="onAdd"
+        android:onClick="addSport"
         android:src="@drawable/ic_add_black_24dp"/>
 
 </RelativeLayout>

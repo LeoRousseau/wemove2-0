@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import Utils.AccessData;
@@ -75,6 +76,9 @@ public class MySportAdapter extends BaseAdapter {
         TextView sportname = (TextView)customView.findViewById(R.id.textSportGV);
         ImageView sportimage = (ImageView)customView.findViewById(R.id.imageSportGV);
         CardView cardView = (CardView) customView.findViewById(R.id.cardViewSportGV);
+        RatingBar ratingBar = (RatingBar)customView.findViewById(R.id.ratingBarMySport);
+        TextView level = (TextView)customView.findViewById(R.id.levelMySport);
+        TextView style = (TextView)customView.findViewById(R.id.styleMySport);
         final RelativeLayout view = (RelativeLayout) customView.findViewById(R.id.viewGV);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +105,9 @@ public class MySportAdapter extends BaseAdapter {
 
         sportname.setText(sport.getName());
         sportimage.setImageResource(AccessData.table.get(sport.getName()));
+        level.setText(sport.getLevel());
+        style.setText(sport.getType());
+        ratingBar.setRating(sport.getInterest());
 
 
         return customView;
@@ -133,6 +140,9 @@ public class MySportAdapter extends BaseAdapter {
                 sportItem.setInterest(interestRating.getRating());
                 sportItem.setLevel(levelSpinner.getSelectedItem().toString());
                 sportItem.setType(styleSpinner.getSelectedItem().toString());
+                HashMap<String,Object> map = new HashMap<>();
+                map.put("sports",items);
+                AccessData.db.updateUser(AccessData.currentUser,map);
             }
         });
 

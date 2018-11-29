@@ -16,7 +16,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/OrangeNormal"
+            android:background="@color/CardViewGrey"
             android:layout_margin="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -24,18 +24,34 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <RatingBar
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="?android:attr/ratingBarStyleSmall"
-                    android:progressTint="@color/OrangeNormal"/>
+                    android:numStars="5"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:rating="3"
+                    android:isIndicator="true"
+                    android:progressTint="@color/OrangeNormal"
+                    android:id="@+id/ratingBarMySport"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Debutant"/>
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/foregroundWhite"
+                    android:textStyle="bold"
+                    android:text="Debutant"
+                    android:id="@+id/levelMySport"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tout"/>
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/foregroundWhite"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:text="Tout"
+                    android:id="@+id/styleMySport"/>
 
             </LinearLayout>
             <RelativeLayout
