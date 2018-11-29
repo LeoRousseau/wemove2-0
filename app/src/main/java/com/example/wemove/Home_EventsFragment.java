@@ -15,6 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,27 +25,33 @@ import Utils.AccessData;
 
 public class Home_EventsFragment extends Fragment {
 
-    private ListView lv;
+    public static ListView lv=null;
     private FloatingActionButton create;
     private Button join;
     private Sport foot=new Sport("foot");
     private boolean group=false;
-    private EventAdapter eventAdapter;
-    private ArrayList<Event> events= AccessData.events;
+    public static EventAdapter eventAdapter;
+    public static ProgressBar progressBarEvents;
+    public static boolean isCharged = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment_events, container, false);
-
+        progressBarEvents = (ProgressBar)view.findViewById(R.id.progressbarEvents);
+        //eventAdapter=null;
         lv = (ListView) view.findViewById(R.id.listEventsView);
         create = (FloatingActionButton) view.findViewById(R.id.Create);
         join = (Button) view.findViewById(R.id.Rejoindre);
-        if(eventAdapter == null) {
-            eventAdapter = new EventAdapter(getActivity(), events);
-            lv.setAdapter(eventAdapter);
-            eventAdapter.notifyDataSetChanged();
+        if (AccessData.events.size()==0) {
+            //AccessData.db.getEvents();
         }
+        if (eventAdapter==null) {
+            eventAdapter = new EventAdapter(getActivity(), AccessData.events);
+        }
+        lv.setAdapter(eventAdapter);
+        eventAdapter.notifyDataSetChanged();
+
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,13 +60,21 @@ public class Home_EventsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
+        if (isCharged) {
+            hidePB();
+        }
+
         return view;
     }
 
-        public void onCreateClicked(){
-            //Intent intent=new Intent("android.intent.action.CreateEvent");
-            //startActivity(intent);
-            Log.d("TEST",String.valueOf(AccessData.events.size()));
-        }
+    public EventAdapter getEventAdapter() {
+        return eventAdapter;
+    }
+
+    public static void hidePB() {
+        progressBarEvents.setVisibility(View.GONE);
+    }
 
 }

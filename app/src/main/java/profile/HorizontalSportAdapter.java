@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.wemove.R;
 import com.example.wemove.Sport;
+import com.example.wemove.User;
 
 import java.util.List;
 
@@ -59,8 +60,8 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
     Context context;
     int rowindex =-1; //Default case
 
-    public HorizontalSportAdapter(List<Sport> items, Context context, LinearLayout linearLayout) {
-        this.items = items;
+    public HorizontalSportAdapter(User user, Context context, LinearLayout linearLayout) {
+        this.items = user.getSports();
         this.context = context;
         this.linearLayout = linearLayout;
 
@@ -68,6 +69,10 @@ public class HorizontalSportAdapter extends RecyclerView.Adapter<CustomViewHolde
         level = (TextView)linearLayout.findViewById(R.id.levelSelected);
         interest = (RatingBar)linearLayout.findViewById(R.id.interestSelected);
         type = (TextView)linearLayout.findViewById(R.id.typeSelected);
+    }
+
+    public void setInput (User user) {
+        this.items=user.getSports();
     }
 
     @NonNull

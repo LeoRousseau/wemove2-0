@@ -1,8 +1,15 @@
 package com.example.wemove;
 
+import android.content.Context;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import android.app.Application;
+import android.content.Context;
+
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import Utils.AccessData;
+import profile.ProfileActivity;
 
 
 public class WeMoveDB {
@@ -21,6 +29,43 @@ public class WeMoveDB {
     private DatabaseReference mUserRef = mRootRef.child("Users");
     private DatabaseReference mSportsRef = mRootRef.child("Sports");
     private DatabaseReference mEventRef = mRootRef.child("Event");
+    private DatabaseReference mCuserRef;
+
+    public WeMoveDB() {
+
+
+        mEventRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                AccessData.events.add(dataSnapshot.getValue(Event.class));
+                if(Home_EventsFragment.lv!=null) {
+                    Home_EventsFragment.eventAdapter.notifyDataSetChanged();
+                    Home_EventsFragment.hidePB();
+                }
+                Home_EventsFragment.isCharged=true;
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     public void addUser(User user) {
         DatabaseReference mParamUserRef = mUserRef.child(user.getId());
@@ -80,23 +125,6 @@ public class WeMoveDB {
         });
     }
 
-    public void getEvents() {
-        DatabaseReference dbEvents=FirebaseDatabase.getInstance().getReference("Event");
-        AccessData.events = new ArrayList<Event>();
-        dbEvents.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    AccessData.events.add(ds.getValue(Event.class));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("Erreur", "Erreur");
-            }
-        });
-    }
 
     public void getUser(String id) {
         DatabaseReference mGetUserRef = mUserRef.child(id);
@@ -104,6 +132,22 @@ public class WeMoveDB {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccessData.currentUser = dataSnapshot.getValue(User.class);
+                Log.d("EVENT", "USER");
+                if (MySportsActivity.gridView!=null) {
+                    MySportsActivity.adapter.setInput(AccessData.currentUser);
+                    MySportsActivity.adapter.notifyDataSetChanged();
+                    MySportsActivity.hidePB();
+                    Log.d("EVENT", "notifyed");
+                }
+                MySportsActivity.isCharged=true;
+                if (ProfileActivity.isRunning) {
+                    ProfileActivity.getData();
+                    ProfileActivity.horizontalSportAdapter.setInput(AccessData.currentUser);
+                    ProfileActivity.horizontalSportAdapter.notifyDataSetChanged();
+                    ProfileActivity.hidePB();
+                }
+                ProfileActivity.isCharged=true;
+
             }
 
             @Override
@@ -112,6 +156,9 @@ public class WeMoveDB {
             }
         });
     }
+
+
+
     /* public void addPhoto(User user, File path) {
 
         Uri file = Uri.fromFile(path);

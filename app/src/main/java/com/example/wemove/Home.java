@@ -53,6 +53,9 @@ public class Home extends AppCompatActivity {
 
         // Test des méthodes (validées)
 
+
+        AccessData.db.getUser(userID);
+
         if (savedInstanceState!=null) {
         }
         else {
@@ -60,11 +63,7 @@ public class Home extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.groupButton);
         }
 
-        AccessData.db.getUser(userID);
-        if(first) {
-            AccessData.db.getEvents();
-            first = !first;
-        }
+
 
     }
 

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.AccessData;
 import profile.ListSportAdapter;
 import profile.ProfileActivity;
 
@@ -82,6 +83,7 @@ public class Home_MenuFragment extends Fragment {
     }
 
     public void signOut () {
+        AccessData.db = new WeMoveDB();
         Log.d("ATTEMPT", "onClick: attempting to sign out the user");
         FirebaseAuth.getInstance().signOut();
     }
