@@ -1,11 +1,15 @@
 package Utils;
 
+import android.os.Debug;
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class AgeCalculator{
 
@@ -13,7 +17,7 @@ public class AgeCalculator{
             Calendar now = Calendar.getInstance();
             Calendar dob = Calendar.getInstance();
 
-            dob.set(birthDate.getYear(),birthDate.getMonth(),birthDate.getDay());
+            dob.set(birthDate.getYear(),birthDate.getMonth(),birthDate.getDate());
             if (dob.after(now)) {
                 return 0;
             }
@@ -34,5 +38,13 @@ public class AgeCalculator{
 
             return age;
         }
+
+    public long getDifferenceDays(Date d1) {
+        Calendar d = Calendar.getInstance();
+        Date d2 = new Date(d.get(Calendar.YEAR),d.get(Calendar.MONTH)+1,d.get(Calendar.DAY_OF_MONTH));
+        Log.d("DATE",String.valueOf(d2.getYear()));
+        long diff = d2.getTime() - d1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
 
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@color/foregroundWhite">
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_event_black_24dp"
+        android:id="@+id/imageNotif"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Football : Un nouvel évènement vous correspond ! "
+        android:layout_toRightOf="@id/imageNotif"
+        android:layout_alignTop="@id/imageNotif"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:id="@+id/msgNotif"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Il y a deux jours"
+        android:layout_toRightOf="@id/imageNotif"
+        android:layout_alignBottom="@id/imageNotif"
+        android:paddingLeft="10dp"
+        android:paddingRight="5dp"
+        android:textStyle="italic"
+        android:textColor="@color/OrangeNormal"
+        android:id="@+id/dateNotif"
+        android:textSize="15sp"/>
+</RelativeLayout>

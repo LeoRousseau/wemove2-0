@@ -53,7 +53,6 @@ public class Home extends AppCompatActivity {
 
         // Test des méthodes (validées)
 
-
         AccessData.db.getUser(userID);
 
         if (savedInstanceState!=null) {
