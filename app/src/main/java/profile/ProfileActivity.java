@@ -20,6 +20,7 @@ import com.example.wemove.R;
 import com.example.wemove.Sport;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Utils.AccessData;
@@ -139,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static void getData() {
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
-        age_text.setText(AccessData.currentUser.getAge());
+        age_text.setText(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07))));
         number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
     }
