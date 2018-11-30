@@ -20,4 +20,9 @@
         android:id="@+id/navigationBar"
         app:menu="@menu/bottom_nav_bar">
     </android.support.design.widget.BottomNavigationView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/badge_background"/>
 </RelativeLayout>

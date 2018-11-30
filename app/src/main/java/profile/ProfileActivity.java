@@ -140,7 +140,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static void getData() {
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
-        age_text.setText(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07))));
+        String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07)))).append(" ans").toString();
+        age_text.setText(date_);
         number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
     }

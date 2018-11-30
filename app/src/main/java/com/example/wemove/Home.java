@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,7 @@ public class Home extends AppCompatActivity {
     private Button mSignOutBtn;
     private  FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
+    private View notificationBadge;
     private  FirebaseAuth mAuth;
     private  String userID;
     private boolean first = true;
@@ -46,6 +50,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
@@ -63,6 +68,7 @@ public class Home extends AppCompatActivity {
         }
 
 
+        addBadgeView();
 
     }
 
@@ -131,4 +137,13 @@ public class Home extends AppCompatActivity {
                     return true;
                 }
             };
+
+    private void addBadgeView() {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(2);
+
+        notificationBadge = LayoutInflater.from(this).inflate(R.layout.notifications_badge, menuView, false);
+
+        itemView.addView(notificationBadge);
+    }
 }
