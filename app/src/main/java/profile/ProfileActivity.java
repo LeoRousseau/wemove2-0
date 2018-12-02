@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.example.wemove.R;
 import com.example.wemove.Sport;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Utils.AccessData;
@@ -26,7 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private List<Sport> sportItems;
+    public static boolean isRunning=false;
+    public static boolean isCharged=false;
+    public static ProgressBar progressBarProfile;
+    public static LinearLayout linearLayoutProfile;
+
+    public static HorizontalSportAdapter horizontalSportAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -37,21 +44,20 @@ public class ProfileActivity extends AppCompatActivity {
     private RelativeLayout editinglayout;
     private RelativeLayout ratingLayout;
 
-    private CircleImageView image_profile;
-    private TextView name_text;
-    private TextView age_text;
-    private RatingBar user_ratingBar;
-    private TextView number_activities;
-    private TextView number_sports;
-    private TextView bio_content;
+    private static CircleImageView image_profile;
+    private static TextView name_text;
+    private static TextView age_text;
+    private static RatingBar user_ratingBar;
+    private static TextView number_activities;
+    private static TextView number_sports;
+    private static TextView bio_content;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        isRunning=true;
         isOwner=true;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -69,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.layoutselected);
         recyclerView = (RecyclerView) findViewById(R.id.sportRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        HorizontalSportAdapter  horizontalSportAdapter = new HorizontalSportAdapter(sportItems,this,ll);
+        horizontalSportAdapter = new HorizontalSportAdapter(AccessData.currentUser,this,ll);
         recyclerView.setAdapter(horizontalSportAdapter);
 
         // Editing
@@ -83,11 +89,20 @@ public class ProfileActivity extends AppCompatActivity {
         image_profile.bringToFront();
         ratingLayout.bringToFront();
         user_ratingBar.bringToFront();
+
+        if (isCharged) {
+            hidePB();
+        }
+        else {
+            linearLayoutProfile.setVisibility(View.GONE);
+        }
     }
 
 
     public void initContentVariables () {
 
+        linearLayoutProfile = (LinearLayout)findViewById(R.id.llProfile);
+        progressBarProfile = (ProgressBar)findViewById(R.id.progressbarProfile);
         ratingLayout = (RelativeLayout) findViewById(R.id.ratinglayout);
         editinglayout = (RelativeLayout) findViewById(R.id.editingLayout);
         selecLL = (LinearLayout) findViewById(R.id.layoutselectedint);
@@ -99,7 +114,6 @@ public class ProfileActivity extends AppCompatActivity {
         number_sports = (TextView) findViewById(R.id.number_sports);
         bio_content = (TextView) findViewById(R.id.bio_content);
 
-        sportItems = new ArrayList<>();
     }
 
     public void setLayout () {
@@ -116,14 +130,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void setSports () {
-        sportItems.add(new Sport("Football","Intermédiaire","Détente",(float)3.5));
-        sportItems.add(new Sport("Ping Pong","Débutant","Détente",1));
-        sportItems.add(new Sport("Rugby","Confirmé","Tout",5));
-        sportItems.add(new Sport("Natation","Intermédiaire","Sérieux",4));
-        sportItems.add(new Sport("Volleyball","Débutant","Tout",2));
-        sportItems.add(new Sport("Peche","Intermédiaire","Détente",4));
-    }
 
 
     public void editProfile (View view) {
@@ -131,15 +137,24 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void getData() {
-
+    public static void getData() {
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
-        age_text.setText(AccessData.currentUser.getAge());
-        sportItems = new ArrayList<>(AccessData.currentUser.getSports());
-        number_sports.setText(String.valueOf(sportItems.size()));
+        String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07)))).append(" ans").toString();
+        age_text.setText(date_);
+        number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isRunning=false;
+    }
+
+    public static void hidePB() {
+        progressBarProfile.setVisibility(View.GONE);
+        linearLayoutProfile.setVisibility(View.VISIBLE);
+    }
 
 }

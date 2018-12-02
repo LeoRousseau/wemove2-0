@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import Utils.AccessData;
+
 public class NewUser extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
