@@ -90,6 +90,7 @@ public class User {
     }
 
     public User(String id, String tag, String name, String firstname, String bio, ArrayList<Sport> sports) {
+
         this.id = id;
         this.tag = tag;
         this.name = name;
@@ -132,6 +133,13 @@ public class User {
         this.firstname = firstname;
         this.email = email;
         this.age = age;
+    }
+
+    public User(String id, String name, String firstname, String email) {
+        this.id = id;
+        this.name = name;
+        this.firstname = firstname;
+        this.email = email;
     }
 
     public String getId() {

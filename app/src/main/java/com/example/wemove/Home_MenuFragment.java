@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -83,6 +84,7 @@ public class Home_MenuFragment extends Fragment {
 
     public void signOut () {
         Log.d("ATTEMPT", "onClick: attempting to sign out the user");
+        LoginManager.getInstance().logOut();
         FirebaseAuth.getInstance().signOut();
     }
 }

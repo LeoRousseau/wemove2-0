@@ -15,4 +15,7 @@
         completions."
     </string>
     <string name="creditsIcon">Sport Icons made by Freepik from www.flaticon.com </string>
+    <string name="facebook_app_id">2193897860695336</string>
+    <string name="fb_login_protocol_scheme">fb2193897860695336</string>
+
 </resources>

@@ -57,6 +57,18 @@
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_orange_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newBtn" />
+
+
     <ProgressBar
         android:id="@+id/progressbar"
         style="?android:attr/progressBarStyleHorizontal"

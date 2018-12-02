@@ -3,6 +3,7 @@ package com.example.wemove;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,7 @@ public class WeMoveDB {
     private DatabaseReference mEventRef = mRootRef.child("Event");
 
     public void addUser(User user) {
-        DatabaseReference mParamUserRef = mUserRef.child(user.getId());
+        DatabaseReference mParamUserRef = mUserRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid());
         mParamUserRef.setValue(user);
     }
 
