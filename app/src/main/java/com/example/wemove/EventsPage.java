@@ -117,17 +117,17 @@ public class EventsPage extends AppCompatActivity {
             view=getLayoutInflater().inflate(R.layout.eventlayout,null);
 
             TextView nom=(TextView) view.findViewById(R.id.textViewnom);
-            TextView description=(TextView) view.findViewById(R.id.textViewDescription);
+           // TextView description=(TextView) view.findViewById(R.id.textViewDescription);
             TextView sport =(TextView) view.findViewById(R.id.textViewSport);
-            TextView place =(TextView) view.findViewById(R.id.textViewPlace);
-            TextView niveau=(TextView) view.findViewById(R.id.textViewNiveau);
+           // TextView place =(TextView) view.findViewById(R.id.textViewPlace);
+          //  TextView niveau=(TextView) view.findViewById(R.id.textViewNiveau);
 
 
             nom.setText(eventNames.get(position));
-            description.setText(eventDescriptions.get(position));
+           // description.setText(eventDescriptions.get(position));
             sport.setText(eventSports.get(position));
-            place.setText(eventPlaces.get(position));
-            niveau.setText(eventNiveaux.get(position));
+           // place.setText(eventPlaces.get(position));
+            //niveau.setText(eventNiveaux.get(position));
             return view;
         }
     }
