@@ -102,7 +102,7 @@ public class MySportsActivity extends AppCompatActivity {
                 HashMap<String,Object> map = new HashMap<>();
                 map.put("sports",AccessData.currentUser.sports);
                 AccessData.db.updateUser(AccessData.currentUser,map);
-
+                AccessData.db.implementSports(AccessData.currentUser);
             }
         });
 

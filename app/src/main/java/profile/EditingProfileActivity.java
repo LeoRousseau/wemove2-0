@@ -42,6 +42,7 @@ public class EditingProfileActivity extends AppCompatActivity {
 
 
     private List<Sport> sportItems;
+    private Sport sportItem;
     private ImageView hideList;
     private ListView listSportView;
     private ListAdapter listAdapter;
@@ -180,7 +181,7 @@ public class EditingProfileActivity extends AppCompatActivity {
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Sport sportItem = new Sport(nameSpinner.getSelectedItem().toString(),levelSpinner.getSelectedItem().toString(),styleSpinner.getSelectedItem().toString(),interestRating.getRating());
+                    sportItem = new Sport(nameSpinner.getSelectedItem().toString(),levelSpinner.getSelectedItem().toString(),styleSpinner.getSelectedItem().toString(),interestRating.getRating());
                     sportItems.add(0,sportItem);
                     ((BaseAdapter)listAdapter).notifyDataSetChanged();
                     setListViewSize();
@@ -218,6 +219,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("name", name_text.getText().toString());
         map.put("sports",sportItems);
         AccessData.db.updateUser(AccessData.currentUser,map);
+        AccessData.db.implementSports(AccessData.currentUser);
     }
 
     public void onConfirm (View view) {

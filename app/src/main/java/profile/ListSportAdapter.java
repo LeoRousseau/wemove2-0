@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 
+import java.util.HashMap;
 import java.util.List;
 
 import Utils.AccessData;
@@ -117,6 +118,10 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
                 sportItem.setInterest(interestRating.getRating());
                 sportItem.setLevel(levelSpinner.getSelectedItem().toString());
                 sportItem.setType(styleSpinner.getSelectedItem().toString());
+                HashMap<String,Object> map = new HashMap<>();
+                map.put("sports",items);
+                AccessData.db.updateUser(AccessData.currentUser,map);
+                AccessData.db.implementSports(AccessData.currentUser);
             }
         });
 

@@ -143,6 +143,7 @@ public class MySportAdapter extends BaseAdapter {
                 HashMap<String,Object> map = new HashMap<>();
                 map.put("sports",items);
                 AccessData.db.updateUser(AccessData.currentUser,map);
+                AccessData.db.implementSports(AccessData.currentUser);
             }
         });
 

@@ -78,14 +78,16 @@ public class WeMoveDB {
 
     public void addUserToSport(Sport s, User user) {
         DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
-        DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(Float.toString(s.getInterest()).replace('.',':'));
-        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getTag());
+        DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(s.getLevel());
+        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getName());
         mIdUser.setValue(user.getId());
     }
 
     public void implementSports(User user) {
         for(Sport s : user.getSports()) {
-            this.addUserToSport(s, user);
+            if(s.getInterest() >= 4) {
+                this.addUserToSport(s, user);
+            }
         }
     }
 
