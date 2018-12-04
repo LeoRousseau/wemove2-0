@@ -3,16 +3,20 @@ package com.example.wemove;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Utils.AccessData;
 import profile.EditingProfileActivity;
@@ -51,7 +55,18 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView textViewPlace = (TextView) customView.findViewById(R.id.textViewPlace);
         TextView textViewNiveau = (TextView) customView.findViewById(R.id.textViewNiveau);
 
-        Event event = getItem(position);
+        final Event event = getItem(position);
+        Button join = customView.findViewById(R.id.Rejoindre);
+
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> eventUpdates = new HashMap<>();
+                eventUpdates.put(AccessData.currentUser.getName(),AccessData.currentUser.getId());
+                AccessData.db.updateEvent(event,eventUpdates);
+            }
+        });
+
         textViewNom.setText(event.getName());
         textViewDesc.setText(event.getDescription());
         textViewNiveau.setText(event.getNiveau());

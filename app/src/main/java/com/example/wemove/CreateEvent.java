@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 import Utils.AccessData;
@@ -60,7 +62,7 @@ public class CreateEvent extends AppCompatActivity {
         String description=eventDescription.getText().toString();
         String level=eventLevel.getSelectedItem().toString();
         String sportName= sport.getSelectedItem().toString();
-        int nbParticipantAlpha =(int)nbParticipant.getAlpha();
+
         if(name.isEmpty()) {
             eventName.setError("Le nom est requis");
             eventName.requestFocus();
@@ -83,8 +85,9 @@ public class CreateEvent extends AppCompatActivity {
         Log.d("TEST","o");
 
         Sport s= new Sport(sportName);
-
-        Event createdEvent = new Event(name,s,nbParticipantAlpha,groupe,place,level,description);
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        Event createdEvent = new Event(ts,name,s,groupe,place,level,description);
 
         AccessData.db.addEvent(createdEvent);
         startActivity(new Intent(CreateEvent.this,Home.class));

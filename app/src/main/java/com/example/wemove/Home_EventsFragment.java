@@ -42,7 +42,7 @@ public class Home_EventsFragment extends Fragment {
         //eventAdapter=null;
         lv = (ListView) view.findViewById(R.id.listEventsView);
         create = (FloatingActionButton) view.findViewById(R.id.Create);
-        join = (Button) view.findViewById(R.id.Rejoindre);
+
         if (AccessData.events.size()==0) {
             //AccessData.db.getEvents();
         }

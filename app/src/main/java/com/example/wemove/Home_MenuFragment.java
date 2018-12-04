@@ -84,7 +84,10 @@ public class Home_MenuFragment extends Fragment {
     }
 
     public void signOut () {
-        AccessData.db = new WeMoveDB();
+        //AccessData.db = new WeMoveDB();
+        AccessData.currentUser = new User();
+        AccessData.currentEvent = new Event();
+        AccessData.events = new ArrayList<>();
         Log.d("ATTEMPT", "onClick: attempting to sign out the user");
         LoginManager.getInstance().logOut();
         FirebaseAuth.getInstance().signOut();

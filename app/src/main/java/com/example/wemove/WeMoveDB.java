@@ -38,12 +38,15 @@ public class WeMoveDB {
         mEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Log.d("modif", "onChildChanged: avant");
                 AccessData.events.add(dataSnapshot.getValue(Event.class));
+                Log.d("modif", "onChildChanged: après");
                 if(Home_EventsFragment.lv!=null) {
                     Home_EventsFragment.eventAdapter.notifyDataSetChanged();
                     Home_EventsFragment.hidePB();
                 }
                 Home_EventsFragment.isCharged=true;
+                //Log.d("test",String.valueOf(AccessData.events.get(AccessData.events.size()-1).getUsersID().size()));
             }
 
             @Override
@@ -87,7 +90,7 @@ public class WeMoveDB {
     }
 
     public void addEvent(Event e) {
-        DatabaseReference mParamEventRef = mEventRef.child(e.getName());
+        DatabaseReference mParamEventRef = mEventRef.child(e.getId());
         mParamEventRef.setValue(e);
     }
 
@@ -102,8 +105,9 @@ public class WeMoveDB {
     }
 
     public void updateEvent(Event e, Map eventUpdates) {
-        DatabaseReference mUpdateEventRef = mEventRef.child(e.getName());
-        mUpdateEventRef.updateChildren(eventUpdates);
+        DatabaseReference mUpdateEventRef = mEventRef.child(e.getId());
+        DatabaseReference mUserIdRef = mUpdateEventRef.child("usersID");
+        mUserIdRef.updateChildren(eventUpdates);
     }
 
     public void deleteEvent(Event e) {

@@ -1,8 +1,13 @@
 package com.example.wemove;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
+import Utils.AccessData;
+
 public class Event {
+    String id;
     String name;
     Sport sport;
     int nbPeople;
@@ -10,17 +15,20 @@ public class Event {
     String place;
     String niveau;
     String description;
-    ArrayList<User> users;
+    ArrayList<String> usersID;
 
-    public Event(String name, Sport sport, int nbPeople, boolean groupe, String place, String niveau, String description, ArrayList<User> users) {
+
+    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description) {
+        this.id = id;
         this.name = name;
         this.sport = sport;
-        this.nbPeople = nbPeople;
         this.groupe = groupe;
         this.place = place;
         this.niveau = niveau;
         this.description = description;
-        this.users = users;
+        this.usersID = new ArrayList<>();
+        usersID.add(AccessData.currentUser.getId());
+        this.nbPeople = getUsersID().size();
     }
 
     public Event() {
@@ -36,16 +44,28 @@ public class Event {
                 ", Lieu ='" + place + '\'' +
                 ", Niveau ='" + niveau + '\'' +
                 ", Description='" + description + '\'' +
-                ", Participants =" + users +
                 '}';
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public Event(String id, String name, Sport sport, int nbPeople, boolean groupe, String place, String niveau, String description, ArrayList<String> usersID) {
+        this.id = id;
+        this.name = name;
+        this.sport = sport;
+        this.nbPeople = nbPeople;
+        this.groupe = groupe;
+        this.place = place;
+        this.niveau = niveau;
+        this.description = description;
+        this.usersID = usersID;
     }
 
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
+    public void setUsersID(ArrayList<String> usersID) {
+        this.usersID = usersID;
+    }
+
+    public ArrayList<String> getUsersID() {
+
+        return usersID;
     }
 
     public String getName() {
@@ -104,14 +124,11 @@ public class Event {
         this.description = description;
     }
 
-    public Event(String name, Sport sport, int nbPeople, boolean groupe, String place, String niveau,String description) {
+    public String getId() {
+        return id;
+    }
 
-        this.name = name;
-        this.sport = sport;
-        this.nbPeople = nbPeople;
-        this.groupe = groupe;
-        this.place = place;
-        this.niveau = niveau;
-        this.description = description;
+    public void setId(String id) {
+        this.id = id;
     }
 }
