@@ -1,14 +1,20 @@
 package com.example.wemove;
 
 import android.content.Context;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import android.app.Application;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -16,22 +22,29 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import Utils.AccessData;
+import profile.EditingProfileActivity;
 import profile.ProfileActivity;
 
 
 public class WeMoveDB {
     private DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    //private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
     private DatabaseReference mUserRef = mRootRef.child("Users");
     private DatabaseReference mSportsRef = mRootRef.child("Sports");
     private DatabaseReference mEventRef = mRootRef.child("Event");
     private DatabaseReference mCuserRef;
+    private Uri photo;
+    public static Boolean isSuccess = false;
 
     public WeMoveDB() {
 
@@ -174,27 +187,56 @@ public class WeMoveDB {
     }
 
 
+    public void addPhoto(Uri path) {
 
-    /* public void addPhoto(User user, File path) {
-
-        Uri file = Uri.fromFile(path);
-        StorageReference mParamStorageRef = mStorageRef.child(user.getTag());
+        Uri file = path;
+        StorageReference mParamStorageRef = mStorageRef.child(AccessData.currentUser.getId());
 
         mParamStorageRef.putFile(file)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        isSuccess = true;
+                        Log.d("photo", "onSuccess: Done");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
+                        Log.d("photo", "onFailure: " + exception.getMessage());
                     }
                 });
-    } */
+    }
 
+    public void getPhoto() {
+        if(NewUser.firstTime) {
+            NewUser.firstTime = false;
+        }
+        else {
+            StorageReference mGetPhotoRef = mStorageRef.child(AccessData.currentUser.getId());
+
+            mGetPhotoRef.getDownloadUrl()
+                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            if(ProfileActivity.isRunning) {
+                                String url = String.valueOf(uri);
+                                Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
+                            }
+                            if(EditingProfileActivity.isRunning) {
+                                String url = String.valueOf(uri);
+                                Glide.with(EditingProfileActivity.ctx).load(url).into(EditingProfileActivity.profilePicture);
+                            }
+                            Log.d("photo", "chemin :"+uri);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("photo", "onFailure: File doesn't exists");
+                }
+            });
+        }
+
+    }
 }

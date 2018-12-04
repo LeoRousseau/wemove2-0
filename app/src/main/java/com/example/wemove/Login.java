@@ -41,6 +41,7 @@ import java.lang.reflect.Array;
 import Utils.AccessData;
 
 import Utils.AccessData;
+import profile.ProfileActivity;
 
 
 public class Login extends AppCompatActivity {
@@ -157,7 +158,7 @@ public class Login extends AppCompatActivity {
                                 String parts[] = userAuth.getDisplayName().split(" ");
                                 User user = new User(userAuth.getUid(),parts[1],parts[0],userAuth.getEmail()); //Sans tag et faut le mettre ailleurs sinon prend pas en compte modif
                                 AccessData.db.addUser(user);
-                                startActivity(new Intent(Login.this,Home.class));
+                                startActivity(new Intent(Login.this, ProfileActivity.class));
                             }
                         }
 

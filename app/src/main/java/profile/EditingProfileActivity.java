@@ -1,6 +1,7 @@
 package profile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,7 +28,9 @@ import android.widget.Toast;
 import com.example.wemove.Home;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
+import com.example.wemove.WeMoveDB;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,6 +44,8 @@ public class EditingProfileActivity extends AppCompatActivity {
     private static final int SELECTED_PICTURE=1;
     private static final int REQUEST_IMAGE_CAPTURE=2;
 
+    public static boolean isRunning=false;
+    public static Context ctx;
 
     private List<Sport> sportItems;
     private List<Sport> sportToEdit;
@@ -50,11 +55,12 @@ public class EditingProfileActivity extends AppCompatActivity {
     private ListAdapter listAdapter;
     private Bitmap loadedBitmap;
 
-    private CircleImageView profilePicture;
+    public static CircleImageView profilePicture;
     private EditText name_text;
     private EditText fname_text;
     private EditText bd_text;
     private EditText bio_content;
+    private Uri uriUser;
 
     private boolean saved=false;
 
@@ -62,8 +68,7 @@ public class EditingProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_profile);
-
-
+        isRunning = true;
 
         // Init Content Variables
         initContentVariables();
@@ -90,7 +95,7 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     public void initContentVariables () {
         hideList = (ImageView)findViewById(R.id.hideList);
-
+        ctx = getBaseContext();
         profilePicture = (CircleImageView)findViewById(R.id.profile_image);
         name_text = (EditText) findViewById(R.id.nomEditText);
         fname_text = (EditText) findViewById(R.id.prenomEditText);
@@ -122,13 +127,16 @@ public class EditingProfileActivity extends AppCompatActivity {
                 if(resultCode==RESULT_OK && data!=null) {
                     Uri uri = data.getData();
                     profilePicture.setImageURI(uri);
+                    uriUser = uri;
+                    Log.d("ok" ,"onActivityResult: "+uriUser);
                     break;
                 }
             case REQUEST_IMAGE_CAPTURE:
                 if (resultCode==RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    Bitmap photo = (Bitmap) extras.get("data");
-                    profilePicture.setImageBitmap(photo);
+                    Uri uri = data.getData();
+                    profilePicture.setImageURI(uri);
+                    uriUser = uri;
+                    Log.d("ok" ,"onActivityResult: "+uriUser);
                     break;
                 }
         }
@@ -217,7 +225,8 @@ public class EditingProfileActivity extends AppCompatActivity {
         for (int i=0;i<AccessData.currentUser.getSports().size();i++) {
             sportItems.add(new Sport(AccessData.currentUser.getSports().get(i).getName(),AccessData.currentUser.getSports().get(i).getLevel(),AccessData.currentUser.getSports().get(i).getType(),AccessData.currentUser.getSports().get(i).getInterest()));
         }
-}
+        AccessData.db.getPhoto();
+    }
 
     //Save Data to DataBase
     public void saveData() {
@@ -230,7 +239,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("sports",sportItems);
         AccessData.db.updateUser(AccessData.currentUser,map);
         saved=true;
-
+        AccessData.db.addPhoto(uriUser);
     }
 
     @Override
@@ -248,6 +257,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         saveData();
         Intent intent = new Intent(this,ProfileActivity.class);
         startActivity(intent);
+        //WeMoveDB.isSuccess=false;
     }
 
     public void onDismiss (View view) {
@@ -264,5 +274,16 @@ public class EditingProfileActivity extends AppCompatActivity {
             otherSport.remove(sportItems.get(i).getName());
         }
         return otherSport;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        isRunning = false;
     }
 }

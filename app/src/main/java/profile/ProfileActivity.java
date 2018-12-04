@@ -1,5 +1,6 @@
 package profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,7 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
     private RelativeLayout editinglayout;
     private RelativeLayout ratingLayout;
 
-    private static CircleImageView image_profile;
+    public static Context ctx;
+    public static CircleImageView image_profile;
     private static TextView name_text;
     private static TextView age_text;
     private static RatingBar user_ratingBar;
@@ -101,7 +103,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void initContentVariables () {
-
+        ctx = getBaseContext();
         linearLayoutProfile = (LinearLayout)findViewById(R.id.llProfile);
         progressBarProfile = (ProgressBar)findViewById(R.id.progressbarProfile);
         ratingLayout = (RelativeLayout) findViewById(R.id.ratinglayout);
@@ -145,6 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
         age_text.setText(date_);
         number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
+        AccessData.db.getPhoto();
     }
 
     @Override
@@ -158,4 +161,8 @@ public class ProfileActivity extends AppCompatActivity {
         linearLayoutProfile.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

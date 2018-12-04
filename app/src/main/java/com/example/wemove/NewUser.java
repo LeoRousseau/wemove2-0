@@ -20,11 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import Utils.AccessData;
+import profile.ProfileActivity;
 
 public class NewUser extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    public static Boolean firstTime = true;
     private EditText mNameText;
     private EditText mPrenomText;
     private EditText mTagText;
@@ -131,7 +133,7 @@ public class NewUser extends AppCompatActivity {
                         userID = userAuth.getUid();
                         User user = new User(userID,tag,name,prenom,email,date);
                         db.addUser(user);
-                        startActivity(new Intent(NewUser.this,Home.class));
+                        startActivity(new Intent(NewUser.this, ProfileActivity.class));
                     } else {
                         Log.d("SIGNIN", "onComplete: Signed_in failed");
                         Toast.makeText(getBaseContext(),"Authentication failed",Toast.LENGTH_LONG).show();
