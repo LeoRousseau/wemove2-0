@@ -98,6 +98,9 @@ public class MySportsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Sport sportItem = new Sport(nameSpinner.getSelectedItem().toString(),levelSpinner.getSelectedItem().toString(),styleSpinner.getSelectedItem().toString(),interestRating.getRating());
+                if ( AccessData.currentUser.sports==null) {
+                    AccessData.currentUser.sports = new ArrayList<>();
+                }
                 AccessData.currentUser.sports.add(sportItem);
                 HashMap<String,Object> map = new HashMap<>();
                 map.put("sports",AccessData.currentUser.sports);
@@ -106,12 +109,13 @@ public class MySportsActivity extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("Anuler", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
             }
         });
+
 
         builder.setView(view);
         AlertDialog dialog = builder.create();
@@ -123,9 +127,12 @@ public class MySportsActivity extends AppCompatActivity {
         for ( String key : AccessData.table.keySet() ) {
             otherSport.add(key);
         }
-        for (int i =0; i<AccessData.currentUser.sports.size();i++) {
-            otherSport.remove(AccessData.currentUser.sports.get(i).getName());
+        if (AccessData.currentUser.sports!=null) {
+            for (int i =0; i<AccessData.currentUser.sports.size();i++) {
+                otherSport.remove(AccessData.currentUser.sports.get(i).getName());
+            }
         }
+
         return otherSport;
     }
 }

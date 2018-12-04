@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import Utils.AccessData;
@@ -79,7 +80,7 @@ public class WeMoveDB {
     public void addUserToSport(Sport s, User user) {
         DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
         DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(s.getLevel());
-        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getName());
+        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getId());
         mIdUser.setValue(user.getId());
     }
 
@@ -88,6 +89,14 @@ public class WeMoveDB {
             if(s.getInterest() >= 4) {
                 this.addUserToSport(s, user);
             }
+        }
+    }
+
+    public void deleteSports (List<Sport> list) {
+        for (Sport s : list) {
+            DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
+            DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(s.getLevel());
+            mParamSportsInsideRef.child(AccessData.currentUser.getId()).removeValue();
         }
     }
 

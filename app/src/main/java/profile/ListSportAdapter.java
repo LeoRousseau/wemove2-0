@@ -27,14 +27,15 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
 
     private Context context;
     private List<Sport> items;
+    private List<Sport> sportTE;
 
 
 
-
-    public ListSportAdapter(@NonNull Context context, List<Sport> items) {
+    public ListSportAdapter(@NonNull Context context, List<Sport> items, List<Sport> sportTE) {
         super(context, R.layout.editingprofile_sportrow);
         this.context=context;
         this.items=items;
+        this.sportTE=sportTE;
     }
 
     @NonNull
@@ -56,6 +57,7 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
         deleteSport.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                sportTE.add(new Sport(items.get(position).getName(),items.get(position).getLevel(),"",0f));
                 items.remove(position);
                 notifyDataSetChanged();
                 ((EditingProfileActivity)context).setListViewSize();
@@ -115,13 +117,11 @@ public class ListSportAdapter extends ArrayAdapter<Sport> {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                sportTE.add(new Sport(sportItem.getName(),sportItem.getLevel(),"",0));
                 sportItem.setInterest(interestRating.getRating());
                 sportItem.setLevel(levelSpinner.getSelectedItem().toString());
                 sportItem.setType(styleSpinner.getSelectedItem().toString());
-                HashMap<String,Object> map = new HashMap<>();
-                map.put("sports",items);
-                AccessData.db.updateUser(AccessData.currentUser,map);
-                AccessData.db.implementSports(AccessData.currentUser);
+                //AccessData.db.implementSports(AccessData.currentUser);
             }
         });
 

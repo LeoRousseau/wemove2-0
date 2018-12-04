@@ -14,6 +14,7 @@ public class User {
     //A completer lors de la première inscription
     String bio;
     ArrayList<Sport> sports;
+    ArrayList<Notification> notifications;
 
     public String getTag() {
         return tag;

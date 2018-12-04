@@ -69,6 +69,7 @@ public class MySportAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        boolean isSup=false;
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View customView= layoutInflater.inflate(R.layout.gridview_sport_item,parent,false);
 
@@ -103,6 +104,7 @@ public class MySportAdapter extends BaseAdapter {
             }
         });
 
+
         sportname.setText(sport.getName());
         sportimage.setImageResource(AccessData.table.get(sport.getName()));
         level.setText(sport.getLevel());
@@ -133,10 +135,14 @@ public class MySportAdapter extends BaseAdapter {
         styleSpinner.setAdapter(adapterStyle);
 
         interestRating.setRating(sportItem.getInterest());
+        //hello
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                List<Sport> list = new ArrayList<>();
+                list.add(new Sport(sportItem.getName(),sportItem.getLevel(),"",0));
+                AccessData.db.deleteSports(list);
                 sportItem.setInterest(interestRating.getRating());
                 sportItem.setLevel(levelSpinner.getSelectedItem().toString());
                 sportItem.setType(styleSpinner.getSelectedItem().toString());
@@ -150,6 +156,30 @@ public class MySportAdapter extends BaseAdapter {
         builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        builder.setNeutralButton("Supprimer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("EVENT","suppr");
+                List<Sport> list = new ArrayList<>();
+                for (int i=0; i<items.size();i++) {
+                    if (items.get(i).getName().compareTo(sportItem.getName())==0) {
+                        list.add(new Sport(sportItem.getName(),sportItem.getLevel(),"",0));
+                        items.remove(i);
+                        break;
+                    }
+                }
+                AccessData.db.deleteSports(list);
+                HashMap<String,Object> map = new HashMap<>();
+                map.put("sports",items);
+                AccessData.db.updateUser(AccessData.currentUser,map);
+                AccessData.db.implementSports(AccessData.currentUser);
+
+
+
 
             }
         });

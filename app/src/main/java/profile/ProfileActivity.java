@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -63,7 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Init Content Variables
         initContentVariables();
-
+        Log.d("EVENT", "profile");
         //Get Data from DataBase
         getData();
 

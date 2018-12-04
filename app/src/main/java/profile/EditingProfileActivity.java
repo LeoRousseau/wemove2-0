@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class EditingProfileActivity extends AppCompatActivity {
 
 
     private List<Sport> sportItems;
+    private List<Sport> sportToEdit;
     private Sport sportItem;
     private ImageView hideList;
     private ListView listSportView;
@@ -54,10 +56,13 @@ public class EditingProfileActivity extends AppCompatActivity {
     private EditText bd_text;
     private EditText bio_content;
 
+    private boolean saved=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_profile);
+
 
 
         // Init Content Variables
@@ -69,7 +74,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         //setSports();
 
         listSportView = (ListView) findViewById(R.id.listSportView);
-        listAdapter = new ListSportAdapter(this,sportItems);
+        listAdapter = new ListSportAdapter(this,sportItems,sportToEdit);
         listSportView.setAdapter(listAdapter);
         setListViewSize();
     }
@@ -92,6 +97,8 @@ public class EditingProfileActivity extends AppCompatActivity {
         bd_text = (EditText) findViewById(R.id.dateEditText);
         bio_content = (EditText) findViewById(R.id.bioEditText);
         sportItems = new ArrayList<>();
+        sportToEdit = new ArrayList<>();
+        saved=false;
     }
 
     public void takePicture (View view) {
@@ -207,11 +214,14 @@ public class EditingProfileActivity extends AppCompatActivity {
         fname_text.setText(AccessData.currentUser.getFirstname());
         bd_text.setText(AccessData.currentUser.getAge());
         bio_content.setText(AccessData.currentUser.getBio());
-        sportItems = new ArrayList<Sport>(AccessData.currentUser.getSports());
-    }
+        for (int i=0;i<AccessData.currentUser.getSports().size();i++) {
+            sportItems.add(new Sport(AccessData.currentUser.getSports().get(i).getName(),AccessData.currentUser.getSports().get(i).getLevel(),AccessData.currentUser.getSports().get(i).getType(),AccessData.currentUser.getSports().get(i).getInterest()));
+        }
+}
 
     //Save Data to DataBase
     public void saveData() {
+        AccessData.db.deleteSports(sportToEdit);
         HashMap<String,Object> map = new HashMap<>();
         map.put("bio",bio_content.getText().toString());
         map.put("age",bd_text.getText().toString());
@@ -219,7 +229,19 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("name", name_text.getText().toString());
         map.put("sports",sportItems);
         AccessData.db.updateUser(AccessData.currentUser,map);
-        AccessData.db.implementSports(AccessData.currentUser);
+        saved=true;
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (saved) {
+            AccessData.db.implementSports(AccessData.currentUser);
+
+        }
+        Log.d("test",AccessData.currentUser.getSports().toString());
+
     }
 
     public void onConfirm (View view) {
