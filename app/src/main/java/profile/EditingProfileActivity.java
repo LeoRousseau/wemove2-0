@@ -66,6 +66,8 @@ public class EditingProfileActivity extends AppCompatActivity {
     private Boolean isChanged = false;
     private Handler mHandler = new Handler();
 
+    public boolean saved;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,7 +252,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("sports",sportItems);
 
         AccessData.db.updateUser(AccessData.currentUser,map);
-        AccessData.db.implementSports(AccessData.currentUser);
+        saved=true;
         if(isChanged == true) {
             AccessData.db.addPhoto(uriUser);
         }
