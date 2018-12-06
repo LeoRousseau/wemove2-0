@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
         android:id="@+id/si"
+        android:layout_width="60dp"
+        android:layout_height="53dp"
         android:layout_centerHorizontal="true"
-        />
+        android:baselineAligned="false" />
 
     <LinearLayout
         android:id="@+id/rl1"
-        android:layout_width="273dp"
-        android:layout_height="101dp"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
         android:padding="2dp">
 
         <TextView
             android:id="@+id/textViewnom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="198dp"
+            android:layout_height="54dp"
 
             android:text="TextView"
             android:textColor="@color/CardViewGrey"
@@ -38,8 +36,8 @@
             android:id="@+id/textViewSport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/Rejoindre"

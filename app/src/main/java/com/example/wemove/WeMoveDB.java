@@ -54,9 +54,7 @@ public class WeMoveDB {
         mEventRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d("modif", "onChildChanged: avant");
                 AccessData.events.add(dataSnapshot.getValue(Event.class));
-                Log.d("modif", "onChildChanged: après");
                 if(Home_EventsFragment.lv!=null) {
                     Home_EventsFragment.eventAdapter.notifyDataSetChanged();
                     Home_EventsFragment.hidePB();

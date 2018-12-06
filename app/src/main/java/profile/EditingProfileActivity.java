@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -62,8 +63,9 @@ public class EditingProfileActivity extends AppCompatActivity {
     private EditText bd_text;
     private EditText bio_content;
     private Uri uriUser;
+    private Boolean isChanged = false;
+    private Handler mHandler = new Handler();
 
-    private boolean saved=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +138,7 @@ public class EditingProfileActivity extends AppCompatActivity {
                     profilePicture.setImageURI(uri);
                     uriUser = uri;
                     Log.d("ok" ,"onActivityResult: "+uriUser);
+                    isChanged = true;
                     break;
                 }
             case REQUEST_IMAGE_CAPTURE:
@@ -144,6 +147,7 @@ public class EditingProfileActivity extends AppCompatActivity {
                     profilePicture.setImageURI(uri);
                     uriUser = uri;
                     Log.d("ok" ,"onActivityResult: "+uriUser);
+                    isChanged = true;
                     break;
                 }
         }
@@ -246,8 +250,10 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("sports",sportItems);
 
         AccessData.db.updateUser(AccessData.currentUser,map);
-        saved=true;
-        AccessData.db.addPhoto(uriUser);
+        AccessData.db.implementSports(AccessData.currentUser);
+        if(isChanged == true) {
+            AccessData.db.addPhoto(uriUser);
+        }
     }
 
     @Override
@@ -263,10 +269,22 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     public void onConfirm (View view) {
         saveData();
-        Intent intent = new Intent(this,ProfileActivity.class);
-        startActivity(intent);
-        //WeMoveDB.isSuccess=false;
+        if(isChanged) {
+            mHandler.postDelayed(mUpdateDisplay,2000);
+            isChanged = false;
+        } else {
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
+        }
     }
+
+    private Runnable mUpdateDisplay = new Runnable() {
+        @Override
+        public void run() {
+            Intent intent = new Intent(getBaseContext(),ProfileActivity.class);
+            startActivity(intent);
+        }
+    };
 
     public void onDismiss (View view) {
         Intent intent = new Intent(this,ProfileActivity.class);
