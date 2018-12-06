@@ -3,6 +3,7 @@ package com.example.wemove;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.GnssClock;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -37,7 +38,8 @@ public class Home extends AppCompatActivity {
     private Button mSignOutBtn;
     private  FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
-    private View notificationBadge;
+    public static View notificationBadge;
+    public static boolean isRunning=false;
     private  FirebaseAuth mAuth;
     private  String userID;
     private boolean first = true;
@@ -48,6 +50,7 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
@@ -69,8 +72,11 @@ public class Home extends AppCompatActivity {
 
 
         addBadgeView();
+        Home.notificationBadge.setVisibility(View.GONE);
 
     }
+
+
 
 
     private void setupFirebaseListener() {
@@ -95,6 +101,7 @@ public class Home extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+        isRunning=true;
     }
 
 
@@ -104,6 +111,7 @@ public class Home extends AppCompatActivity {
         if(mAuthListener != null) {
             FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
         }
+        isRunning=false;
     }
 
     @Override

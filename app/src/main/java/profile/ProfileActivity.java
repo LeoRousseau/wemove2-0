@@ -2,6 +2,7 @@ package profile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wemove.Home;
+import com.example.wemove.Notification;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 
@@ -59,7 +61,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        isRunning=true;
         isOwner=true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
@@ -99,8 +100,15 @@ public class ProfileActivity extends AppCompatActivity {
         else {
             linearLayoutProfile.setVisibility(View.GONE);
         }
+
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isRunning=true;
+    }
 
     public void initContentVariables () {
         ctx = getBaseContext();

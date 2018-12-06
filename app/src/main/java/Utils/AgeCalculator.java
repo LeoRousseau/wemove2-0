@@ -41,8 +41,9 @@ public class AgeCalculator{
 
     public long getDifferenceDays(Date d1) {
         Calendar d = Calendar.getInstance();
-        Date d2 = new Date(d.get(Calendar.YEAR),d.get(Calendar.MONTH)+1,d.get(Calendar.DAY_OF_MONTH));
-        Log.d("DATE",String.valueOf(d2.getYear()));
+        Date d2 = new Date(d.get(Calendar.YEAR)-1900,d.get(Calendar.MONTH),d.get(Calendar.DAY_OF_MONTH));
+        Log.d("DATE",d1.toString());
+        Log.d("DATE",d2.toString());
         long diff = d2.getTime() - d1.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }

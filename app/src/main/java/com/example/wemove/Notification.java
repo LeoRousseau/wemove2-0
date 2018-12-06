@@ -17,6 +17,10 @@ public class Notification {
         this.date = date;
     }
 
+    public Notification() {
+
+    }
+
     public String getType() {
         return type;
     }
@@ -35,5 +39,20 @@ public class Notification {
 
     public Date getDate() {
         return date;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    @Override
+    public String toString() {
+        return "Notif{" +
+                "date'" + date + '\'' +
+                ", contentID'" + contentID + '\'' +
+                ", type " + type + '\'' +
+                ", message " + message + '\'' +
+                ", seen " + seen + '\'' +
+                '}';
     }
 }

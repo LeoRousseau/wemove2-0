@@ -26,6 +26,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.wemove.Home;
+import com.example.wemove.Notification;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 import com.example.wemove.WeMoveDB;
@@ -68,7 +69,7 @@ public class EditingProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_profile);
-        isRunning = true;
+
 
         // Init Content Variables
         initContentVariables();
@@ -82,6 +83,12 @@ public class EditingProfileActivity extends AppCompatActivity {
         listAdapter = new ListSportAdapter(this,sportItems,sportToEdit);
         listSportView.setAdapter(listAdapter);
         setListViewSize();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isRunning = true;
     }
 
     public void setSports () {
@@ -237,6 +244,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         map.put("firstname",fname_text.getText().toString());
         map.put("name", name_text.getText().toString());
         map.put("sports",sportItems);
+
         AccessData.db.updateUser(AccessData.currentUser,map);
         saved=true;
         AccessData.db.addPhoto(uriUser);
@@ -250,7 +258,7 @@ public class EditingProfileActivity extends AppCompatActivity {
 
         }
         Log.d("test",AccessData.currentUser.getSports().toString());
-
+        isRunning=false;
     }
 
     public void onConfirm (View view) {
@@ -281,9 +289,4 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        isRunning = false;
-    }
 }

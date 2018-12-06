@@ -2,6 +2,8 @@ package com.example.wemove;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class User {
@@ -14,7 +16,16 @@ public class User {
     //A completer lors de la première inscription
     String bio;
     ArrayList<Sport> sports;
-    ArrayList<Notification> notifications;
+    HashMap<String,Notification> notifications;
+
+    public void setNotifications(HashMap<String,Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public HashMap<String,Notification> getNotifications() {
+
+        return notifications;
+    }
 
     public String getTag() {
         return tag;
@@ -117,6 +128,15 @@ public class User {
         this.firstname = firstname;
         this.email = email;
         this.age = age;
+    }
+
+    public User(String tag, String name, String firstname, String bio, ArrayList<Sport> sports, HashMap<String,Notification> notifications) {
+        this.tag = tag;
+        this.name = name;
+        this.firstname = firstname;
+        this.bio = bio;
+        this.sports = sports;
+        this.notifications=notifications;
     }
 
     public User(String tag, String name, String firstname, String bio, ArrayList<Sport> sports) {
