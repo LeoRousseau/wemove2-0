@@ -16,4 +16,6 @@
     <color name="OrangeYellow">#ECC01D</color>
     <color name="CardViewGrey">#524F4C</color>
     <color name="notifRed">#C31807</color>
+    <color name="blue">#3B0CB4</color>
+    <color name="green">#56B40C</color>
 </resources>

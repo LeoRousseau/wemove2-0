@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Debug;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.LongDef;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -66,6 +67,17 @@ public class WeMoveDB {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                Log.d("changed","enter");
+                for (int i=0;i<AccessData.events.size();i++) {
+                    if (AccessData.events.get(i).getId().compareTo(dataSnapshot.getKey())==0) {
+                        AccessData.events.set(i,dataSnapshot.getValue(Event.class));
+                        Log.d("changed","size : " + String.valueOf(AccessData.events.get(i).usersID.size()));
+                        break;
+                    }
+                }
+                if(Home_EventsFragment.lv!=null) {
+                    Home_EventsFragment.eventAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -130,8 +142,7 @@ public class WeMoveDB {
 
     public void updateEvent(Event e, Map eventUpdates) {
         DatabaseReference mUpdateEventRef = mEventRef.child(e.getId());
-        DatabaseReference mUserIdRef = mUpdateEventRef.child("usersID");
-        mUserIdRef.updateChildren(eventUpdates);
+        mUpdateEventRef.updateChildren(eventUpdates);
     }
 
     public void deleteEvent(Event e) {
