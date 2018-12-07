@@ -39,106 +39,236 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/createEventToolbar"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_alignParentTop="true">
 
-        <EditText
-            android:id="@+id/NameEvent"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="30dp"
-            android:ems="10"
-            android:hint="Nom de l'évènement"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/NbPersonne"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:ems="10"
-            android:hint="Nombre de participants"
-            android:inputType="number" />
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:padding="2dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:id="@+id/txvsp"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:ems="10"
-                android:text="Sport : "
-                android:textSize="18sp" />
-
-            <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/NameSport"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/txvsp">
+                android:layout_marginTop="55dp"
+                android:text="Nouvel événement"
+                android:textAlignment="center"
+                android:textColor="@color/CardViewGrey"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-            </Spinner>
-
-        </RelativeLayout>
-
-        <EditText
-            android:id="@+id/Place"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:ems="10"
-            android:hint="Endroit de la pratique"
-            android:layout_marginTop="10dp"
-            android:inputType="text" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="10dp"
-            android:padding="2dp">
-
-            <TextView
-                android:id="@+id/txniv"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:ems="10"
-                android:text="Niveau requis : "
-                android:textSize="18sp" />
-
-            <Spinner
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:id="@+id/Niveau"
-                android:layout_toRightOf="@id/txniv">
+                android:layout_marginTop="30dp">
 
-            </Spinner>
-
-        </RelativeLayout>
-
-        <EditText
-            android:id="@+id/Description"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:ems="10"
-            android:hint="Ajouter une description"
-            android:inputType="text"
-            android:layout_marginTop="10dp"/>
+                <ImageView
+                    android:id="@+id/iim1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_info_black_24dp" />
 
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iim1"
+                    android:text="Informations générales :"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/CardViewGrey"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/NameEvent"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Nom de l'évènement"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/NbPersonne"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Nombre de participants"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/Place"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Endroit de la pratique"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/Description"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Ajouter une description"
+                android:inputType="text" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/sim1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_directions_run_black_24dp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/sim1"
+                    android:text="Sport :"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/CardViewGrey"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/txvsp"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:ems="10"
+                    android:text="Sport : "
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/NameSport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/txvsp">
+
+                </Spinner>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/txniv"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:ems="10"
+                    android:text="Niveau : "
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/Niveau"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/txniv">
+
+                </Spinner>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <ImageView
+                    android:id="@+id/dim1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_date_range_black_24dp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/dim1"
+                    android:text="Date :"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/CardViewGrey"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="2dp">
+
+
+                <Button
+                    android:id="@+id/buttonDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    android:background="@android:color/transparent"
+                    android:text="Choisir une date"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="date"
+                    android:id="@+id/textViewdate"
+                    android:layout_below="@id/buttonDate"/>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
 </RelativeLayout>

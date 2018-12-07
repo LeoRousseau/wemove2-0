@@ -1,18 +1,25 @@
 package com.example.wemove;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import Utils.AccessData;
 
@@ -24,7 +31,11 @@ public class CreateEvent extends AppCompatActivity {
     private Spinner sport;
     private EditText eventPlace;
     private EditText nbParticipant;
+    private Button datebutton;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
     private ArrayList<String> sportsName= new ArrayList<String>();
+    private TextView tvdate;
+    private Date date;
     private boolean groupe =false;
 
 
@@ -44,6 +55,37 @@ public class CreateEvent extends AppCompatActivity {
         eventPlace=findViewById(R.id.Place);
         sport=findViewById(R.id.NameSport);
         nbParticipant=findViewById(R.id.NbPersonne);
+        datebutton=findViewById(R.id.buttonDate);
+        tvdate = findViewById(R.id.textViewdate);
+
+        Calendar calendar = Calendar.getInstance();
+        tvdate.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH))+"/"+String.valueOf(calendar.get(Calendar.MONTH)+1)+"/" + String.valueOf(calendar.get(Calendar.YEAR)));
+        date = new Date();
+        datebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        CreateEvent.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        dateSetListener,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                date=new Date(year-1900,month,dayOfMonth);
+                tvdate.setText(String.valueOf(dayOfMonth)+"/"+String.valueOf(month+1)+"/" + String.valueOf(year));
+            }
+        };
 
         ArrayAdapter<String> adapterName = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,sportsName);
         adapterName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,7 +130,7 @@ public class CreateEvent extends AppCompatActivity {
         Sport s= new Sport(sportName);
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
-        Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb));
+        Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb),date);
 
         AccessData.db.addEvent(createdEvent);
         startActivity(new Intent(CreateEvent.this,Home.class));

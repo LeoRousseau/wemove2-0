@@ -3,6 +3,7 @@ package com.example.wemove;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import Utils.AccessData;
 
@@ -15,10 +16,11 @@ public class Event {
     String place;
     String niveau;
     String description;
+    Date date;
     ArrayList<String> usersID;
 
 
-    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description, int numb) {
+    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description, int numb, Date date) {
         this.id = id;
         this.name = name;
         this.sport = sport;
@@ -29,6 +31,8 @@ public class Event {
         this.usersID = new ArrayList<>();
         usersID.add(AccessData.currentUser.getId());
         this.nbPeople = numb;
+        this.date=date;
+
     }
 
     public Event() {
