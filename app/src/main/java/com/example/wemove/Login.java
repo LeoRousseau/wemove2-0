@@ -51,6 +51,7 @@ public class Login extends AppCompatActivity {
 
     private EditText mEmailText;
     private EditText mPasswordText;
+    public static Boolean isFirstTime = false;
 
     private Button mLoginBtn;
     private Button mNewBtn;
@@ -77,12 +78,13 @@ public class Login extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         callbackManager = CallbackManager.Factory.create();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null) {
                     startActivity(new Intent(Login.this,Home.class));
+                    //AccessData.db.getPhoto();
+                    isFirstTime = true;
                 }
             }
         };
@@ -151,20 +153,24 @@ public class Login extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.hasChild(userAuth.getUid())) {
                                 Log.d("login", "User already exists");
-                                startActivity(new Intent(Login.this,Home.class));
+                                //startActivity(new Intent(Login.this,Home.class));
+                                isFirstTime = true;
                             }
                             else {
                                 Log.d("login", "User created");
                                 String parts[] = userAuth.getDisplayName().split(" ");
                                 User user = new User(userAuth.getUid(),parts[1],parts[0],userAuth.getEmail()); //Sans tag et faut le mettre ailleurs sinon prend pas en compte modif
                                 AccessData.db.addUser(user);
+                                isFirstTime = true;
+                                Toast.makeText(getBaseContext(),"Compléter votre profil", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(Login.this, ProfileActivity.class));
+
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            Log.d("test", "onCancelled: ");
                         }
                     });
 
@@ -215,6 +221,7 @@ public class Login extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar.setVisibility(View.GONE);
+                    isFirstTime = true;
                     if (!task.isSuccessful()) {
                         Toast.makeText(Login.this, "Un problème est survenu", Toast.LENGTH_LONG).show();
                     }

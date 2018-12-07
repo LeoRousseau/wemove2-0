@@ -133,6 +133,8 @@ public class NewUser extends AppCompatActivity {
                         userID = userAuth.getUid();
                         User user = new User(userID,tag,name,prenom,email,date);
                         db.addUser(user);
+                        Login.isFirstTime = true;
+                        Toast.makeText(getBaseContext(),"Compléter votre profil", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(NewUser.this, ProfileActivity.class));
                     } else {
                         Log.d("SIGNIN", "onComplete: Signed_in failed");
