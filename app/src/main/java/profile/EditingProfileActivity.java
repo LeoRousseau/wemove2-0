@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.wemove.Home;
+import com.example.wemove.Notification;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
 import com.example.wemove.WeMoveDB;
@@ -49,6 +50,7 @@ public class EditingProfileActivity extends AppCompatActivity {
     public static Context ctx;
 
     private List<Sport> sportItems;
+    private List<Sport> sportToEdit;
     private Sport sportItem;
     private ImageView hideList;
     private ListView listSportView;
@@ -64,12 +66,14 @@ public class EditingProfileActivity extends AppCompatActivity {
     private Boolean isChanged = false;
     private Handler mHandler = new Handler();
 
+    public boolean saved;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing_profile);
-        isRunning = true;
+
 
         // Init Content Variables
         initContentVariables();
@@ -80,9 +84,15 @@ public class EditingProfileActivity extends AppCompatActivity {
         //setSports();
 
         listSportView = (ListView) findViewById(R.id.listSportView);
-        listAdapter = new ListSportAdapter(this,sportItems);
+        listAdapter = new ListSportAdapter(this,sportItems,sportToEdit);
         listSportView.setAdapter(listAdapter);
         setListViewSize();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isRunning = true;
     }
 
     public void setSports () {
@@ -103,6 +113,8 @@ public class EditingProfileActivity extends AppCompatActivity {
         bd_text = (EditText) findViewById(R.id.dateEditText);
         bio_content = (EditText) findViewById(R.id.bioEditText);
         sportItems = new ArrayList<>();
+        sportToEdit = new ArrayList<>();
+        saved=false;
     }
 
     public void takePicture (View view) {
@@ -223,23 +235,38 @@ public class EditingProfileActivity extends AppCompatActivity {
         fname_text.setText(AccessData.currentUser.getFirstname());
         bd_text.setText(AccessData.currentUser.getAge());
         bio_content.setText(AccessData.currentUser.getBio());
-        sportItems = new ArrayList<Sport>(AccessData.currentUser.getSports());
+        for (int i=0;i<AccessData.currentUser.getSports().size();i++) {
+            sportItems.add(new Sport(AccessData.currentUser.getSports().get(i).getName(),AccessData.currentUser.getSports().get(i).getLevel(),AccessData.currentUser.getSports().get(i).getType(),AccessData.currentUser.getSports().get(i).getInterest()));
+        }
         AccessData.db.getPhoto();
     }
 
     //Save Data to DataBase
     public void saveData() {
+        AccessData.db.deleteSports(sportToEdit);
         HashMap<String,Object> map = new HashMap<>();
         map.put("bio",bio_content.getText().toString());
         map.put("age",bd_text.getText().toString());
         map.put("firstname",fname_text.getText().toString());
         map.put("name", name_text.getText().toString());
         map.put("sports",sportItems);
+
         AccessData.db.updateUser(AccessData.currentUser,map);
-        AccessData.db.implementSports(AccessData.currentUser);
+        saved=true;
         if(isChanged == true) {
             AccessData.db.addPhoto(uriUser);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (saved) {
+            AccessData.db.implementSports(AccessData.currentUser);
+
+        }
+        Log.d("test",AccessData.currentUser.getSports().toString());
+        isRunning=false;
     }
 
     public void onConfirm (View view) {
@@ -282,9 +309,4 @@ public class EditingProfileActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        isRunning = false;
-    }
 }

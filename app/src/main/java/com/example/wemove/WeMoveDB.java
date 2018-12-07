@@ -2,6 +2,7 @@ package com.example.wemove;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Debug;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import android.app.Application;
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -28,6 +30,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import Utils.AccessData;
@@ -91,7 +94,7 @@ public class WeMoveDB {
     public void addUserToSport(Sport s, User user) {
         DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
         DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(s.getLevel());
-        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getName());
+        DatabaseReference mIdUser = mParamSportsInsideRef.child(user.getId());
         mIdUser.setValue(user.getId());
     }
 
@@ -100,6 +103,14 @@ public class WeMoveDB {
             if(s.getInterest() >= 4) {
                 this.addUserToSport(s, user);
             }
+        }
+    }
+
+    public void deleteSports (List<Sport> list) {
+        for (Sport s : list) {
+            DatabaseReference mParamSportsRef = mSportsRef.child(s.getName());
+            DatabaseReference mParamSportsInsideRef = mParamSportsRef.child(s.getLevel());
+            mParamSportsInsideRef.child(AccessData.currentUser.getId()).removeValue();
         }
     }
 
@@ -166,6 +177,20 @@ public class WeMoveDB {
                     ProfileActivity.hidePB();
                 }
                 ProfileActivity.isCharged=true;
+                Log.d("EVENT",String.valueOf(Home.isRunning));
+                if (Home.isRunning) {
+                    boolean notifNotSeen=false;
+                    if (AccessData.currentUser.notifications!=null) {
+                        for (Notification value : AccessData.currentUser.notifications.values()) {
+                            if (!value.isSeen()) {
+                                notifNotSeen = true;
+                            }
+                        }
+                        if (notifNotSeen) {
+                            Home.notificationBadge.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
 
             }
 
