@@ -152,11 +152,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
             public void onClick(View v) {
                 //a coder
                 Intent intent=new Intent(context, EventDetails.class);
-                intent.putExtra("nom", event.getName());
-                intent.putExtra("sport", event.getSport().getName());
-                intent.putExtra("niveau",event.getNiveau());
-                intent.putExtra("place",event.getPlace());
-                intent.putExtra("description", event.getDescription());
+                intent.putExtra("position", position);
                 context.startActivity(intent);
             }
         });
