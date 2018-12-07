@@ -60,7 +60,7 @@ public class WeMoveDB {
                     Home_EventsFragment.hidePB();
                 }
                 Home_EventsFragment.isCharged=true;
-                //Log.d("test",String.valueOf(AccessData.events.get(AccessData.events.size()-1).getUsersID().size()));
+                Log.d("test",String.valueOf(AccessData.events.size()));
             }
 
             @Override

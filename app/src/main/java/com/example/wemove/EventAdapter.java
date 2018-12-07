@@ -62,15 +62,19 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView textViewSport= (TextView) customView.findViewById(R.id.textViewSport);
        // TextView textViewPlace = (TextView) customView.findViewById(R.id.textViewPlace);
       //  TextView textViewNiveau = (TextView) customView.findViewById(R.id.textViewNiveau);
+        TextView textViewNumber = (TextView)customView.findViewById(R.id.textViewNumber);
+
 
         final Event event = getItem(position);
         Button join = customView.findViewById(R.id.Rejoindre);
+
+        textViewNumber.setText(event.usersID.size() + "/" + event.getNbPeople());
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Map<String, Object> eventUpdates = new HashMap<>();
-                eventUpdates.put(AccessData.currentUser.getName(),AccessData.currentUser.getId());
+                eventUpdates.put(String.valueOf(event.usersID.size()),AccessData.currentUser.getId());
                 AccessData.db.updateEvent(event,eventUpdates);
             }
         });

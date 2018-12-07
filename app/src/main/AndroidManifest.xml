@@ -65,13 +65,6 @@
         <activity android:name=".NewUser" />
         <activity android:name=".CreditActivity" />
         <activity android:name=".MySportsActivity" />
-        <activity android:name=".EventsPage">
-            <intent-filter>
-                <action android:name="android.intent.action.EventsPage" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".CreateEvent"
             android:theme="@style/AppTheme.NoActionBar">

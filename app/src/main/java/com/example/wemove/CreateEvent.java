@@ -62,6 +62,7 @@ public class CreateEvent extends AppCompatActivity {
         String description=eventDescription.getText().toString();
         String level=eventLevel.getSelectedItem().toString();
         String sportName= sport.getSelectedItem().toString();
+        String numb = nbParticipant.getText().toString();
 
         if(name.isEmpty()) {
             eventName.setError("Le nom est requis");
@@ -87,7 +88,7 @@ public class CreateEvent extends AppCompatActivity {
         Sport s= new Sport(sportName);
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
-        Event createdEvent = new Event(ts,name,s,groupe,place,level,description);
+        Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb));
 
         AccessData.db.addEvent(createdEvent);
         startActivity(new Intent(CreateEvent.this,Home.class));

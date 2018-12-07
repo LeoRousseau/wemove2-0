@@ -18,7 +18,7 @@ public class Event {
     ArrayList<String> usersID;
 
 
-    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description) {
+    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description, int numb) {
         this.id = id;
         this.name = name;
         this.sport = sport;
@@ -28,7 +28,7 @@ public class Event {
         this.description = description;
         this.usersID = new ArrayList<>();
         usersID.add(AccessData.currentUser.getId());
-        this.nbPeople = getUsersID().size();
+        this.nbPeople = numb;
     }
 
     public Event() {
