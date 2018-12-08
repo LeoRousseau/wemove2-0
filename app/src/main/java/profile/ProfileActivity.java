@@ -171,8 +171,11 @@ public class ProfileActivity extends AppCompatActivity {
         linearLayoutProfile.setVisibility(View.VISIBLE);
     }
 
+    /*
     @Override
     public void onBackPressed() {
-
+        Intent intent = new Intent(this,Home.class);
+        startActivity(intent);
     }
+    */
 }

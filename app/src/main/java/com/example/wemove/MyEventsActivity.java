@@ -42,7 +42,7 @@ public class MyEventsActivity extends AppCompatActivity {
         listView.setAdapter(createdAdapter);
 
     }
-    
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {

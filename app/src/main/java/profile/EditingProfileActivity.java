@@ -275,22 +275,19 @@ public class EditingProfileActivity extends AppCompatActivity {
             mHandler.postDelayed(mUpdateDisplay,2000);
             isChanged = false;
         } else {
-            Intent intent = new Intent(this,ProfileActivity.class);
-            startActivity(intent);
+            onBackPressed();
         }
     }
 
     private Runnable mUpdateDisplay = new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(getBaseContext(),ProfileActivity.class);
-            startActivity(intent);
+            onBackPressed();
         }
     };
 
     public void onDismiss (View view) {
-        Intent intent = new Intent(this,ProfileActivity.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     public List<String> getOtherSportsName () {
@@ -304,9 +301,11 @@ public class EditingProfileActivity extends AppCompatActivity {
         return otherSport;
     }
 
+    /*
     @Override
     public void onBackPressed() {
 
     }
+    */
 
 }
