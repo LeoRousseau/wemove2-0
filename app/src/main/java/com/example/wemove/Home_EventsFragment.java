@@ -7,8 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +28,7 @@ import java.util.ArrayList;
 
 import Utils.AccessData;
 
-public class Home_EventsFragment extends Fragment {
+public class Home_EventsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener{
 
     public static ListView lv=null;
     private FloatingActionButton create;
@@ -37,6 +42,7 @@ public class Home_EventsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.home_fragment_events, container, false);
         progressBarEvents = (ProgressBar)view.findViewById(R.id.progressbarEvents);
         //eventAdapter=null;
@@ -65,7 +71,6 @@ public class Home_EventsFragment extends Fragment {
         if (isCharged) {
             hidePB();
         }
-
         return view;
     }
 
@@ -77,4 +82,51 @@ public class Home_EventsFragment extends Fragment {
         progressBarEvents.setVisibility(View.GONE);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menusearch, menu);
+        android.view.MenuItem item = menu.findItem(R.id.action_search);
+
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint("Search");
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+        return false;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        if(s.equals("") || s.trim().isEmpty()) {
+            Toast.makeText(getContext(),"Aucune valeur indiquée",Toast.LENGTH_LONG).show();
+        }
+        else {
+            Log.d("text", "onQueryTextSubmit: "+s);
+            for(Event val : AccessData.events) {
+                if (val.name.toLowerCase().contains(s.toLowerCase())) {
+                    Log.d("val", "onQueryTextSubmit: "+val.name);
+                }
+                else {
+                    Log.d("val", "onQueryTextSubmit: ici");
+                    eventAdapter.remove(val);
+                    eventAdapter.notifyDataSetChanged();
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        return false;
+    }
 }
