@@ -31,6 +31,7 @@ import Utils.AccessData;
 public class Home_EventsFragment extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener{
 
     public static ListView lv=null;
+    private SearchView searchView;
     private FloatingActionButton create;
     private Button join;
     private Sport foot=new Sport("foot");
@@ -48,6 +49,9 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         //eventAdapter=null;
         lv = (ListView) view.findViewById(R.id.listEventsView);
         create = (FloatingActionButton) view.findViewById(R.id.Create);
+
+        lv.setDivider(null);
+        lv.setDividerHeight(0);
 
         if (AccessData.events.size()==0) {
             //AccessData.db.getEvents();
@@ -72,6 +76,8 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
             hidePB();
         }
         return view;
+
+
     }
 
     public EventAdapter getEventAdapter() {
@@ -87,21 +93,30 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         inflater.inflate(R.menu.menusearch, menu);
         android.view.MenuItem item = menu.findItem(R.id.action_search);
 
-        SearchView searchView = (SearchView) item.getActionView();
+        searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
         searchView.setQueryHint("Search");
 
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.d("val","close");
+                eventAdapter.setTrue();
+                eventAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onMenuItemActionExpand(MenuItem menuItem) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-        return false;
+        return true;
     }
 
     @Override
@@ -110,14 +125,11 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
             Toast.makeText(getContext(),"Aucune valeur indiquée",Toast.LENGTH_LONG).show();
         }
         else {
-            Log.d("text", "onQueryTextSubmit: "+s);
-            for(Event val : AccessData.events) {
-                if (val.name.toLowerCase().contains(s.toLowerCase())) {
-                    Log.d("val", "onQueryTextSubmit: "+val.name);
+            for(int i=0;i<AccessData.events.size();i++) {
+                if (AccessData.events.get(i).sport.getName().toLowerCase().contains(s.toLowerCase())) {
                 }
                 else {
-                    Log.d("val", "onQueryTextSubmit: ici");
-                    eventAdapter.remove(val);
+                    eventAdapter.displayed.set(i,false);
                     eventAdapter.notifyDataSetChanged();
                 }
             }
@@ -127,6 +139,23 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
 
     @Override
     public boolean onQueryTextChange(String s) {
+        eventAdapter.setTrue();
+        eventAdapter.notifyDataSetChanged();
+        if(s.equals("") || s.trim().isEmpty()) {
+
+        }
+        else {
+            for(int i=0;i<AccessData.events.size();i++) {
+                if (AccessData.events.get(i).sport.getName().toLowerCase().contains(s.toLowerCase())) {
+                }
+                else {
+                    eventAdapter.displayed.set(i,false);
+                    eventAdapter.notifyDataSetChanged();
+                }
+            }
+        }
         return false;
     }
+
+
 }

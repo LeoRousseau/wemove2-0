@@ -2,15 +2,18 @@ package com.example.wemove;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.CpuUsageInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -27,16 +30,18 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
     private Context context;
     private List<Event> items;
+    public List<Boolean> displayed;
     LayoutInflater inflater;
-    ArrayList<Event> arrayList;
 
     public EventAdapter(@NonNull Context context, List<Event> items) {
         super(context, R.layout.eventlayout);
         this.context=context;
         this.items=items;
         inflater = LayoutInflater.from(context);
-        arrayList=new ArrayList<Event>();
-        arrayList.addAll(items);
+        displayed= new ArrayList<>();
+        for (int i=0;i<items.size();i++) {
+            displayed.add(true);
+        }
     }
 
     @Override
@@ -47,7 +52,12 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
     public void setInput(List<Event> items) {
         this.items=items;
+        displayed= new ArrayList<>();
+        for (int i=0;i<items.size();i++) {
+            displayed.add(true);
+        }
     }
+
 
 
     @Override
@@ -55,6 +65,13 @@ public class EventAdapter extends ArrayAdapter<Event> {
         return items.size();
 
     }
+
+    public void setTrue() {
+        for (int i=0;i<items.size();i++) {
+            displayed.set(i,true);
+        }
+    }
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
@@ -65,6 +82,9 @@ public class EventAdapter extends ArrayAdapter<Event> {
         TextView textViewSport= (TextView) customView.findViewById(R.id.textViewSport);
         TextView textViewNumber = (TextView)customView.findViewById(R.id.textViewNumber);
 
+        if (!displayed.get(position)) {
+            return inflater.inflate(R.layout.null_item, null);
+        }
 
         final Event event = getItem(position);
         final Button join = customView.findViewById(R.id.Rejoindre);

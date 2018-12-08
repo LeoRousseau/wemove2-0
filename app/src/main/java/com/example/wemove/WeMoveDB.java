@@ -59,6 +59,7 @@ public class WeMoveDB {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 AccessData.events.add(dataSnapshot.getValue(Event.class));
                 if(Home_EventsFragment.lv!=null) {
+                    Home_EventsFragment.eventAdapter.setInput(AccessData.events);
                     Home_EventsFragment.eventAdapter.notifyDataSetChanged();
                     Home_EventsFragment.hidePB();
                 }
