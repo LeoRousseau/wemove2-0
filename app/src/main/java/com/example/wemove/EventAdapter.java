@@ -45,6 +45,11 @@ public class EventAdapter extends ArrayAdapter<Event> {
     }
 
 
+    public void setInput(List<Event> items) {
+        this.items=items;
+    }
+
+
     @Override
     public int getCount() {
         return items.size();
@@ -55,32 +60,93 @@ public class EventAdapter extends ArrayAdapter<Event> {
     public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View customView= layoutInflater.inflate(R.layout.eventlayout,parent,false);
-        //a revoir pour l'image
         ImageView si=(ImageView)customView.findViewById(R.id.si);
         TextView textViewNom = (TextView) customView.findViewById(R.id.textViewnom);
-       // TextView textViewDesc = (TextView) customView.findViewById(R.id.textViewDescription);
         TextView textViewSport= (TextView) customView.findViewById(R.id.textViewSport);
-       // TextView textViewPlace = (TextView) customView.findViewById(R.id.textViewPlace);
-      //  TextView textViewNiveau = (TextView) customView.findViewById(R.id.textViewNiveau);
+        TextView textViewNumber = (TextView)customView.findViewById(R.id.textViewNumber);
+
 
         final Event event = getItem(position);
-        Button join = customView.findViewById(R.id.Rejoindre);
+        final Button join = customView.findViewById(R.id.Rejoindre);
+
+        textViewNumber.setText(event.usersID.size() + "/" + event.getNbPeople());
+
+
+        if (AccessData.currentUser.getId().compareTo(event.usersID.get(0))==0) {
+            join.setText("GERER");
+            join.setTextColor(context.getResources().getColor(R.color.blue));
+        }
+        else if (isJoined(position)){
+            join.setText("QUITTER");
+            join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+        }
+        else if (event.getNbPeople()<=event.usersID.size()) {
+            join.setText("COMPLET");
+            join.setTextColor(context.getResources().getColor(R.color.notifRed));
+        }
+        else {
+            join.setText("REJOINDRE");
+            join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+        }
+
+
+
+
+
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String, Object> eventUpdates = new HashMap<>();
-                eventUpdates.put(AccessData.currentUser.getName(),AccessData.currentUser.getId());
-                AccessData.db.updateEvent(event,eventUpdates);
+
+                if (AccessData.events.get(position).usersID.get(0).compareTo(AccessData.currentUser.getId())==0) {
+                    Intent intent = new Intent(context,ManageEvent.class);
+                    intent.putExtra("position",position);
+                    context.startActivity(intent);
+                }
+                else if (isJoined(position)){
+                    Log.d("changed","1");
+                    ArrayList<String> list = new ArrayList<>();
+                    for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
+                        list.add(new String(AccessData.events.get(position).usersID.get(i)));
+                    }
+                    int i;
+                    for (i=0;i<list.size();i++) {
+                        if (list.get(i).compareTo(AccessData.currentUser.getId())==0) {
+                            list.remove(i);
+                            break;
+                        }
+                    }
+                    Map<String, Object> eventUpdates = new HashMap<>();
+                    eventUpdates.put("usersID",list);
+                    AccessData.db.updateEvent(event,eventUpdates);
+                    join.setText("REJOINDRE");
+                    Log.d("changed",join.getText().toString());
+                    join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+
+                }
+                else if (event.getNbPeople()<=event.usersID.size()) {
+                    //COMPLET
+                }
+                else {
+                    Log.d("changed","2");
+                    Map<String, Object> eventUpdates = new HashMap<>();
+                    ArrayList<String> list = new ArrayList<>();
+                    for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
+                        list.add(new String(AccessData.events.get(position).usersID.get(i)));
+                    }
+                    list.add(AccessData.currentUser.getId());
+                    eventUpdates.put("usersID",list);
+                    AccessData.db.updateEvent(event,eventUpdates);
+                    join.setText("QUITTER");
+                    Log.d("changed",join.getText().toString());
+                    join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+                }
+
             }
         });
 
-       //a revoir pour l'image
         si.setImageResource(AccessData.table.get(event.getSport().getName()));
         textViewNom.setText(event.getName());
-        //textViewDesc.setText(event.getDescription());
-       // textViewNiveau.setText(event.getNiveau());
-       // textViewPlace.setText(event.getPlace());
         textViewSport.setText(event.getSport().getName());
 
         customView.setOnClickListener(new View.OnClickListener() {
@@ -88,15 +154,24 @@ public class EventAdapter extends ArrayAdapter<Event> {
             public void onClick(View v) {
                 //a coder
                 Intent intent=new Intent(context, EventDetails.class);
-                intent.putExtra("nom", event.getName());
-                intent.putExtra("sport", event.getSport().getName());
-                intent.putExtra("niveau",event.getNiveau());
-                intent.putExtra("place",event.getPlace());
-                intent.putExtra("description", event.getDescription());
+                intent.putExtra("position", position);
                 context.startActivity(intent);
             }
         });
 
         return customView;
+    }
+
+
+    public boolean isJoined(int position) {
+        boolean result=false;
+        if (AccessData.events.get(position).usersID.size()>1) {
+            for (int i=1;i<AccessData.events.get(position).usersID.size();i++) {
+                if(AccessData.events.get(position).usersID.get(i).compareTo(AccessData.currentUser.getId())==0) {
+                    result  = true;
+                }
+            }
+        }
+        return result;
     }
 }

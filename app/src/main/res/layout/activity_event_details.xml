@@ -1,55 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EventDetails">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="32dp"
-        android:text="nom" />
 
-    <TextView
-        android:id="@+id/sport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/nom"
-        android:layout_marginTop="65dp"
-        android:text="sport" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
-    <TextView
-        android:id="@+id/endroit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/nom"
-        android:layout_marginTop="98dp"
-        android:text="endroit" />
+            <LinearLayout
+                android:id="@+id/lltop"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-    <TextView
-        android:id="@+id/niveau"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/nom"
-        android:layout_marginTop="136dp"
-        android:text="niveau" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DEC"
+                    android:textAlignment="center"
+                    android:textColor="@color/OrangeNormal"
+                    android:textSize="20sp"
+                    android:id="@+id/month"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/nom"
-        android:layout_marginTop="173dp"
-        android:text="description " />
-</RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="14"
+                    android:textAlignment="center"
+                    android:textColor="@color/OrangeNormal"
+                    android:id="@+id/day"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="3dp"
+                android:layout_height="80dp"
+                android:background="@color/OrangeNormal"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/lltop"
+                android:layout_marginRight="8dp"
+                android:id="@+id/bar">
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/bar"
+                android:text="Le nom de l'évènement un peu long"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/CardViewGrey"
+                android:id="@+id/textName"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Musculation"
+                android:textColor="@color/CardViewGrey"
+                android:textSize="15sp"
+                android:id="@+id/nameSportEvent"
+                android:layout_below="@id/textName"
+                android:layout_toRightOf="@id/bar"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="32dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/OrangeNormal"
+                android:background="@android:color/transparent"
+                android:id="@+id/btnJoin"
+                android:text="REJOINDRE"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/backgroundGrey">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_location_on_black_24dp"
+                android:id="@+id/imloc"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/imloc"
+                android:layout_marginLeft="6dp"
+                android:text="Terrain municipale"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_sport_run_black_24dp"
+                android:id="@+id/imsport"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textSporte"
+                android:layout_toRightOf="@id/imsport"
+                android:text="Musculation - Débutant"
+                android:layout_marginLeft="6dp"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_group_black_24dp"
+                android:id="@+id/imgroup"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/imgroup"
+                android:layout_marginLeft="6dp"
+                android:id="@+id/numb"
+                android:text="2/5"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/backgroundGrey">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description : "
+                android:textStyle="bold"
+                android:id="@+id/desc"
+                android:layout_marginLeft="20dp"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem"
+                android:padding="20dp"
+                android:id="@+id/textdesc"
+                android:layout_below="@id/desc"/>
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
