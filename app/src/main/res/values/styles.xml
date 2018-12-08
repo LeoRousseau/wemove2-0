@@ -13,4 +13,18 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="eventBarSelected" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/OrangeNormal</item>
+    </style>
+
+    <style name="eventBar" parent="@android:style/TextAppearance.Widget.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/CardViewGrey</item>
+    </style>
+
 </resources>

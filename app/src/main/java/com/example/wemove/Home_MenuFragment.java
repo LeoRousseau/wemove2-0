@@ -49,6 +49,7 @@ public class Home_MenuFragment extends Fragment {
                         goToProfile();
                         break;
                     case 1 :
+                        goToMyEvents();
                         break;
                     case 2 :
                         goToMySports();
@@ -99,6 +100,11 @@ public class Home_MenuFragment extends Fragment {
         Intent intent = new Intent(getContext(), MySportsActivity.class);
         startActivity(intent);
     }
+
+   public void goToMyEvents() {
+       Intent intent = new Intent(getContext(), MyEventsActivity.class);
+       startActivity(intent);
+   }
 
     public void signOut () {
         //AccessData.db = new WeMoveDB();

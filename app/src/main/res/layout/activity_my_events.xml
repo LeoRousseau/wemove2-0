@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyEventsActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:layout_marginBottom="5dp"
+        android:text="Mes Evénements" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/textView3"
+        android:id="@+id/eventNavBar"
+        app:menu="@menu/event_nav_bar"
+        android:elevation="5dp">
+    </android.support.design.widget.BottomNavigationView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/eventNavBar"
+        android:id="@+id/sep"
+        android:background="@color/backgroundGrey">
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/lvEvent"
+        android:layout_below="@id/sep">
+
+    </ListView>
+
+</RelativeLayout>

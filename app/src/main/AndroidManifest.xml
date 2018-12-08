@@ -75,8 +75,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".EventDetails" />
-        <activity android:name=".ManageEvent"
+        <activity
+            android:name=".ManageEvent"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MyEventsActivity"></activity>
     </application>
 
 </manifest>
