@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.wemove.Home;
 import com.example.wemove.Notification;
 import com.example.wemove.R;
@@ -70,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         Log.d("EVENT", "profile");
         //Get Data from DataBase
         getData();
-
         //Set layout with screen size
         setLayout();
 
@@ -149,13 +149,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public static void getData() {
+        String url = AccessData.db.getPhoto();
+        Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
         String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07)))).append(" ans").toString();
         age_text.setText(date_);
         number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
-        AccessData.db.getPhoto();
+
     }
 
     @Override

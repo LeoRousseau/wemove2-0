@@ -48,6 +48,7 @@ public class WeMoveDB {
     private DatabaseReference mEventRef = mRootRef.child("Event");
     private DatabaseReference mCuserRef;
     private Uri photo;
+    private String urlPhoto;
     public static Boolean isSuccess = false;
 
     public WeMoveDB() {
@@ -241,34 +242,41 @@ public class WeMoveDB {
                 });
     }
 
-    public void getPhoto() {
+    public String getPhoto() {
         if(NewUser.firstTime) {
             NewUser.firstTime = false;
         }
         else {
-            StorageReference mGetPhotoRef = mStorageRef.child(AccessData.currentUser.getId());
+            if(AccessData.currentUser.getId() == null) {
 
-            mGetPhotoRef.getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            if(ProfileActivity.isRunning) {
-                                String url = String.valueOf(uri);
-                                Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
+            }
+            else {
+                StorageReference mGetPhotoRef = mStorageRef.child(AccessData.currentUser.getId());
+
+                mGetPhotoRef.getDownloadUrl()
+                        .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                if(ProfileActivity.isRunning) {
+                                    String url = String.valueOf(uri);
+                                    urlPhoto = url;
+                                    Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
+                                }
+                                if(EditingProfileActivity.isRunning) {
+                                    String url = String.valueOf(uri);
+                                    Glide.with(EditingProfileActivity.ctx).load(url).into(EditingProfileActivity.profilePicture);
+                                }
+                                Log.d("ok", "chemin :"+uri);
                             }
-                            if(EditingProfileActivity.isRunning) {
-                                String url = String.valueOf(uri);
-                                Glide.with(EditingProfileActivity.ctx).load(url).into(EditingProfileActivity.profilePicture);
-                            }
-                            Log.d("photo", "chemin :"+uri);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("photo", "onFailure: File doesn't exists");
-                }
-            });
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("photo", "onFailure: File doesn't exists");
+                    }
+                });
+            }
+
         }
-
+        return urlPhoto;
     }
 }

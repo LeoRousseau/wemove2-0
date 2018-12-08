@@ -2,6 +2,7 @@ package com.example.wemove;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ public class Home_MenuFragment extends Fragment {
 
     ListView listView;
     private ListAdapter listAdapter;
+    private Handler mHandler = new Handler();
 
     @Nullable
     @Override
@@ -69,9 +71,24 @@ public class Home_MenuFragment extends Fragment {
         return view;
     }
     public void goToProfile () {
-        Intent intent = new Intent(getContext(), ProfileActivity.class);
-        startActivity(intent);
+        if(Login.isFirstTime) {
+            mHandler.postDelayed(mUpdateDisplay,2000);
+            Log.d("ok", "goToProfile: coucou");
+            Login.isFirstTime = false;
+        } else {
+            Log.d("ok", "goToProfile: coucou2");
+            Intent intent = new Intent(getContext(),ProfileActivity.class);
+            startActivity(intent);
+        }
     }
+
+    private Runnable mUpdateDisplay = new Runnable() {
+        @Override
+        public void run() {
+            Intent intent = new Intent(getContext(),ProfileActivity.class);
+            startActivity(intent);
+        }
+    };
 
     public void goToCredits () {
         Intent intent = new Intent(getContext(), CreditActivity.class);
@@ -88,6 +105,7 @@ public class Home_MenuFragment extends Fragment {
         AccessData.currentUser = new User();
         AccessData.currentEvent = new Event();
         AccessData.events = new ArrayList<>();
+        Login.isFirstTime = false;
         Log.d("ATTEMPT", "onClick: attempting to sign out the user");
         LoginManager.getInstance().logOut();
         FirebaseAuth.getInstance().signOut();

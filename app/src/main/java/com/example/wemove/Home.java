@@ -53,7 +53,6 @@ public class Home extends AppCompatActivity {
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
