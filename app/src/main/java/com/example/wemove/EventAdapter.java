@@ -99,7 +99,9 @@ public class EventAdapter extends ArrayAdapter<Event> {
             public void onClick(View view) {
 
                 if (AccessData.events.get(position).usersID.get(0).compareTo(AccessData.currentUser.getId())==0) {
-                    //GERER
+                    Intent intent = new Intent(context,ManageEvent.class);
+                    intent.putExtra("position",position);
+                    context.startActivity(intent);
                 }
                 else if (isJoined(position)){
                     Log.d("changed","1");

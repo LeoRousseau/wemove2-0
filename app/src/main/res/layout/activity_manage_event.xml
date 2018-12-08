@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateEvent">
+    tools:context=".ManageEvent">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/OrangeNormal"
-        android:id="@+id/createEventToolbar"
+        android:id="@+id/editProfileToolbar"
         android:elevation="4dp">
 
         <RelativeLayout
@@ -25,7 +26,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/returned"
-                android:onClick="onDismissEvent"/>
+                android:onClick="onDismiss"/>
 
             <ImageView
                 android:layout_width="25dp"
@@ -33,36 +34,50 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/checked"
-                android:onClick="onConfirmEvent"/>
+                android:onClick="onConfirm"/>
 
         </RelativeLayout>
-
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/createEventToolbar"
-        android:layout_alignParentTop="true">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical"
             android:padding="5dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="55dp"
-                android:text="Nouvel événement"
+                android:text="Modifier l'événement"
                 android:textAlignment="center"
                 android:textColor="@color/CardViewGrey"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:text="SUPPRIMER"
+                    android:textColor="@color/notifRed"
+                    android:background="@android:color/transparent"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:padding="2dp"
+                    android:textSize="15sp"
+                    android:id="@+id/supp"/>
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,11 +100,10 @@
                     android:textColor="@color/CardViewGrey"
                     android:textSize="17sp"
                     android:textStyle="bold" />
-
             </RelativeLayout>
 
             <EditText
-                android:id="@+id/NameEvent"
+                android:id="@+id/NameEvent2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -97,17 +111,9 @@
                 android:hint="Nom de l'évènement"
                 android:inputType="text" />
 
-            <EditText
-                android:id="@+id/NbPersonne"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="5dp"
-                android:ems="10"
-                android:hint="Nombre de participants"
-                android:inputType="number" />
 
             <EditText
-                android:id="@+id/Place"
+                android:id="@+id/Place2"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="5dp"
@@ -116,7 +122,7 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/Description"
+                android:id="@+id/Description2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -128,92 +134,47 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:id="@+id/sim1"
+                    android:id="@+id/dim1"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/ic_directions_run_black_24dp" />
+                    android:src="@drawable/ic_group_orange_24dp"
+                    android:layout_centerVertical="true"/>
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/sim1"
-                    android:text="Sport :"
-                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/dim1"
+                    android:text="Nombre de participants : "
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/oo"
+                    android:layout_centerVertical="true"
                     android:textColor="@color/CardViewGrey"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:padding="2dp">
-
-                <TextView
-                    android:id="@+id/txvsp"
-                    android:layout_width="120dp"
+                <NumberPicker
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:ems="10"
-                    android:text="Sport : "
-                    android:textSize="18sp" />
+                    android:layout_toRightOf="@id/oo"
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/numpick">
 
-                <Spinner
-                    android:id="@+id/NameSport"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/txvsp">
-
-                </Spinner>
+                </NumberPicker>
 
             </RelativeLayout>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:padding="2dp">
-
-                <TextView
-                    android:id="@+id/txniv"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="8dp"
-                    android:ems="10"
-                    android:text="Niveau : "
-                    android:textSize="18sp" />
-
-                <Spinner
-                    android:id="@+id/Niveau"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/txniv">
-
-                </Spinner>
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="10dp">
 
                 <ImageView
-                    android:id="@+id/dim1"
+                    android:id="@+id/nim1"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:src="@drawable/ic_date_range_black_24dp" />
@@ -222,7 +183,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/dim1"
+                    android:layout_toRightOf="@id/nim1"
                     android:text="Date :"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
@@ -241,7 +202,7 @@
 
 
                 <Button
-                    android:id="@+id/buttonDate"
+                    android:id="@+id/buttonDate2"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_margin="5dp"
@@ -259,16 +220,13 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="5dp"
                     android:text="date"
-                    android:id="@+id/textViewdate"
-                    android:layout_below="@id/buttonDate"/>
+                    android:id="@+id/textViewdate2"
+                    android:layout_below="@id/buttonDate2"/>
 
 
             </RelativeLayout>
 
 
         </LinearLayout>
-
-
     </ScrollView>
-
 </RelativeLayout>

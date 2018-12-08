@@ -75,6 +75,7 @@
                 android:text="Musculation"
                 android:textColor="@color/CardViewGrey"
                 android:textSize="15sp"
+                android:id="@+id/nameSportEvent"
                 android:layout_below="@id/textName"
                 android:layout_toRightOf="@id/bar"/>
 

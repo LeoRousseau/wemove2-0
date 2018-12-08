@@ -22,6 +22,7 @@ public class EventDetails extends AppCompatActivity {
     TextView day;
     TextView month;
     TextView eventNumber;
+    TextView nameSportEvent;
     Button join;
 
     @Override
@@ -39,6 +40,7 @@ public class EventDetails extends AppCompatActivity {
         month = findViewById(R.id.month);
         eventNumber = findViewById(R.id.numb);
         join = findViewById(R.id.btnJoin);
+        nameSportEvent = findViewById(R.id.nameSportEvent);
 
 
         if (AccessData.currentUser.getId().compareTo(AccessData.events.get(position).usersID.get(0))==0) {
@@ -63,7 +65,9 @@ public class EventDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (AccessData.events.get(position).usersID.get(0).compareTo(AccessData.currentUser.getId())==0) {
-                    //GERER
+                    Intent intent = new Intent(EventDetails.this,ManageEvent.class);
+                    intent.putExtra("position",position);
+                    startActivity(intent);
                 }
                 else if (isJoined(position)){
                     Log.d("changed","1");
@@ -112,6 +116,7 @@ public class EventDetails extends AppCompatActivity {
         day.setText(String.valueOf(AccessData.events.get(position).date.getDate()));
         month.setText(getMonthAccro(AccessData.events.get(position).date.getMonth()));
         eventNumber.setText(AccessData.events.get(position).usersID.size() + "/" +AccessData.events.get(position).getNbPeople());
+        nameSportEvent.setText(AccessData.events.get(position).getSport().getName());
     }
 
     public String getMonthAccro(int val) {

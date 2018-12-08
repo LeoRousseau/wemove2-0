@@ -3,6 +3,7 @@ package com.example.wemove;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Debug;
+import android.provider.CalendarContract;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.LongDef;
@@ -82,7 +83,13 @@ public class WeMoveDB {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+                Event event = dataSnapshot.getValue(Event.class);
+                for (int i=0; i<AccessData.events.size();i++) {
+                    if (AccessData.events.get(i).getId().compareTo(event.getId())==0){
+                        AccessData.events.remove(i);
+                        break;
+                    }
+                }
             }
 
             @Override
