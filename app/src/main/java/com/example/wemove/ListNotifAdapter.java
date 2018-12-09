@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,10 +23,19 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
 
     private List<Notification> list;
     private Context context;
+    private List<Boolean> index;
     public ListNotifAdapter(@NonNull Context context, List<Notification> list) {
         super(context,R.layout.notifications_row);
         this.list=list;
         this.context=context;
+        setIndex();
+    }
+
+    public void setIndex () {
+        index = new ArrayList<>();
+        for (int i=0;i<list.size();i++) {
+            index.add(list.get(i).isSeen());
+        }
     }
 
     @Override
@@ -48,6 +59,15 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
         ImageView imageView = customView.findViewById(R.id.imageNotif);
         TextView message = customView.findViewById(R.id.msgNotif);
         TextView date = customView.findViewById(R.id.dateNotif);
+        RelativeLayout rl = customView.findViewById(R.id.rlnotif);
+
+        if (index.get(position)) {
+            rl.setBackgroundColor(context.getResources().getColor(R.color.foregroundWhite));
+        }
+        else {
+            rl.setBackgroundColor(context.getResources().getColor(R.color.foregroundWhiteYellow));
+        }
+
 
         final Notification notification = getItem(position);
 

@@ -32,15 +32,6 @@ public class Home_NotificationsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.home_fragment_notifications,container,false);
 
-        /*
-        List<Notification> list = new ArrayList<>();
-        list.add(new Notification("Event","Football : Un nouvel évènement vous correspond ! ","0",new Date(2018,11,29)));
-        list.add(new Notification("Group","Nouveau membre dans le groupe ","0",new Date(2018,11,20)));
-        list.add(new Notification("Event","Ping Pong : Un nouvel évènement vous correspond ! ","0",new Date(2018,11,30)));
-        list.add(new Notification("Event","Rugby : Un nouvel évènement vous correspond ! ","0",new Date(2018,11,11)));
-
-        */
-
         noNotif = view.findViewById(R.id.noNotif);
         listView =  view.findViewById(R.id.listNotifView);
 
