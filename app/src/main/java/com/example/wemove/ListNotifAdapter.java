@@ -38,6 +38,10 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
         }
     }
 
+    public void setSpeIndex (int pos) {
+        index.set(pos,true);
+    }
+
     @Override
     public int getCount() {
         return this.list.size();
@@ -52,7 +56,7 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         final View customView= layoutInflater.inflate(R.layout.notifications_row,parent,false);
 
@@ -84,6 +88,8 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
             @Override
             public void onClick(View v) {
                 boolean found=false;
+                setSpeIndex(position);
+                notifyDataSetChanged();
                 Intent intent = new Intent(context,EventDetails.class);
                 for (int i=0;i<AccessData.events.size();i++) {
                     if (AccessData.events.get(i).getId().compareTo(notification.getContentID())==0) {

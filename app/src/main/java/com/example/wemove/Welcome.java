@@ -22,6 +22,7 @@ public class Welcome extends AppCompatActivity {
 
         ///////////////////////////////////// Pour les tests ///////////////////////////////////////
 
+        /*
         db = new WeMoveDB();
 
         ArrayList<Sport> sports = new ArrayList<>();
@@ -38,6 +39,7 @@ public class Welcome extends AppCompatActivity {
         User user = new User("OliverNico","Oliver","Nicolas","Joyeux gars",sports);
         User user2 = new User("RousseauLeo","Rousseau","Leo","Happy guy",sports2);
         User userEmail = new User("test","nico","test","j@gmail.com","012541");
+        */
 
         /*File img = new File("C:/Users/nicoo/Google Drive/Mobilité sortante/Cours UQAC/Automne/Prog Mobiles/marvel.png");
         User userPhoto = new User("MartinDupont","Dupont","Martin","Un test",sports);
@@ -47,6 +49,7 @@ public class Welcome extends AppCompatActivity {
         //Event event = new Event("Badminton Second Time",new Sport("badminton"),5,false,"Pavillon sportif","Amateur","Cherche 2 personnes pour une doublette",new ArrayList<User>());
 
         // Pour completer un profil (une description et liste de sport)
+        /*
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("bio","joyeux noel");
         childUpdates.put("sports",sports);
@@ -76,6 +79,7 @@ public class Welcome extends AppCompatActivity {
         //Supprimer un event
         //db.deleteEvent(event);
 
+    */
 
 
 

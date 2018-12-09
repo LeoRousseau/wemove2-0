@@ -13,7 +13,7 @@ public class User {
     String name;
     String firstname;
     String email;
-    String age;
+    long age;
     //A completer lors de la première inscription
     String bio;
     ArrayList<Sport> sports;
@@ -79,12 +79,12 @@ public class User {
         this.email = email;
     }
 
-    public String getAge() {
-        return age;
+    public void setAge(long age) {
+        this.age = age;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public long getAge() {
+        return age;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class User {
         this.sports = sports;
     }
 
-    public User(String id, String tag, String name, String firstname, String email, String age, String bio, ArrayList<Sport> sports) {
+    public User(String id, String tag, String name, String firstname, String email, long age, String bio, ArrayList<Sport> sports) {
         this.id = id;
         this.tag = tag;
         this.name = name;
@@ -123,7 +123,7 @@ public class User {
         this.sports = sports;
     }
 
-    public User(String tag, String name, String firstname, String email, String age) {
+    public User(String tag, String name, String firstname, String email, long age) {
         this.tag = tag;
         this.name = name;
         this.firstname = firstname;
@@ -148,7 +148,7 @@ public class User {
         this.sports = sports;
     }
 
-    public User(String id, String tag, String name, String firstname, String email, String age) {
+    public User(String id, String tag, String name, String firstname, String email, long age) {
         this.id = id;
         this.tag = tag;
         this.name = name;

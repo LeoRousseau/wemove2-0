@@ -153,7 +153,7 @@ public class ProfileActivity extends AppCompatActivity {
         Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
-        String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(1990,12,07)))).append(" ans").toString();
+        String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(AccessData.currentUser.getAge()))-1900)).append(" ans").toString();
         age_text.setText(date_);
         number_sports.setText(String.valueOf(AccessData.currentUser.getSports().size()));
         bio_content.setText(AccessData.currentUser.getBio());
@@ -171,11 +171,11 @@ public class ProfileActivity extends AppCompatActivity {
         linearLayoutProfile.setVisibility(View.VISIBLE);
     }
 
-    /*
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this,Home.class);
         startActivity(intent);
     }
-    */
+
 }

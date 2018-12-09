@@ -1,11 +1,14 @@
 package profile;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -18,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -28,6 +33,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wemove.Home;
+import com.example.wemove.NewUser;
 import com.example.wemove.Notification;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
@@ -35,6 +41,7 @@ import com.example.wemove.WeMoveDB;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,9 +68,11 @@ public class EditingProfileActivity extends AppCompatActivity {
     public static CircleImageView profilePicture;
     private EditText name_text;
     private EditText fname_text;
-    private EditText bd_text;
+    private Button bdBtn;
     private EditText bio_content;
     private Uri uriUser;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+    private Date date=null;
     private Boolean isChanged = false;
     private Handler mHandler = new Handler();
 
@@ -78,6 +87,34 @@ public class EditingProfileActivity extends AppCompatActivity {
 
         // Init Content Variables
         initContentVariables();
+
+        date = new Date(AccessData.currentUser.getAge());
+        bdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        EditingProfileActivity.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        dateSetListener,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                date=new Date(year-1900,month,dayOfMonth);
+                bdBtn.setText(String.valueOf(dayOfMonth)+"/"+String.valueOf(month+1)+"/" + String.valueOf(year));
+            }
+        };
+
 
         //Get Data from DataBase
         getData();
@@ -96,14 +133,6 @@ public class EditingProfileActivity extends AppCompatActivity {
         isRunning = true;
     }
 
-    public void setSports () {
-        sportItems.add(new Sport("Football","Intermédiaire","Détente",(float)3.5));
-        sportItems.add(new Sport("Ping Pong","Débutant","Détente",1));
-        sportItems.add(new Sport("Rugby","Confirmé","Tout",5));
-        sportItems.add(new Sport("Natation","Intermédiaire","Sérieux",4));
-        sportItems.add(new Sport("Volleyball","Débutant","Tout",2));
-        sportItems.add(new Sport("Peche","Intermédiaire","Détente",4));
-    }
 
     public void initContentVariables () {
         hideList = (ImageView)findViewById(R.id.hideList);
@@ -111,7 +140,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         profilePicture = (CircleImageView)findViewById(R.id.profile_image);
         name_text = (EditText) findViewById(R.id.nomEditText);
         fname_text = (EditText) findViewById(R.id.prenomEditText);
-        bd_text = (EditText) findViewById(R.id.dateEditText);
+        bdBtn = (Button) findViewById(R.id.dateBtn);
         bio_content = (EditText) findViewById(R.id.bioEditText);
         sportItems = new ArrayList<>();
         sportToEdit = new ArrayList<>();
@@ -234,7 +263,9 @@ public class EditingProfileActivity extends AppCompatActivity {
     public void getData() {
         name_text.setText(AccessData.currentUser.getName());
         fname_text.setText(AccessData.currentUser.getFirstname());
-        bd_text.setText(AccessData.currentUser.getAge());
+        Date date_ = new Date(AccessData.currentUser.getAge());
+        String date = String.valueOf(date_.getDate()) + "/" + String.valueOf(date_.getMonth()+1) + "/" + String.valueOf(date_.getYear()+1900);
+        bdBtn.setText(date);
         bio_content.setText(AccessData.currentUser.getBio());
         for (int i=0;i<AccessData.currentUser.getSports().size();i++) {
             sportItems.add(new Sport(AccessData.currentUser.getSports().get(i).getName(),AccessData.currentUser.getSports().get(i).getLevel(),AccessData.currentUser.getSports().get(i).getType(),AccessData.currentUser.getSports().get(i).getInterest()));
@@ -247,7 +278,7 @@ public class EditingProfileActivity extends AppCompatActivity {
         AccessData.db.deleteSports(sportToEdit);
         HashMap<String,Object> map = new HashMap<>();
         map.put("bio",bio_content.getText().toString());
-        map.put("age",bd_text.getText().toString());
+        map.put("age",date.getTime());
         map.put("firstname",fname_text.getText().toString());
         map.put("name", name_text.getText().toString());
         map.put("sports",sportItems);
