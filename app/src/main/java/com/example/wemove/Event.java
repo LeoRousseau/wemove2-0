@@ -41,13 +41,16 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "Nom = '" + name + '\'' +
-                ", Sport =" + sport +
-                ", Nombre de personne =" + nbPeople +
-                ", Réservé =" + groupe +
-                ", Lieu ='" + place + '\'' +
-                ", Niveau ='" + niveau + '\'' +
-                ", Description='" + description + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", sport=" + sport +
+                ", nbPeople=" + nbPeople +
+                ", groupe=" + groupe +
+                ", place='" + place + '\'' +
+                ", niveau='" + niveau + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", usersID=" + usersID +
                 '}';
     }
 
