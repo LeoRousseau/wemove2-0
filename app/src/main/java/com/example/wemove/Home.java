@@ -101,6 +101,18 @@ public class Home extends AppCompatActivity {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
         isRunning=true;
+        boolean notifNotSeen=false;
+        Log.d("test","start");
+        if (AccessData.currentUser.notifications!=null) {
+            for (Notification value : AccessData.currentUser.notifications.values()) {
+                if (!value.isSeen()) {
+                    notifNotSeen = true;
+                }
+            }
+            if (notifNotSeen) {
+                Home.notificationBadge.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
 
