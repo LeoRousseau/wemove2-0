@@ -67,11 +67,7 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
                 Intent intent = new Intent(context,EventDetails.class);
                 for (int i=0;i<AccessData.events.size();i++) {
                     if (AccessData.events.get(i).getId().compareTo(notification.getContentID())==0) {
-                        intent.putExtra("nom", AccessData.events.get(i).getName());
-                        intent.putExtra("sport", AccessData.events.get(i).getSport().getName());
-                        intent.putExtra("niveau",AccessData.events.get(i).getNiveau());
-                        intent.putExtra("place",AccessData.events.get(i).getPlace());
-                        intent.putExtra("description", AccessData.events.get(i).getDescription());
+                        intent.putExtra("position", i);
                         context.startActivity(intent);
                         found=true;
                     }

@@ -59,6 +59,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tagText" />
 
+
     <EditText
         android:id="@+id/emailText"
         android:layout_width="0dp"

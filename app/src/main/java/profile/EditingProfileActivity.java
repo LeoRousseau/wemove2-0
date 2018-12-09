@@ -26,6 +26,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.wemove.Home;
 import com.example.wemove.Notification;
 import com.example.wemove.R;
@@ -275,14 +276,16 @@ public class EditingProfileActivity extends AppCompatActivity {
             mHandler.postDelayed(mUpdateDisplay,2000);
             isChanged = false;
         } else {
-            onBackPressed();
+            Intent intent = new Intent(this,ProfileActivity.class);
+            startActivity(intent);
         }
     }
 
     private Runnable mUpdateDisplay = new Runnable() {
         @Override
         public void run() {
-            onBackPressed();
+            Intent intent = new Intent(getBaseContext(),ProfileActivity.class);
+            startActivity(intent);
         }
     };
 

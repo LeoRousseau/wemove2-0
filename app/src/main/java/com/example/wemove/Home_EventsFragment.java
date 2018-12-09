@@ -95,7 +95,7 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
 
         searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint("Search");
+        searchView.setQueryHint("Recherche par sport");
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override

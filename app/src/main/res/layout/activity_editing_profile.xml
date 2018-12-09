@@ -39,6 +39,7 @@
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
+
     <ScrollView
         android:layout_below="@+id/editProfileToolbar"
         android:layout_width="match_parent"
