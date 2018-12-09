@@ -81,17 +81,17 @@ public class ListNotifAdapter extends ArrayAdapter<Notification> {
 
         message.setText(notification.getMessage());
         String date_;
-        if (AccessData.ageCalculator.getDifferenceDays(notification.getDate())<=0) {
+        if (AccessData.ageCalculator.getDifferenceDays(new Date(notification.getDate()))<=0) {
             date_="Aujourd'hui";
         }
-        else if (AccessData.ageCalculator.getDifferenceDays(notification.getDate())==1){
+        else if (AccessData.ageCalculator.getDifferenceDays(new Date(notification.getDate()))==1){
             date_="Hier";
         }
-        else if (AccessData.ageCalculator.getDifferenceDays(notification.getDate())>30) {
+        else if (AccessData.ageCalculator.getDifferenceDays(new Date(notification.getDate()))>30) {
             date_="Il y a plus d'un mois";
         }
         else {
-            date_ = new StringBuilder().append("Il y a ").append(AccessData.ageCalculator.getDifferenceDays(notification.getDate())).append(" jours").toString();
+            date_ = new StringBuilder().append("Il y a ").append(AccessData.ageCalculator.getDifferenceDays(new Date(notification.getDate()))).append(" jours").toString();
         }
         date.setText(date_);
 

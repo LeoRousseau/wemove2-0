@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -130,8 +131,8 @@ public class CreateEvent extends AppCompatActivity {
         Sport s= new Sport(sportName);
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
-        Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb),date);
-
+        date.setHours(12);
+        Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb),date.getTime());
         AccessData.db.addEvent(createdEvent);
         startActivity(new Intent(CreateEvent.this,Home.class));
 

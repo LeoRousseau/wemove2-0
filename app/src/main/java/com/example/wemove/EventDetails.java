@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -113,8 +114,9 @@ public class EventDetails extends AppCompatActivity {
         eventDesc.setText(AccessData.events.get(position).getDescription());
         eventName.setText(AccessData.events.get(position).getName());
         eventSport.setText(AccessData.events.get(position).getSport().getName() + "-" + AccessData.events.get(position).getNiveau());
-        day.setText(String.valueOf(AccessData.events.get(position).date.getDate()));
-        month.setText(getMonthAccro(AccessData.events.get(position).date.getMonth()));
+        Date date = new Date(AccessData.events.get(position).date);
+        day.setText(String.valueOf(date.getDate()));
+        month.setText(getMonthAccro(date.getMonth()));
         eventNumber.setText(AccessData.events.get(position).usersID.size() + "/" +AccessData.events.get(position).getNbPeople());
         nameSportEvent.setText(AccessData.events.get(position).getSport().getName());
     }

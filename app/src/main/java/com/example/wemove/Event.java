@@ -16,11 +16,11 @@ public class Event {
     String place;
     String niveau;
     String description;
-    Date date;
+    long date;
     ArrayList<String> usersID;
 
 
-    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description, int numb, Date date) {
+    public Event(String id, String name, Sport sport, boolean groupe, String place, String niveau, String description, int numb, long date) {
         this.id = id;
         this.name = name;
         this.sport = sport;
@@ -70,6 +70,14 @@ public class Event {
     public ArrayList<String> getUsersID() {
 
         return usersID;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 
     public String getName() {

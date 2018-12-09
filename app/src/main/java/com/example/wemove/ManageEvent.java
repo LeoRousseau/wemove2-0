@@ -62,8 +62,10 @@ public class ManageEvent extends AppCompatActivity {
         numberPicker.setMinValue(AccessData.events.get(position).getNbPeople());
         numberPicker.setMaxValue(999);
 
+        Date date_ = new Date(AccessData.events.get(position).getDate());
 
-        tvdate.setText(String.valueOf(AccessData.events.get(position).date.getDate())+"/"+String.valueOf(AccessData.events.get(position).date.getMonth()+1)+"/" + String.valueOf(AccessData.events.get(position).date.getYear()+1900));
+
+        tvdate.setText(String.valueOf(date_.getDate())+"/"+String.valueOf(date_.getMonth()+1)+"/" + String.valueOf(date_.getYear()+1900));
         date = new Date();
         datebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +139,7 @@ public class ManageEvent extends AppCompatActivity {
         map.put("description",eventDescription.getText().toString());
         map.put("place",eventPlace.getText().toString());
         map.put("nbPeople",numberPicker.getValue());
-        map.put("date",date);
+        map.put("date",date.getTime());
         AccessData.db.updateEvent(AccessData.events.get(position),map);
         Intent intent = new Intent(this,Home.class);
         startActivity(intent);

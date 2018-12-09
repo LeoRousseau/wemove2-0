@@ -8,9 +8,9 @@ public class Notification {
     private String message;
     private String contentID;
     private boolean seen = false;
-    private Date date;
+    private long date;
 
-    public Notification(String type, String message, String contentID, Date date) {
+    public Notification(String type, String message, String contentID, long date) {
         this.type = type;
         this.message = message;
         this.contentID = contentID;
@@ -37,7 +37,7 @@ public class Notification {
         return seen;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return date;
     }
 
