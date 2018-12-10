@@ -24,6 +24,7 @@ public class EventDetails extends AppCompatActivity {
     TextView month;
     TextView eventNumber;
     TextView nameSportEvent;
+    TextView place;
     Button join;
 
     @Override
@@ -37,6 +38,7 @@ public class EventDetails extends AppCompatActivity {
         eventDesc = findViewById(R.id.textdesc);
         eventName = findViewById(R.id.textName);
         eventSport = findViewById(R.id.textSporte);
+        place = findViewById(R.id.textplace);
         day = findViewById(R.id.day);
         month = findViewById(R.id.month);
         eventNumber = findViewById(R.id.numb);
@@ -118,6 +120,7 @@ public class EventDetails extends AppCompatActivity {
         day.setText(String.valueOf(date.getDate()));
         month.setText(getMonthAccro(date.getMonth()));
         eventNumber.setText(AccessData.events.get(position).usersID.size() + "/" +AccessData.events.get(position).getNbPeople());
+        place.setText(AccessData.events.get(position).getPlace());
         nameSportEvent.setText(AccessData.events.get(position).getSport().getName());
     }
 

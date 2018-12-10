@@ -52,6 +52,7 @@ public class Login extends AppCompatActivity {
     private EditText mEmailText;
     private EditText mPasswordText;
     public static Boolean isFirstTime = false;
+    public static Boolean isNew=false;
 
     private Button mLoginBtn;
     private Button mNewBtn;
@@ -154,6 +155,9 @@ public class Login extends AppCompatActivity {
                             if(dataSnapshot.hasChild(userAuth.getUid())) {
                                 Log.d("login", "User already exists");
                                 //startActivity(new Intent(Login.this,Home.class));
+                                if (AccessData.db.getPhoto()==null) {
+                                    isNew=true;
+                                }
                                 isFirstTime = true;
                             }
                             else {
@@ -161,6 +165,7 @@ public class Login extends AppCompatActivity {
                                 String parts[] = userAuth.getDisplayName().split(" ");
                                 User user = new User(userAuth.getUid(),parts[1],parts[0],userAuth.getEmail()); //Sans tag et faut le mettre ailleurs sinon prend pas en compte modif
                                 AccessData.db.addUser(user);
+                                isNew=true;
                                 isFirstTime = true;
                                 Toast.makeText(getBaseContext(),"Compléter votre profil", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(Login.this, ProfileActivity.class));
@@ -220,6 +225,9 @@ public class Login extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (AccessData.db.getPhoto()==null) {
+                        isNew=true;
+                    }
                     progressBar.setVisibility(View.GONE);
                     isFirstTime = true;
                     if (!task.isSuccessful()) {

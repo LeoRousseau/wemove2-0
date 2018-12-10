@@ -53,9 +53,8 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         lv.setDivider(null);
         lv.setDividerHeight(0);
 
-        if (AccessData.events.size()==0) {
-            //AccessData.db.getEvents();
-        }
+        Log.d("test",String.valueOf(AccessData.events.size()));
+
         if (eventAdapter==null) {
             eventAdapter = new EventAdapter(getActivity(), AccessData.events);
         }
@@ -78,6 +77,12 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         return view;
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        eventAdapter.notifyDataSetChanged();
     }
 
     public EventAdapter getEventAdapter() {

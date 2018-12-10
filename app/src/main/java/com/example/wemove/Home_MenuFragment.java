@@ -75,7 +75,6 @@ public class Home_MenuFragment extends Fragment {
         if(Login.isFirstTime) {
             mHandler.postDelayed(mUpdateDisplay,2000);
             Log.d("ok", "goToProfile: coucou");
-            Login.isFirstTime = false;
         } else {
             Log.d("ok", "goToProfile: coucou2");
             Intent intent = new Intent(getContext(),ProfileActivity.class);
@@ -110,7 +109,6 @@ public class Home_MenuFragment extends Fragment {
         //AccessData.db = new WeMoveDB();
         AccessData.currentUser = new User();
         AccessData.currentEvent = new Event();
-        AccessData.events = new ArrayList<>();
         Login.isFirstTime = false;
         Log.d("ATTEMPT", "onClick: attempting to sign out the user");
         LoginManager.getInstance().logOut();

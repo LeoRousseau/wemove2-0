@@ -122,6 +122,7 @@
                 android:layout_marginLeft="6dp"
                 android:text="Terrain municipale"
                 android:textStyle="bold"
+                android:id="@+id/textplace"
                 android:textSize="16sp"/>
         </RelativeLayout>
 

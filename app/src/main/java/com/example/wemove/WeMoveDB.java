@@ -197,19 +197,22 @@ public class WeMoveDB {
                 }
                 ProfileActivity.isCharged=true;
                 Log.d("EVENT",String.valueOf(Home.isRunning));
-                if (Home.isRunning) {
-                    boolean notifNotSeen=false;
-                    if (AccessData.currentUser.notifications!=null) {
-                        for (Notification value : AccessData.currentUser.notifications.values()) {
-                            if (!value.isSeen()) {
-                                notifNotSeen = true;
+                if (AccessData.currentUser!=null) {
+                    if (Home.isRunning) {
+                        boolean notifNotSeen = false;
+                        if (AccessData.currentUser.notifications != null) {
+                            for (Notification value : AccessData.currentUser.notifications.values()) {
+                                if (!value.isSeen()) {
+                                    notifNotSeen = true;
+                                }
                             }
-                        }
-                        if (notifNotSeen) {
-                            Home.notificationBadge.setVisibility(View.VISIBLE);
+                            if (notifNotSeen) {
+                                Home.notificationBadge.setVisibility(View.VISIBLE);
+                            }
                         }
                     }
                 }
+
 
             }
 

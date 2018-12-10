@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wemove.Home;
+import com.example.wemove.Login;
 import com.example.wemove.Notification;
 import com.example.wemove.R;
 import com.example.wemove.Sport;
@@ -100,7 +101,7 @@ public class ProfileActivity extends AppCompatActivity {
         else {
             linearLayoutProfile.setVisibility(View.GONE);
         }
-
+        Login.isFirstTime = false;
 
     }
 
@@ -149,8 +150,15 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public static void getData() {
-        String url = AccessData.db.getPhoto();
-        Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
+        Log.d("login",AccessData.currentUser.toString());
+        if(Login.isNew) {
+            image_profile.setImageResource(R.drawable.profilepicture);
+        }
+        else {
+            String url = AccessData.db.getPhoto();
+            Glide.with(ProfileActivity.ctx).load(url).into(ProfileActivity.image_profile);
+        }
+
         String name = new StringBuilder().append(AccessData.currentUser.getFirstname()).append(" ").append(AccessData.currentUser.getName()).toString();
         name_text.setText(name);
         String date_ = new StringBuilder().append(String.valueOf(AccessData.ageCalculator.calculateAge(new Date(AccessData.currentUser.getAge()))-1900)).append(" ans").toString();

@@ -173,6 +173,7 @@ public class NewUser extends AppCompatActivity {
                         User user = new User(userID,tag,name,prenom,email,date.getTime());
                         db.addUser(user);
                         Login.isFirstTime = true;
+                        Login.isNew=true;
                         Toast.makeText(getBaseContext(),"Compléter votre profil", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(NewUser.this, ProfileActivity.class));
                     } else {

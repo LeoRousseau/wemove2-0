@@ -91,24 +91,23 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
         textViewNumber.setText(event.usersID.size() + "/" + event.getNbPeople());
 
+       //if (false) {
 
-        if (AccessData.currentUser.getId().compareTo(event.usersID.get(0))==0) {
-            join.setText("GERER");
-            join.setTextColor(context.getResources().getColor(R.color.blue));
-        }
-        else if (isJoined(position)){
-            join.setText("QUITTER");
-            join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
-        }
-        else if (event.getNbPeople()<=event.usersID.size()) {
-            join.setText("COMPLET");
-            join.setTextColor(context.getResources().getColor(R.color.notifRed));
-        }
-        else {
-            join.setText("REJOINDRE");
-            join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
-        }
 
+            if (AccessData.currentUser.getId().compareTo(event.usersID.get(0)) == 0) {
+                join.setText("GERER");
+                join.setTextColor(context.getResources().getColor(R.color.blue));
+            } else if (isJoined(position)) {
+                join.setText("QUITTER");
+                join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+            } else if (event.getNbPeople() <= event.usersID.size()) {
+                join.setText("COMPLET");
+                join.setTextColor(context.getResources().getColor(R.color.notifRed));
+            } else {
+                join.setText("REJOINDRE");
+                join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
+            }
+      //  }
 
 
 

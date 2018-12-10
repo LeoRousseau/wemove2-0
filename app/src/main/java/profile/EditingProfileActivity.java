@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.wemove.Home;
+import com.example.wemove.Login;
 import com.example.wemove.NewUser;
 import com.example.wemove.Notification;
 import com.example.wemove.R;
@@ -170,6 +171,7 @@ public class EditingProfileActivity extends AppCompatActivity {
                     profilePicture.setImageURI(uri);
                     uriUser = uri;
                     Log.d("ok" ,"onActivityResult: "+uriUser);
+                    Login.isNew=false;
                     isChanged = true;
                     break;
                 }
@@ -179,6 +181,7 @@ public class EditingProfileActivity extends AppCompatActivity {
                     profilePicture.setImageURI(uri);
                     uriUser = uri;
                     Log.d("ok" ,"onActivityResult: "+uriUser);
+                    Login.isNew=false;
                     isChanged = true;
                     break;
                 }

@@ -95,7 +95,6 @@ public class User {
                 ", Prénom ='" + firstname + '\'' +
                 ", Âge ='" + age + '\'' +
                 ", Description ='" + bio + '\'' +
-                ", Sports =" + sports.toString() +
                 '}';
     }
 
