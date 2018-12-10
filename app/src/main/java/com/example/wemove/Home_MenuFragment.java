@@ -74,9 +74,7 @@ public class Home_MenuFragment extends Fragment {
     public void goToProfile () {
         if(Login.isFirstTime) {
             mHandler.postDelayed(mUpdateDisplay,2000);
-            Log.d("ok", "goToProfile: coucou");
         } else {
-            Log.d("ok", "goToProfile: coucou2");
             Intent intent = new Intent(getContext(),ProfileActivity.class);
             startActivity(intent);
         }

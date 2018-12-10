@@ -123,7 +123,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
                     context.startActivity(intent);
                 }
                 else if (isJoined(position)){
-                    Log.d("changed","1");
                     ArrayList<String> list = new ArrayList<>();
                     for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
                         list.add(new String(AccessData.events.get(position).usersID.get(i)));
@@ -139,7 +138,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
                     eventUpdates.put("usersID",list);
                     AccessData.db.updateEvent(event,eventUpdates);
                     join.setText("REJOINDRE");
-                    Log.d("changed",join.getText().toString());
                     join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
 
                 }
@@ -147,7 +145,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
                     //COMPLET
                 }
                 else {
-                    Log.d("changed","2");
                     Map<String, Object> eventUpdates = new HashMap<>();
                     ArrayList<String> list = new ArrayList<>();
                     for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
@@ -157,7 +154,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
                     eventUpdates.put("usersID",list);
                     AccessData.db.updateEvent(event,eventUpdates);
                     join.setText("QUITTER");
-                    Log.d("changed",join.getText().toString());
                     join.setTextColor(context.getResources().getColor(R.color.OrangeNormal));
                 }
 

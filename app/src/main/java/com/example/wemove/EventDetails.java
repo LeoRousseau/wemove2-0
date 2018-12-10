@@ -73,7 +73,6 @@ public class EventDetails extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else if (isJoined(position)){
-                    Log.d("changed","1");
                     ArrayList<String> list = new ArrayList<>();
                     for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
                         list.add(new String(AccessData.events.get(position).usersID.get(i)));
@@ -89,7 +88,6 @@ public class EventDetails extends AppCompatActivity {
                     eventUpdates.put("usersID",list);
                     AccessData.db.updateEvent(AccessData.events.get(position),eventUpdates);
                     join.setText("REJOINDRE");
-                    Log.d("changed",join.getText().toString());
                     join.setTextColor(EventDetails.this.getResources().getColor(R.color.OrangeNormal));
 
                 }
@@ -97,7 +95,6 @@ public class EventDetails extends AppCompatActivity {
                     //COMPLET
                 }
                 else {
-                    Log.d("changed","2");
                     Map<String, Object> eventUpdates = new HashMap<>();
                     ArrayList<String> list = new ArrayList<>();
                     for (int i=0;i<AccessData.events.get(position).usersID.size();i++) {
@@ -107,7 +104,6 @@ public class EventDetails extends AppCompatActivity {
                     eventUpdates.put("usersID",list);
                     AccessData.db.updateEvent(AccessData.events.get(position),eventUpdates);
                     join.setText("QUITTER");
-                    Log.d("changed",join.getText().toString());
                     join.setTextColor(EventDetails.this.getResources().getColor(R.color.OrangeNormal));
                 }
             }

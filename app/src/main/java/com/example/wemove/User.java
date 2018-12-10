@@ -14,7 +14,6 @@ public class User {
     String firstname;
     String email;
     long age;
-    //A completer lors de la première inscription
     String bio;
     ArrayList<Sport> sports;
     HashMap<String,Notification> notifications;

@@ -46,7 +46,6 @@ public class NewUser extends AppCompatActivity {
     private Date date=null;
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
-    private WeMoveDB db;
     private String userID;
     ProgressBar progressBar;
 
@@ -55,7 +54,6 @@ public class NewUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
-        db = new WeMoveDB();
         mAuth = FirebaseAuth.getInstance();
 
         mNameText = findViewById(R.id.nameText);
@@ -171,7 +169,7 @@ public class NewUser extends AppCompatActivity {
                         FirebaseUser userAuth = mAuth.getCurrentUser();
                         userID = userAuth.getUid();
                         User user = new User(userID,tag,name,prenom,email,date.getTime());
-                        db.addUser(user);
+                        AccessData.db.addUser(user);
                         Login.isFirstTime = true;
                         Login.isNew=true;
                         Toast.makeText(getBaseContext(),"Compléter votre profil", Toast.LENGTH_LONG).show();

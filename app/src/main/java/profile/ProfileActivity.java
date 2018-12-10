@@ -69,14 +69,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Init Content Variables
         initContentVariables();
-        Log.d("EVENT", "profile");
+
         //Get Data from DataBase
         getData();
         //Set layout with screen size
         setLayout();
 
-        // Sport
-        //setSports();
         LinearLayout ll = (LinearLayout) findViewById(R.id.layoutselected);
         recyclerView = (RecyclerView) findViewById(R.id.sportRV);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -150,7 +148,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public static void getData() {
-        Log.d("login",AccessData.currentUser.toString());
         if(Login.isNew) {
             image_profile.setImageResource(R.drawable.profilepicture);
         }

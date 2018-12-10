@@ -64,17 +64,14 @@ public class WeMoveDB {
                     Home_EventsFragment.hidePB();
                 }
                 Home_EventsFragment.isCharged=true;
-                Log.d("test",String.valueOf(AccessData.events.size()));
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                Log.d("changed","enter");
                 for (int i=0;i<AccessData.events.size();i++) {
                     if (AccessData.events.get(i).getId().compareTo(dataSnapshot.getKey())==0) {
                         AccessData.events.set(i,dataSnapshot.getValue(Event.class));
-                        Log.d("changed","size : " + String.valueOf(AccessData.events.get(i).usersID.size()));
                         break;
                     }
                 }
@@ -181,12 +178,10 @@ public class WeMoveDB {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 AccessData.currentUser = dataSnapshot.getValue(User.class);
-                Log.d("EVENT", "USER");
                 if (MySportsActivity.gridView!=null) {
                     MySportsActivity.adapter.setInput(AccessData.currentUser);
                     MySportsActivity.adapter.notifyDataSetChanged();
                     MySportsActivity.hidePB();
-                    Log.d("EVENT", "notifyed");
                 }
                 MySportsActivity.isCharged=true;
                 if (ProfileActivity.isRunning) {
@@ -196,7 +191,6 @@ public class WeMoveDB {
                     ProfileActivity.hidePB();
                 }
                 ProfileActivity.isCharged=true;
-                Log.d("EVENT",String.valueOf(Home.isRunning));
                 if (AccessData.currentUser!=null) {
                     if (Home.isRunning) {
                         boolean notifNotSeen = false;
@@ -270,7 +264,6 @@ public class WeMoveDB {
                                     String url = String.valueOf(uri);
                                     Glide.with(EditingProfileActivity.ctx).load(url).into(EditingProfileActivity.profilePicture);
                                 }
-                                Log.d("ok", "chemin :"+uri);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override

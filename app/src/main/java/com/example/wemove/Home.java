@@ -35,14 +35,13 @@ import profile.ProfileActivity;
 
 public class Home extends AppCompatActivity {
 
-    private Button mSignOutBtn;
+
     private  FirebaseAuth.AuthStateListener mAuthListener;
     private BottomNavigationView bottomNavigationView;
     public static View notificationBadge;
     public static boolean isRunning=false;
     private  FirebaseAuth mAuth;
     private  String userID;
-    private boolean first = true;
 
 
 
@@ -58,7 +57,6 @@ public class Home extends AppCompatActivity {
         userID = user.getUid();
         setupFirebaseListener();
 
-        // Test des méthodes (validées)
 
         AccessData.db.getUser(userID);
 
@@ -102,7 +100,6 @@ public class Home extends AppCompatActivity {
         FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
         isRunning=true;
         boolean notifNotSeen=false;
-        Log.d("test","start");
         if (AccessData.currentUser.notifications!=null) {
             for (Notification value : AccessData.currentUser.notifications.values()) {
                 if (!value.isSeen()) {

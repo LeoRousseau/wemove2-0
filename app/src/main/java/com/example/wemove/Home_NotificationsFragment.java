@@ -53,7 +53,6 @@ public class Home_NotificationsFragment extends Fragment {
         if (AccessData.currentUser.notifications != null) {
             for (String key : AccessData.currentUser.notifications.keySet()) {
                 AccessData.currentUser.notifications.get(key).setSeen(true);
-                Log.d("DATE",AccessData.currentUser.notifications.get(key).toString());
             }
             HashMap<String,Object> map = new HashMap<>();
             map.put("notifications",AccessData.currentUser.notifications);

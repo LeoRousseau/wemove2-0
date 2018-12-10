@@ -64,7 +64,6 @@ public class EditingProfileActivity extends AppCompatActivity {
     private ImageView hideList;
     private ListView listSportView;
     private ListAdapter listAdapter;
-    private Bitmap loadedBitmap;
 
     public static CircleImageView profilePicture;
     private EditText name_text;
@@ -119,8 +118,6 @@ public class EditingProfileActivity extends AppCompatActivity {
 
         //Get Data from DataBase
         getData();
-
-        //setSports();
 
         listSportView = (ListView) findViewById(R.id.listSportView);
         listAdapter = new ListSportAdapter(this,sportItems,sportToEdit);
@@ -300,7 +297,6 @@ public class EditingProfileActivity extends AppCompatActivity {
             AccessData.db.implementSports(AccessData.currentUser);
 
         }
-        Log.d("test",AccessData.currentUser.getSports().toString());
         isRunning=false;
     }
 
@@ -337,12 +333,5 @@ public class EditingProfileActivity extends AppCompatActivity {
         }
         return otherSport;
     }
-
-    /*
-    @Override
-    public void onBackPressed() {
-
-    }
-    */
 
 }

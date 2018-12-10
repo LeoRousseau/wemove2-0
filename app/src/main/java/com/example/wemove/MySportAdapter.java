@@ -163,7 +163,6 @@ public class MySportAdapter extends BaseAdapter {
         builder.setNeutralButton("Supprimer", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Log.d("EVENT","suppr");
                 List<Sport> list = new ArrayList<>();
                 for (int i=0; i<items.size();i++) {
                     if (items.get(i).getName().compareTo(sportItem.getName())==0) {

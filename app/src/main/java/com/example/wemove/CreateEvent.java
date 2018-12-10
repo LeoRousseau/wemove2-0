@@ -132,11 +132,8 @@ public class CreateEvent extends AppCompatActivity {
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
         date.setHours(12);
-        Log.d("test","created");
-        Log.d("test","c- : " + AccessData.events.size());
         Event createdEvent = new Event(ts,name,s,groupe,place,level,description,Integer.parseInt(numb),date.getTime());
         AccessData.db.addEvent(createdEvent);
-        Log.d("test","c+ : " + AccessData.events.size());
         startActivity(new Intent(CreateEvent.this,Home.class));
 
     }

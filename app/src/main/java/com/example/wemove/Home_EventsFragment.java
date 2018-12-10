@@ -33,9 +33,6 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
     public static ListView lv=null;
     private SearchView searchView;
     private FloatingActionButton create;
-    private Button join;
-    private Sport foot=new Sport("foot");
-    private boolean group=false;
     public static EventAdapter eventAdapter;
     public static ProgressBar progressBarEvents;
     public static boolean isCharged = false;
@@ -46,14 +43,12 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.home_fragment_events, container, false);
         progressBarEvents = (ProgressBar)view.findViewById(R.id.progressbarEvents);
-        //eventAdapter=null;
         lv = (ListView) view.findViewById(R.id.listEventsView);
         create = (FloatingActionButton) view.findViewById(R.id.Create);
 
         lv.setDivider(null);
         lv.setDividerHeight(0);
 
-        Log.d("test",String.valueOf(AccessData.events.size()));
 
         if (eventAdapter==null) {
             eventAdapter = new EventAdapter(getActivity(), AccessData.events);
@@ -105,7 +100,6 @@ public class Home_EventsFragment extends Fragment implements SearchView.OnQueryT
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                Log.d("val","close");
                 eventAdapter.setTrue();
                 eventAdapter.notifyDataSetChanged();
                 return false;
